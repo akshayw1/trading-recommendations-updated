@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --blue1: #131633;
+  --blue2: #27f5b8;
+  --blue3: #92ebd0;
+  --blue4: #090c31;
+}
+body {
+  color: white;
+  background-color: var(--blue1);
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.shadow-main {
+  border-top-left-radius: 6px;
+  margin: 94px 0 0 234px;
+  width: calc(100vw - 234px);
+  height: calc(100vh - 94px);
+  box-shadow: inset 4px 4px 170px rgba(0, 0, 0, 0.5);
+}

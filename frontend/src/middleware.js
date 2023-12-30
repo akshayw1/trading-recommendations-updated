@@ -13,11 +13,16 @@ export async function middleware(req) {
   const auth = req.nextUrl.clone();
   auth.pathname = "/autg/login";
   const afterAuth = req.nextUrl.clone();
-  afterAuth.pathname = "/";
+  const home = req.nextUrl.clone();
+  home.pathname = "/home";
+  afterAuth.pathname = "/home";
   // Store current request url in a custom header, which you can read later
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set("x-url", req.url);
 
+  if (req.nextUrl.pathname === "/") {
+    return NextResponse.redirect(home);
+  }
   if (blockedRoutesWithoutLogin.includes(req.nextUrl.pathname)) {
     const session = await getToken({
       req,
