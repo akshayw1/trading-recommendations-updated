@@ -1,10 +1,13 @@
 import styles from "./styles.module.css";
+import Link from "next/link";
 export default function Nav() {
   return (
     <nav className={styles.nav}>
       <ul>
         <li>Guide</li>
-        <li>About us</li>
+        <li>
+          <Link href="/about">About us</Link>
+        </li>
         <li>Contact us</li>
         <li>Donate</li>
         <li className={styles.authBox}>

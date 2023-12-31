@@ -30,7 +30,7 @@ export default function Home() {
   }, [selectWord]); // El segundo parámetro [] asegura que useEffect se ejecute solo una vez al montar el componente
 
   return (
-    <main className={styles.main}>
+    <main>
       <section className={styles.heroBox}>
         <Image
           className={styles.web30}

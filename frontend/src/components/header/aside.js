@@ -1,10 +1,17 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
-
+import Link from "next/link";
 export default function Aside() {
   return (
     <aside className={styles.aside}>
-      <Image alt="logo" width={198} height={122} src="/images/Logo.png"></Image>
+      <Link href="/home">
+        <Image
+          alt="logo"
+          width={198}
+          height={122}
+          src="/images/Logo.png"
+        ></Image>
+      </Link>
       <ul>
         <li className={styles.blue}>Futures & Options OI</li>
         <li className={styles.white}>

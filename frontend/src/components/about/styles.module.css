@@ -1,0 +1,15 @@
+.main {
+  margin: auto;
+  text-align: left;
+  align-items: start;
+  width: 90%;
+  gap: 1.5rem;
+}
+.blue {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: -webkit-linear-gradient(white, var(--blue2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
