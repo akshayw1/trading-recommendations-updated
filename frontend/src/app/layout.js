@@ -3,6 +3,7 @@ import "./globals.css";
 import Aside from "@/components/header/aside";
 import Nav from "@/components/header/nav";
 import MainContainerShadow from "@/components/mainContainerShadow/mainContainerShadow";
+import Footer from "@/components/footer/footer";
 
 const font = Commissioner({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
         <Aside />
         <Nav />
         <MainContainerShadow>{children}</MainContainerShadow>
+        <Footer />
       </body>
     </html>
   );

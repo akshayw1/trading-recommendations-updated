@@ -1,0 +1,22 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: calc(100vw - 252px);
+  margin-left: 234px;
+  background: linear-gradient(#000000, #00000095, #00000000);
+}
+.footer ul {
+  width: 70%;
+  padding-right: 3rem;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+.footer li {
+  cursor: pointer;
+}
+.footer li:hover {
+  color: var(--blue2);
+}

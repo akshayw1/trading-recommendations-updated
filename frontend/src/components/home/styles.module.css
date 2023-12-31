@@ -1,17 +1,17 @@
 .main {
-  padding-top: 15vh;
+  padding-top: 12vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .web30 {
-  height: 25vh;
+  height: 23vh;
   width: auto;
 }
 .colors3 {
   width: auto;
   margin-top: -5%;
-  height: 25vh;
+  height: 23vh;
 }
 .heroBox {
   gap: 1rem;
@@ -67,4 +67,95 @@
   margin: auto;
   flex-direction: column;
   left: 0.6rem;
+}
+.mainPBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-size: 1.1rem;
+  margin-top: 3rem;
+  text-align: center;
+}
+.zigZagBox {
+  position: relative;
+  margin-top: 3rem;
+  width: 85%;
+}
+.zigZagBox img {
+  width: 100%;
+}
+.zigZagBox img:nth-of-type(2) {
+  left: 0;
+  top: 4.75rem;
+  width: 13% !important;
+  position: absolute;
+}
+.zigZagBox img:nth-of-type(3) {
+  right: 0;
+  top: 4.75rem;
+  width: 13% !important;
+  position: absolute;
+  transform: scaleX(-1);
+}
+
+.zigZagText {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 0.5rem 0;
+  width: 100%;
+  background: linear-gradient(90deg, #2c5cda, #6b15e7, #2a5fda);
+}
+.lastSection {
+  margin-top: 3rem;
+  display: flex;
+  height: 300px;
+  width: 85%;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.lastSection > div {
+  border-top-left-radius: 46px;
+  border-top-right-radius: 46px;
+  padding: 1rem;
+  max-width: 285px;
+  height: 100%;
+  background: linear-gradient(rgba(19, 22, 51, 1), rgba(19, 22, 51, 0));
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.lastSection h3 {
+  text-align: center;
+  font-size: 2rem;
+}
+.lastSection p {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+.infiniteScroll {
+  width: 100%;
+  display: flex;
+  white-space: nowrap;
+  margin-top: 6rem;
+  overflow: hidden;
+  background: linear-gradient(#2c5cda, #6b15e7, rgba(42, 95, 218, 0));
+  padding: 1rem 1rem;
+}
+.infiniteScroll p {
+  user-select: none;
+  white-space: nowrap;
+  font-size: 2.5rem;
+  font-weight: 500;
+  animation: animate_text 15s linear infinite;
+}
+
+@keyframes animate_text {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
 }
