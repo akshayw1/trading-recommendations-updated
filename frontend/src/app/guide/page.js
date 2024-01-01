@@ -1,3 +1,5 @@
-export default function Home() {
-  return <main></main>;
+import Guide from "@/components/guide/guide";
+
+export default function Page() {
+  return <Guide />;
 }

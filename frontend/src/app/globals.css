@@ -18,7 +18,7 @@ ul {
   padding: 0;
 }
 main {
-  padding-top: 12vh;
+  padding-top: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,6 +37,7 @@ main {
   position: absolute;
   overflow: hidden;
   height: 100vh;
+  z-index: -1;
 }
 .blurCircle {
   border-radius: 50%;
@@ -44,16 +45,15 @@ main {
   width: 600px;
   height: 600px;
   filter: blur(120px);
-  z-index: -1;
 }
 
 .blurCircle:nth-of-type(1) {
-  top: 600px;
+  top: 700px;
   left: 50px;
   background: rgb(65, 35, 121);
 }
 .blurCircle:nth-of-type(2) {
-  top: 600px;
+  top: 700px;
   right: 50px;
   background-color: #27487f;
 }
@@ -62,4 +62,57 @@ main {
   left: 50%;
   margin-left: -20%;
   background-color: #27487f;
+}
+.blue {
+  background: -webkit-linear-gradient(white, var(--blue2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.input1 {
+  position: relative;
+}
+
+.input1 label {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 400;
+  position: absolute;
+  pointer-events: none;
+  left: 1.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+.input1 input {
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  font-size: 1.2rem;
+  padding: 0 1.4rem;
+  outline: none;
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: transparent;
+  height: 62px;
+  width: 325px;
+}
+.input1 input:focus {
+  border-color: var(--blue2);
+}
+.input1 input:focus ~ label {
+  color: var(--blue2);
+}
+.input1 input ~ label {
+  backdrop-filter: blur(1000px);
+  border-radius: 100%;
+}
+.input1 input:valid ~ label,
+.input1 input:focus ~ label {
+  padding: 0 10px;
+  top: -2px;
+  font-size: 1rem;
 }

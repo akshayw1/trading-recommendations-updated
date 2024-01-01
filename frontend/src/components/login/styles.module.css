@@ -1,0 +1,20 @@
+.h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+}
+.main {
+  gap: 2rem;
+}
+.authOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  text-align: center;
+}
+.authOptions p {
+  cursor: pointer;
+  margin-top: -1rem;
+  font-size: 1.55rem;
+  font-weight: 400;
+}

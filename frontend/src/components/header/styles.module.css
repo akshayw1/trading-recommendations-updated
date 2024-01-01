@@ -36,50 +36,9 @@
   gap: 32px;
   display: flex;
   flex-direction: row;
-}
-.authBox > div > div {
-  padding: 2px 2px;
-  border-radius: 8px;
-  background-color: white;
-  transition: background-color 0.5s ease-in-out; /* Transición de 0.5 segundos */
-  position: relative;
-}
-.authBox > div > div > div {
-  border-radius: 8px;
-  padding: 6px 32px;
-  background-color: var(--blue1);
-}
-.authBox > div > div {
-  transition: 0.5s;
-}
-.authBox > div > div:first-of-type {
-  opacity: 0;
-  background-image: linear-gradient(white, var(--blue2));
-  position: absolute;
-}
-.authBox > div:first-of-type > div:first-of-type > div > div {
-  background: -webkit-linear-gradient(white 30%, var(--blue2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  align-items: center;
 }
 
-.authBox > div:hover > div:first-of-type {
-  opacity: 1;
-}
-.authBox > div:hover > div:nth-of-type(2) {
-  opacity: 0;
-}
-.authBox > div:nth-of-type(2) > div > div {
-  color: var(--blue1) !important;
-}
-.authBox > div:nth-of-type(2) > div:first-of-type > div {
-  background-image: linear-gradient(white, var(--blue2));
-  color: var(--blue1) !important;
-}
-.authBox > div:nth-of-type(2) > div:nth-of-type(2) > div {
-  background-color: white;
-}
 .aside ul {
   display: flex;
   flex-direction: column;
