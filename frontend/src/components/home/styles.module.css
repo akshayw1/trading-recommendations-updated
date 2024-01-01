@@ -2,6 +2,9 @@
   height: 23vh;
   width: auto;
 }
+.main {
+  padding-bottom: 0;
+}
 .colors3 {
   width: auto;
   margin-top: -5%;

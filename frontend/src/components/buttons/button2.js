@@ -1,12 +1,16 @@
 import styles from "./styles.module.css";
-export default function Button2({ children, style = {} }) {
+export default function Button2({ children, style1 = {}, style2 = {} }) {
   return (
-    <div style={style} className={styles.button2}>
+    <div style={style1} className={styles.button2}>
       <div>
-        <div>{children}</div>
+        <div style={style2}>
+          <p>{children}</p>
+        </div>
       </div>
       <div>
-        <div>{children}</div>
+        <div style={style2}>
+          <p>{children}</p>
+        </div>
       </div>
     </div>
   );

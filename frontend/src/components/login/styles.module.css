@@ -15,6 +15,7 @@
 .authOptions p {
   cursor: pointer;
   margin-top: -1rem;
-  font-size: 1.55rem;
-  font-weight: 400;
+  font-size: 1.6rem;
+  font-weight: 550;
+  letter-spacing: 0.1rem;
 }
