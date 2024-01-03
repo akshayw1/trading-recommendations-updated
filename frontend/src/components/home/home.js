@@ -27,7 +27,7 @@ export default function Home() {
     // Obtén el ancho del elemento
     const elementWidth = myElementRef.current.clientWidth;
     setWidth(elementWidth);
-  }, [selectWord]); // El segundo parámetro [] asegura que useEffect se ejecute solo una vez al montar el componente
+  }, [selectWord]);
 
   return (
     <main className={styles.main}>
@@ -50,11 +50,12 @@ export default function Home() {
       <section>
         <h2 className={styles.h2}>
           Decode the market with
+          <br />
           <div>
             <span ref={myElementRef} className={styles.trueWord}>
               {" " + wordlist[selectWord] + " "}
             </span>
-            <div className={styles.spinBox} style={{ width: 278 }}>
+            <div className={styles.spinBox} style={{ width }}>
               <div>
                 <div
                   className={styles.slotBox}
@@ -74,16 +75,16 @@ export default function Home() {
           </div>
           Analysis
         </h2>
-        <div className={styles.mainPBox}>
-          <p>
-            Our Proprietary Intelligent algorithm demystify Open Interest data
-            in Futures and Options market.
-          </p>
-          <p>
-            &quot;Simplified OI data in real time to understand the trend of
-            price movement.&quot;
-          </p>
-        </div>
+      </section>
+      <section className={styles.mainPBox}>
+        <p>
+          Our Proprietary Intelligent algorithm demystify Open Interest data in
+          Futures and Options market.
+        </p>
+        <p>
+          &quot;Simplified OI data in real time to understand the trend of price
+          movement.&quot;
+        </p>
       </section>
       <section className={styles.zigZagBox}>
         <h1 className={styles.zigZagText}> Zig Zag Moves - STAY AWAY</h1>

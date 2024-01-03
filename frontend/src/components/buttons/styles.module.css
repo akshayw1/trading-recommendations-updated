@@ -1,17 +1,24 @@
+.button1,
+.button2 {
+  --borderRadius: 8px;
+}
 .button1 > div,
 .button2 > div {
   cursor: pointer;
-  padding: 2px 2px;
-  border-radius: 8px;
+  user-select: none;
+  padding: 2px;
+  border-radius: var(--borderRadius);
   background-color: white;
   position: relative;
   transition: 0.5s;
 }
 .button1 > div > div,
 .button2 > div > div {
-  border-radius: 8px;
+  border-radius: var(--borderRadius);
   padding: 0 28px 2px 28px;
   min-height: 34px;
+  justify-content: center;
+
   background-color: var(--blue1);
   align-items: center;
   display: flex;

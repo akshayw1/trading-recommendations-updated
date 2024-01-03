@@ -31,6 +31,7 @@ main {
   min-height: calc(100vh - 94px);
   box-shadow: inset 4px 4px 170px rgba(0, 0, 0, 0.5);
 }
+
 .blurCircleBox {
   top: 94px;
   left: 234px;
@@ -63,6 +64,19 @@ main {
   left: 50%;
   margin-left: -20%;
   background-color: #27487f;
+}
+@media only screen and (max-width: 820px) {
+  .blurCircle:nth-of-type(1) {
+    top: 900px;
+    left: 50px;
+    background: rgb(65, 35, 121);
+  }
+  .blurCircle:nth-of-type(3) {
+    top: -125px;
+    left: 50%;
+    margin-left: -50%;
+    background-color: #27487f;
+  }
 }
 .blue {
   background: -webkit-linear-gradient(white, var(--blue2));
@@ -116,4 +130,20 @@ main {
   padding: 0 10px;
   top: -2px;
   font-size: 1rem;
+}
+
+@media only screen and (max-width: 820px) {
+  .shadow-main,
+  .blurCircleBox {
+    margin-top: 5rem;
+    margin-left: 0;
+    width: 100%;
+  }
+  .blurCircleBox {
+    top: 0;
+    left: 0;
+  }
+  .menuIsOpen {
+    display: flex !important;
+  }
 }
