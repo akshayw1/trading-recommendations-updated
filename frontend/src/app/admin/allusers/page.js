@@ -1,3 +1,4 @@
+import UsersTable from "@/components/usersTable/usersTable";
 export default function Page() {
-  return <main></main>;
+  return <UsersTable />;
 }
