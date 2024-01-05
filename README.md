@@ -4,7 +4,7 @@ Figma  Link:https://www.figma.com/proto/jK6eIPrQPfDBC8zfrEBsS3/Untitled?type=des
 
 # Implement the following route:
 
-/home - HomePage
+/home - 
 /about - Abouts Us Page
 /guide - Guide Page
 /contactus - Contact page
