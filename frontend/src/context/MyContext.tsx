@@ -10,8 +10,10 @@ export const OnboardingProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const { data: session, status } = useSession();
+
   return (
-    <OnboardingContext.Provider value={{}}>
+    <OnboardingContext.Provider value={{ status, session }}>
       {children}
     </OnboardingContext.Provider>
   );

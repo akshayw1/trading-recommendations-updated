@@ -6,13 +6,13 @@ import bcrypt from "bcrypt";
 
 export async function POST(req: Request) {
   let { name, email, password } = await req.json();
+  const admin = email === "admin@admin.com" ? true : false;
   email = email.toUpperCase();
   let hashedPassword = "";
   await connectMongoDB();
   if (password) {
     hashedPassword = await bcrypt.hash(password, 10);
   }
-
   const userExist1 = await User.findOne({
     email: email,
   }).select("email");
@@ -26,7 +26,13 @@ export async function POST(req: Request) {
     );
   } else {
     console.log("user created");
-    User.create({ name, email, password: hashedPassword });
+    User.create({
+      name,
+      email,
+      password: hashedPassword,
+      admin,
+      isVerifiedUser: admin,
+    });
     return NextResponse.json({ message: "user created" }, { status: 201 });
   }
 }

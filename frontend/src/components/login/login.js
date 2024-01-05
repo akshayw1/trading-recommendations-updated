@@ -45,6 +45,7 @@ export default function Login() {
     });
 
     if (!res.error) {
+      toast.success("Logged");
     } else {
       toast.warning(res.error);
     }

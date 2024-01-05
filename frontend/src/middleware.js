@@ -9,9 +9,10 @@ export async function middleware(req) {
     "/user/injective",
     "/user/quant",
     "/admin/allusers",
+    "/admin",
   ];
   const auth = req.nextUrl.clone();
-  auth.pathname = "/autg/login";
+  auth.pathname = "/auth/login";
   const afterAuth = req.nextUrl.clone();
   const home = req.nextUrl.clone();
   home.pathname = "/home";
@@ -36,7 +37,10 @@ export async function middleware(req) {
     // If user is unauthenticated, continue.
   }
 
-  if (req.nextUrl.pathname === "/login" || req.nextUrl.pathname === "/signup") {
+  if (
+    req.nextUrl.pathname === "/auth/login" ||
+    req.nextUrl.pathname === "/auth/signup"
+  ) {
     const session = await getToken({
       req,
       secret: process.env.JWT_SECRET,
