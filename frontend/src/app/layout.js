@@ -4,7 +4,8 @@ import Aside from "@/components/header/aside";
 import Nav from "@/components/header/nav";
 import MainContainerShadow from "@/components/mainContainerShadow/mainContainerShadow";
 import Footer from "@/components/footer/footer";
-
+import { NextAuthProvider } from "../providers/Providers";
+import { OnboardingProvider } from "../context/MyContext";
 const font = Commissioner({ subsets: ["latin"] });
 
 export const metadata = {
@@ -16,10 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={font.className}>
-        <Aside />
-        <Nav />
-        <MainContainerShadow>{children}</MainContainerShadow>
-        <Footer />
+        <NextAuthProvider>
+          <OnboardingProvider>
+            <Aside />
+            <Nav />
+            <MainContainerShadow>{children}</MainContainerShadow>
+            <Footer />
+          </OnboardingProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

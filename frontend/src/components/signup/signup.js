@@ -1,23 +1,111 @@
+"use client";
 import Button2 from "../buttons/button2";
 import styles from "./../login/styles.module.css";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [errors, setErrors] = useState([]);
+
+  const register = async (e) => {
+    e.preventDefault();
+
+    let newErrors = [];
+
+    if (email === "") {
+      newErrors.push("email required");
+    }
+    if (name === "") {
+      newErrors.push("name required");
+    }
+
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      newErrors.push("email invalid");
+    }
+    if (password === "") {
+      newErrors.push("pass required");
+    }
+    if (password.length < 6) {
+      newErrors.push("password of at least 6 characters");
+    }
+    if (password.length < 4) {
+      newErrors.push("name of at least 4 characters");
+    }
+
+    for (let i = 0; i < newErrors.length; i++) {
+      toast.warning(newErrors[i]);
+    }
+    setErrors((arr) => [...newErrors]);
+    if (newErrors.length > 0) {
+      return;
+    }
+    console.log(1);
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        data.message !== "user created"
+          ? toast.warning(data.message)
+          : toast.success("Registered");
+      }
+    } catch (error) {
+      console.log("error");
+    }
+  };
   return (
     <main className={styles.main}>
+      <ToastContainer />
+
       <h2 className={styles.h2}>Get Started</h2>
       <div className="input1">
-        <input type="text" required></input>
+        <input
+          onBlur={() => setErrors([])}
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value.replace(" ", ""));
+            setErrors([]);
+          }}
+          type="text"
+          required
+        ></input>
         <label>Name</label>
       </div>
       <div className="input1">
-        <input type="text" required></input>
+        <input
+          onBlur={() => setErrors([])}
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value.replace(" ", ""));
+            setErrors([]);
+          }}
+          type="text"
+          required
+        ></input>
         <label>Email</label>
       </div>
       <div className="input1">
-        <input type="password" required></input>
+        <input
+          onBlur={() => setErrors([])}
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value.replace(" ", ""));
+            setErrors([]);
+          }}
+          type="password"
+          required
+        ></input>
         <label style={{ "--color1": "rgb(30,49,93)" }}>Password</label>
       </div>
       <Button2
+        onClick={register}
         style1={{ "--blue1": "rgb(27,42,80)" }}
         style2={{
           fontWeight: 600,

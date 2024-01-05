@@ -15,6 +15,7 @@
 }
 
 .main img {
+  max-width: 236px;
   width: 18%;
   margin: auto;
   margin-top: 1rem;
@@ -42,13 +43,32 @@
 .networkAddress hr {
   margin: 1rem 0;
 }
-.grey {
-  color: #959595;
+
+.copy {
+  cursor: pointer;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+.main .copy img {
+  margin: 0;
+  margin-left: 0.2rem;
+  height: 32px;
+  width: 32px;
+  opacity: 0.5;
+  transition: 0.5s;
 }
 
+.main .copy:hover img {
+  opacity: 1;
+}
 @media only screen and (max-width: 960px) {
+  .main .copy img {
+    height: 24px;
+    width: 24px;
+  }
   .main img {
-    width: 55%;
+    width: 45%;
   }
   .main p {
     font-size: 1.1rem;
