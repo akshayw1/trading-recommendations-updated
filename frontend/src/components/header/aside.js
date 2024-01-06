@@ -14,21 +14,12 @@ export default function Aside() {
   const pagesWithTable = ["/bitcoin", "/admin/allusers"];
   const hideAside = pagesWithTable.includes(pathname) ? true : false;
   const [menuOption, setMenuOption] = useState(0);
-
-  const toggleMenuOption = (option) => {
-    setMenuOption(option);
-  };
-  const toggleMenu = () => {
-    const asideMenus = document.querySelectorAll("#asideMenu");
-    asideMenus.forEach((menu) => {
-      menu.classList.toggle("menuIsOpen");
-    });
-  };
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
       <Image
-        onClick={toggleMenu}
+        onClick={() => setMenuOpen(true)}
         className={`${styles.mobile} ${styles.menuIcon}`}
         alt="menu"
         width={256}
@@ -37,11 +28,15 @@ export default function Aside() {
       />
       <div
         id="asideMenu"
-        className={`${styles.overlay} ${styles.mobile}`}
+        className={`${menuOpen ? "menuIsOpen" : ""} ${styles.overlay} ${
+          styles.mobile
+        }`}
       ></div>
       <aside
         id="asideMenu"
-        className={`${hideAside ? styles.onTable : ""} ${styles.aside} `}
+        className={`${menuOpen ? "menuIsOpen" : ""} ${
+          hideAside ? styles.onTable : ""
+        } ${styles.aside} `}
       >
         <Link className={styles.desktop} href="/home">
           <Image
@@ -52,7 +47,7 @@ export default function Aside() {
           ></Image>
         </Link>
         <Image
-          onClick={toggleMenu}
+          onClick={() => setMenuOpen(false)}
           className={styles.mobile}
           alt="close"
           width={256}
@@ -93,27 +88,27 @@ export default function Aside() {
           }`}
         >
           <li>
-            <Link onClick={toggleMenu} href="/home">
+            <Link onClick={() => setMenuOpen(false)} href="/home">
               Home
             </Link>
           </li>
           <li>
-            <Link onClick={toggleMenu} href="/guide">
+            <Link onClick={() => setMenuOpen(false)} href="/guide">
               Guide
             </Link>
           </li>
           <li>
-            <Link onClick={toggleMenu} href="/about">
+            <Link onClick={() => setMenuOpen(false)} href="/about">
               About us
             </Link>
           </li>
           <li>
-            <Link onClick={toggleMenu} href="/contactus">
+            <Link onClick={() => setMenuOpen(false)} href="/contactus">
               Contact us
             </Link>
           </li>
           <li>
-            <Link onClick={toggleMenu} href="/donate">
+            <Link onClick={() => setMenuOpen(false)} href="/donate">
               Donate
             </Link>
           </li>
@@ -121,7 +116,11 @@ export default function Aside() {
         <ul className={`${menuOption === 0 ? styles.menuSelected : ""}`}>
           <li className={styles.blue}>Futures & Options OI</li>
           <li>
-            <Link onClick={toggleMenu} className={styles.white} href="/bitcoin">
+            <Link
+              onClick={() => setMenuOpen(false)}
+              className={styles.white}
+              href="/bitcoin"
+            >
               <div>
                 <svg
                   className={styles.fill}
@@ -337,7 +336,7 @@ export default function Aside() {
           {session && session.user.admin ? (
             <li>
               <Link
-                onClick={toggleMenu}
+                onClick={() => setMenuOpen(false)}
                 className={styles.white}
                 href="/admin/allusers "
               >
@@ -368,7 +367,7 @@ export default function Aside() {
           ) : null}
         </ul>
         <div className={`${styles.authBox} ${styles.mobile}`}>
-          <Link onClick={toggleMenu} href="/auth/login">
+          <Link onClick={() => setMenuOpen(false)} href="/auth/login">
             <Button1
               style2={{
                 fontWeight: 600,
@@ -380,7 +379,7 @@ export default function Aside() {
               Log in
             </Button1>
           </Link>
-          <Link onClick={toggleMenu} href="/auth/signup">
+          <Link onClick={() => setMenuOpen(false)} href="/auth/signup">
             <Button2
               style2={{
                 fontWeight: 600,
