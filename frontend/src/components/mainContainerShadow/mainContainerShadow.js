@@ -1,7 +1,11 @@
 "use client";
 import { useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function MainContainerShadow({ children }) {
+  const pathname = usePathname();
+  const pagesWithTable = ["/bitcoin", "/admin/allusers"];
+  const hideAside = pagesWithTable.includes(pathname) ? true : false;
   const shadowMainRef = useRef(null);
   useEffect(() => {
     const updateBlurCircleBoxHeight = () => {
@@ -10,20 +14,16 @@ export default function MainContainerShadow({ children }) {
       blurCircleBox.style.height = `${shadowMainHeight}px`;
     };
 
-    // Llama a la función para establecer la altura inicial
     updateBlurCircleBoxHeight();
 
-    // Agrega un event listener para el cambio de tamaño de la ventana
     const handleResize = () => {
       updateBlurCircleBoxHeight();
     };
 
-    // Agrega un event listener para el cambio de altura de shadow-main
     const shadowMainElement = shadowMainRef.current;
     const observer = new ResizeObserver(handleResize);
     observer.observe(shadowMainElement);
 
-    // Limpia los event listeners al desmontar el componente
     return () => {
       window.removeEventListener("resize", handleResize);
       observer.disconnect();
@@ -32,10 +32,13 @@ export default function MainContainerShadow({ children }) {
 
   return (
     <>
-      <div ref={shadowMainRef} className="shadow-main">
+      <div
+        ref={shadowMainRef}
+        className={`${hideAside ? "onTable" : ""} shadowMain`}
+      >
         {children}
       </div>
-      <div className="blurCircleBox">
+      <div className={`${hideAside ? "onTable" : ""} blurCircleBox`}>
         <div className="blurCircle"></div>
         <div className="blurCircle"></div>
         <div className="blurCircle"></div>

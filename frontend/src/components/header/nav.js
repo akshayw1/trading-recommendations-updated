@@ -6,10 +6,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { useOnboardingContext } from "@/context/MyContext";
 import { signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
+
 export default function Nav() {
   const { session, status } = useOnboardingContext();
+  const pathname = usePathname();
+  const pagesWithTable = ["/bitcoin", "/admin/allusers"];
+  const hideAside = pagesWithTable.includes(pathname) ? true : false;
+
   return (
-    <nav className={styles.nav}>
+    <nav className={`${styles.nav} ${hideAside ? styles.onTable : ""}`}>
       <ul className={styles.desktop}>
         <li>
           <Link href="/guide">Guide</Link>
@@ -48,12 +54,14 @@ export default function Nav() {
       <ul className={styles.mobile}>
         <li></li>
         <li>
-          <Image
-            alt="logo"
-            width={198}
-            height={122}
-            src="/images/Logo.png"
-          ></Image>
+          <Link href="/home">
+            <Image
+              alt="logo"
+              width={198}
+              height={122}
+              src="/images/Logo.png"
+            ></Image>
+          </Link>
         </li>
         <li>
           <Image

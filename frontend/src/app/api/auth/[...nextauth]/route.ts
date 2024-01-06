@@ -3,12 +3,55 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import { compare } from "bcrypt";
-
+type User = {
+  name?: string | null | undefined;
+  email?: string | null | undefined;
+  image?: string | null | undefined;
+  admin?: any;
+  isVerifiedUser?: any;
+};
 const handler = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
-      console.log(account?.provider);
       return true;
+    },
+    async jwt({ token, account, profile }) {
+      await connectMongoDB();
+
+      const findUser = await User.findOne({
+        email: token.email,
+      }).select("admin isVerifiedUser");
+
+      token = {
+        ...token,
+        admin: findUser.admin,
+        isVerifiedUser: findUser.isVerifiedUser,
+      } as User;
+
+      return token;
+    },
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      await connectMongoDB();
+
+      const findUser = await User.findOne({
+        email: session.user?.email,
+      }).select("admin isVerifiedUser");
+
+      session.user = {
+        ...session.user,
+        admin: findUser.admin,
+        isVerifiedUser: findUser.isVerifiedUser,
+      } as User;
+
+      return session;
+    },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
   },
   providers: [
@@ -24,17 +67,21 @@ const handler = NextAuth({
           label: "Email",
           type: "text",
         },
+        admin: {
+          label: "Role",
+          type: "boolean",
+        },
       },
 
       async authorize(credentials) {
         await connectMongoDB();
+
         const user =
           credentials?.email !== " "
             ? await User.findOne({
                 email: credentials?.email.toUpperCase(),
               })
             : null;
-
         if (!user) {
           console.log("Invalid Email");
           throw new Error("Wrong credentials");
