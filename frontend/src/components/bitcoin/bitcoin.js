@@ -177,21 +177,19 @@ export default function Bitcoin() {
                   {index + 1}
                 </td>
                 <td>
-                  {session && !session.user.admin ? (
-                    item.Time
-                  ) : (
+                  {session && session.user.admin ? (
                     <input
                       onChange={(e) => onChange(e.target.value, "Time", index)}
                       defaultValue={item.Time}
                       className={styles.inputTable}
                       type="text"
                     />
+                  ) : (
+                    item.Time
                   )}
                 </td>
                 <td>
-                  {session && !session.user.admin ? (
-                    item.CallOI
-                  ) : (
+                  {session && session.user.admin ? (
                     <input
                       onChange={(e) =>
                         onChange(e.target.value, "CallOI", index)
@@ -200,24 +198,24 @@ export default function Bitcoin() {
                       className={styles.inputTable}
                       type="text"
                     />
+                  ) : (
+                    item.CallOI
                   )}
                 </td>
                 <td>
-                  {session && !session.user.admin ? (
-                    item.IV1
-                  ) : (
+                  {session && session.user.admin ? (
                     <input
                       onChange={(e) => onChange(e.target.value, "IV1", index)}
                       defaultValue={item.IV1}
                       className={styles.inputTable}
                       type="text"
                     />
+                  ) : (
+                    item.IV1
                   )}
                 </td>
                 <td>
-                  {session && !session.user.admin ? (
-                    item.Delta1
-                  ) : (
+                  {session && session.user.admin ? (
                     <input
                       onChange={(e) =>
                         onChange(e.target.value, "Delta1", index)
@@ -226,12 +224,14 @@ export default function Bitcoin() {
                       className={styles.inputTable}
                       type="text"
                     />
+                  ) : (
+                    item.Delta1
                   )}
                 </td>
                 <td className={styles.dropdown}>
                   <label htmlFor={`check${1 + 6 * index}`}>
                     <input
-                      disabled={session && !session.user.admin ? true : false}
+                      disabled={session && session.user.admin ? false : true}
                       className={styles.input1}
                       type="checkbox"
                       id={`check${1 + 6 * index}`}
@@ -299,7 +299,7 @@ export default function Bitcoin() {
                 <td className={styles.dropdown}>
                   <label htmlFor={`check${2 + 6 * index}`}>
                     <input
-                      disabled={session && !session.user.admin ? true : false}
+                      disabled={session && session.user.admin ? false : true}
                       className={styles.input1}
                       type="checkbox"
                       id={`check${2 + 6 * index}`}
@@ -367,7 +367,7 @@ export default function Bitcoin() {
                 <td className={styles.dropdown}>
                   <label htmlFor={`check${3 + 6 * index}`}>
                     <input
-                      disabled={session && !session.user.admin ? true : false}
+                      disabled={session && session.user.admin ? false : true}
                       className={styles.input1}
                       type="checkbox"
                       id={`check${3 + 6 * index}`}
@@ -473,9 +473,7 @@ export default function Bitcoin() {
                   </label>
                 </td>
                 <td>
-                  {session && !session.user.admin ? (
-                    item.Strike
-                  ) : (
+                  {session && session.user.admin ? (
                     <input
                       onChange={(e) =>
                         onChange(e.target.value, "Strike", index)
@@ -484,12 +482,14 @@ export default function Bitcoin() {
                       className={styles.inputTable}
                       type="text"
                     />
+                  ) : (
+                    item.Strike
                   )}
                 </td>
                 <td className={styles.dropdown}>
                   <label htmlFor={`check${4 + 6 * index}`}>
                     <input
-                      disabled={session && !session.user.admin ? true : false}
+                      disabled={session && session.user.admin ? false : true}
                       className={styles.input1}
                       type="checkbox"
                       id={`check${4 + 6 * index}`}
@@ -597,7 +597,7 @@ export default function Bitcoin() {
                 <td className={styles.dropdown}>
                   <label htmlFor={`check${5 + 6 * index}`}>
                     <input
-                      disabled={session && !session.user.admin ? true : false}
+                      disabled={session && session.user.admin ? false : true}
                       className={styles.input1}
                       type="checkbox"
                       id={`check${5 + 6 * index}`}
@@ -665,7 +665,7 @@ export default function Bitcoin() {
                 <td className={styles.dropdown}>
                   <label htmlFor={`check${6 + 6 * index}`}>
                     <input
-                      disabled={session && !session.user.admin ? true : false}
+                      disabled={session && session.user.admin ? false : true}
                       className={styles.input1}
                       type="checkbox"
                       id={`check${6 + 6 * index}`}
@@ -731,9 +731,7 @@ export default function Bitcoin() {
                   </label>
                 </td>
                 <td>
-                  {session && !session.user.admin ? (
-                    item.Delta2
-                  ) : (
+                  {session && session.user.admin ? (
                     <input
                       onChange={(e) =>
                         onChange(e.target.value, "Delta2", index)
@@ -742,30 +740,32 @@ export default function Bitcoin() {
                       className={styles.inputTable}
                       type="text"
                     />
+                  ) : (
+                    item.Delta2
                   )}
                 </td>
                 <td>
-                  {session && !session.user.admin ? (
-                    item.IV2
-                  ) : (
+                  {session && session.user.admin ? (
                     <input
                       onChange={(e) => onChange(e.target.value, "IV2", index)}
                       defaultValue={item.IV2}
                       className={styles.inputTable}
                       type="text"
                     />
+                  ) : (
+                    item.IV2
                   )}
                 </td>
                 <td>
-                  {session && !session.user.admin ? (
-                    item.PutOI
-                  ) : (
+                  {session && session.user.admin ? (
                     <input
                       onChange={(e) => onChange(e.target.value, "PutOI", index)}
                       defaultValue={item.PutOI}
                       className={styles.inputTable}
                       type="text"
                     />
+                  ) : (
+                    item.PutOI
                   )}
                 </td>
               </tr>

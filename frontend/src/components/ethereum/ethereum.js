@@ -160,297 +160,305 @@ export default function Ethereum() {
     maintainAspectRatio: true,
   };
   return (
-    <main className={styles.main}>
-      <div className="w-[50%]">
-        <table>
-          <thead>
-            <tr>
-              <th>N</th>
-              <th>Time</th>
-              <th>OI Interpretation</th>
-              <th>Trend</th>
-              <th>Some text</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={index}>
-                <td className="flex flex-row gap-2">
-                  {session && session.user.admin ? (
-                    <div
-                      onClick={() => deleteItem(index)}
-                      className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
-                    >
-                      X
-                    </div>
-                  ) : null}
-                  {index + 1}
-                </td>
-                <td>
-                  {session && !session.user.admin ? (
-                    item.Time
-                  ) : (
-                    <input
-                      onChange={(e) => onChange(e.target.value, "Time", index)}
-                      defaultValue={item.Time}
-                      className={styles.inputTable}
-                      type="text"
-                    />
-                  )}
-                </td>
-                <td className={styles.dropdown}>
-                  <label htmlFor={`check${3 + 6 * index}`}>
-                    <input
-                      disabled={session && !session.user.admin ? true : false}
-                      className={styles.input1}
-                      type="checkbox"
-                      id={`check${3 + 6 * index}`}
-                      onChange={() => closeAllDropdown(`check${3 + 6 * index}`)}
-                    />
-                    <label className={styles.label1}>
-                      <label
-                        onClick={() =>
-                          onChange(0, "CallOIInterpretation", index)
-                        }
-                      >
-                        <div className={`${styles.blue} ${styles.wide}`}>
-                          <Image
-                            className="rotate0"
-                            alt="arrow horizontal"
-                            width={32}
-                            height={32}
-                            src="/images/table/arrow h.png"
-                          />
-                          Neutral
-                        </div>
-                      </label>
-                      <label
-                        onClick={() =>
-                          onChange(2, "CallOIInterpretation", index)
-                        }
-                      >
-                        <div className={`${styles.red} ${styles.wide}`}>
-                          Bullish
-                          <Image
-                            alt="arrow down"
-                            width={32}
-                            height={32}
-                            src="/images/table/arrow.png"
-                          />
-                        </div>
-                      </label>
-                      <label
-                        onClick={() =>
-                          onChange(1, "CallOIInterpretation", index)
-                        }
-                      >
-                        <div className={`${styles.green} ${styles.wide}`}>
-                          Bullish
-                          <Image
-                            alt="arrow up"
-                            width={32}
-                            height={32}
-                            src="/images/table/arrow.png"
-                          />
-                        </div>
-                      </label>
-                      <label
-                        onClick={() =>
-                          onChange(3, "CallOIInterpretation", index)
-                        }
-                      >
-                        <div className={`${styles.red} ${styles.wide}`}>
-                          Ext Bullish
-                          <Image
-                            alt="arrow down"
-                            width={32}
-                            height={32}
-                            src="/images/table/arrow.png"
-                          />
-                        </div>
-                      </label>
-                      <label
-                        onClick={() =>
-                          onChange(4, "CallOIInterpretation", index)
-                        }
-                      >
-                        <div className={`${styles.green} ${styles.wide}`}>
-                          Ext Bullish
-                          <Image
-                            alt="arrow up"
-                            width={32}
-                            height={32}
-                            src="/images/table/arrow.png"
-                          />
-                        </div>
-                      </label>
-                    </label>
-                    <div
-                      className={`${
-                        item.CallOIInterpretation === 0
-                          ? styles.blue
-                          : item.CallOIInterpretation === 1 ||
-                            item.CallOIInterpretation === 4
-                          ? styles.green
-                          : styles.red
-                      } ${styles.wide}`}
-                    >
-                      {item.CallOIInterpretation === 0
-                        ? "Neutral"
-                        : item.CallOIInterpretation === 3 ||
-                          item.CallOIInterpretation === 4
-                        ? "Ext Bullish"
-                        : "Bullish"}
-                      <Image
-                        alt={
-                          item.CallOIInterpretation === 0
-                            ? "arrow horizontal"
-                            : item.CallOIInterpretation === 1
-                            ? "arrow up"
-                            : "arrow down"
-                        }
-                        width={32}
-                        height={32}
-                        src={
-                          "/images/table/" +
-                          (item.CallOIInterpretation === 0
-                            ? "arrow.png"
-                            : "arrow.png")
-                        }
-                      />
-                    </div>
-                  </label>
-                </td>
-                <td className={styles.dropdown}>
-                  <label htmlFor={`check${4 + 6 * index}`}>
-                    <input
-                      disabled={session && !session.user.admin ? true : false}
-                      className={styles.input1}
-                      type="checkbox"
-                      id={`check${4 + 6 * index}`}
-                      onChange={() => closeAllDropdown(`check${4 + 6 * index}`)}
-                    />
-                    <label className={styles.label1}>
-                      <label
-                        onClick={() =>
-                          onChange(0, "PutOiInterpretation", index)
-                        }
-                      >
-                        <div className={`${styles.blue} ${styles.wide}`}>
-                          Shorts Covering
-                          <Image
-                            alt="arrow horizontal"
-                            width={32}
-                            height={32}
-                            src="/images/table/arrow.png"
-                          />
-                        </div>
-                      </label>
-                      <label
-                        onClick={() =>
-                          onChange(2, "PutOiInterpretation", index)
-                        }
-                      >
-                        <div className={`${styles.red} ${styles.wide}`}>
-                          Short Build Up
-                          <Image
-                            alt="arrow down"
-                            width={32}
-                            height={32}
-                            src="/images/table/arrow.png"
-                          />
-                        </div>
-                      </label>
-                      <label
-                        onClick={() =>
-                          onChange(1, "PutOiInterpretation", index)
-                        }
-                      >
-                        <div className={`${styles.green} ${styles.wide}`}>
-                          Long Build Up
-                          <Image
-                            alt="arrow up"
-                            width={32}
-                            height={32}
-                            src="/images/table/arrow.png"
-                          />
-                        </div>
-                      </label>
-                    </label>
-                    <div
-                      className={`${
-                        item.PutOiInterpretation === 0
-                          ? styles.blue
-                          : item.PutOiInterpretation === 1
-                          ? styles.green
-                          : item.PutOiInterpretation === 2
-                          ? styles.red
-                          : styles.yellow
-                      } ${styles.wide}`}
-                    >
-                      {item.PutOiInterpretation === 0
-                        ? "Shorts Covering"
-                        : item.PutOiInterpretation === 1 ||
-                          item.PutOiInterpretation === 3
-                        ? "Long Build Up"
-                        : "Short Build Up"}
-                      <Image
-                        alt={
-                          item.PutOiInterpretation === 0
-                            ? "arrow horizontal"
-                            : item.PutOiInterpretation === 1
-                            ? "arrow up"
-                            : "arrow down"
-                        }
-                        width={32}
-                        height={32}
-                        src={
-                          "/images/table/" +
-                          (item.PutOiInterpretation === 0
-                            ? "arrow.png"
-                            : "arrow.png")
-                        }
-                      />
-                    </div>
-                  </label>
-                </td>
-                <td>
-                  {session && !session.user.admin ? (
-                    item.Strike
-                  ) : (
-                    <input
-                      onChange={(e) =>
-                        onChange(e.target.value, "Strike", index)
-                      }
-                      defaultValue={item.Strike}
-                      className={styles.inputTable}
-                      type="text"
-                    />
-                  )}
-                </td>
+    <main className={`${styles.main}`}>
+      <div className="w-full flex items-center xl:flex-row flex-col">
+        <div className="xl:w-[50%] w-full">
+          <table>
+            <thead>
+              <tr>
+                <th>N</th>
+                <th>Time</th>
+                <th>OI Interpretation</th>
+                <th>Trend</th>
+                <th>Some text</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        {session && session.user.admin ? (
-          <>
-            <button
-              onClick={addItem}
-              className="w-full text-center bg-green-800 h-12 hover:bg-green-700"
-            >
-              +
-            </button>
-            <button
-              onClick={updateData}
-              className="w-full text-center bg-blue-700 h-12 hover:bg-blue-600"
-            >
-              Update
-            </button>
-          </>
-        ) : null}
-      </div>
-      <div className="w-[50%] pl-[50px] bg-[#161a1e]">
-        <Line options={options} datasetIdKey="id" data={tableData} />
+            </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr key={index}>
+                  <td className="flex flex-row gap-2">
+                    {session && session.user.admin ? (
+                      <div
+                        onClick={() => deleteItem(index)}
+                        className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
+                      >
+                        X
+                      </div>
+                    ) : null}
+                    {index + 1}
+                  </td>
+                  <td>
+                    {session && !session.user.admin ? (
+                      item.Time
+                    ) : (
+                      <input
+                        onChange={(e) =>
+                          onChange(e.target.value, "Time", index)
+                        }
+                        defaultValue={item.Time}
+                        className={styles.inputTable}
+                        type="text"
+                      />
+                    )}
+                  </td>
+                  <td className={styles.dropdown}>
+                    <label htmlFor={`check${3 + 6 * index}`}>
+                      <input
+                        disabled={session && !session.user.admin ? true : false}
+                        className={styles.input1}
+                        type="checkbox"
+                        id={`check${3 + 6 * index}`}
+                        onChange={() =>
+                          closeAllDropdown(`check${3 + 6 * index}`)
+                        }
+                      />
+                      <label className={styles.label1}>
+                        <label
+                          onClick={() =>
+                            onChange(0, "CallOIInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.blue} ${styles.wide}`}>
+                            <Image
+                              className="rotate0"
+                              alt="arrow horizontal"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow h.png"
+                            />
+                            Neutral
+                          </div>
+                        </label>
+                        <label
+                          onClick={() =>
+                            onChange(2, "CallOIInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.red} ${styles.wide}`}>
+                            Bullish
+                            <Image
+                              alt="arrow down"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                        <label
+                          onClick={() =>
+                            onChange(1, "CallOIInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.green} ${styles.wide}`}>
+                            Bullish
+                            <Image
+                              alt="arrow up"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                        <label
+                          onClick={() =>
+                            onChange(3, "CallOIInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.red} ${styles.wide}`}>
+                            Ext Bullish
+                            <Image
+                              alt="arrow down"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                        <label
+                          onClick={() =>
+                            onChange(4, "CallOIInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.green} ${styles.wide}`}>
+                            Ext Bullish
+                            <Image
+                              alt="arrow up"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                      </label>
+                      <div
+                        className={`${
+                          item.CallOIInterpretation === 0
+                            ? styles.blue
+                            : item.CallOIInterpretation === 1 ||
+                              item.CallOIInterpretation === 4
+                            ? styles.green
+                            : styles.red
+                        } ${styles.wide}`}
+                      >
+                        {item.CallOIInterpretation === 0
+                          ? "Neutral"
+                          : item.CallOIInterpretation === 3 ||
+                            item.CallOIInterpretation === 4
+                          ? "Ext Bullish"
+                          : "Bullish"}
+                        <Image
+                          alt={
+                            item.CallOIInterpretation === 0
+                              ? "arrow horizontal"
+                              : item.CallOIInterpretation === 1
+                              ? "arrow up"
+                              : "arrow down"
+                          }
+                          width={32}
+                          height={32}
+                          src={
+                            "/images/table/" +
+                            (item.CallOIInterpretation === 0
+                              ? "arrow.png"
+                              : "arrow.png")
+                          }
+                        />
+                      </div>
+                    </label>
+                  </td>
+                  <td className={styles.dropdown}>
+                    <label htmlFor={`check${4 + 6 * index}`}>
+                      <input
+                        disabled={session && !session.user.admin ? true : false}
+                        className={styles.input1}
+                        type="checkbox"
+                        id={`check${4 + 6 * index}`}
+                        onChange={() =>
+                          closeAllDropdown(`check${4 + 6 * index}`)
+                        }
+                      />
+                      <label className={styles.label1}>
+                        <label
+                          onClick={() =>
+                            onChange(0, "PutOiInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.blue} ${styles.wide}`}>
+                            Shorts Covering
+                            <Image
+                              alt="arrow horizontal"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                        <label
+                          onClick={() =>
+                            onChange(2, "PutOiInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.red} ${styles.wide}`}>
+                            Short Build Up
+                            <Image
+                              alt="arrow down"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                        <label
+                          onClick={() =>
+                            onChange(1, "PutOiInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.green} ${styles.wide}`}>
+                            Long Build Up
+                            <Image
+                              alt="arrow up"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                      </label>
+                      <div
+                        className={`${
+                          item.PutOiInterpretation === 0
+                            ? styles.blue
+                            : item.PutOiInterpretation === 1
+                            ? styles.green
+                            : item.PutOiInterpretation === 2
+                            ? styles.red
+                            : styles.yellow
+                        } ${styles.wide}`}
+                      >
+                        {item.PutOiInterpretation === 0
+                          ? "Shorts Covering"
+                          : item.PutOiInterpretation === 1 ||
+                            item.PutOiInterpretation === 3
+                          ? "Long Build Up"
+                          : "Short Build Up"}
+                        <Image
+                          alt={
+                            item.PutOiInterpretation === 0
+                              ? "arrow horizontal"
+                              : item.PutOiInterpretation === 1
+                              ? "arrow up"
+                              : "arrow down"
+                          }
+                          width={32}
+                          height={32}
+                          src={
+                            "/images/table/" +
+                            (item.PutOiInterpretation === 0
+                              ? "arrow.png"
+                              : "arrow.png")
+                          }
+                        />
+                      </div>
+                    </label>
+                  </td>
+                  <td>
+                    {session && !session.user.admin ? (
+                      item.Strike
+                    ) : (
+                      <input
+                        onChange={(e) =>
+                          onChange(e.target.value, "Strike", index)
+                        }
+                        defaultValue={item.Strike}
+                        className={styles.inputTable}
+                        type="text"
+                      />
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {session && session.user.admin ? (
+            <>
+              <button
+                onClick={addItem}
+                className="w-full text-center bg-green-800 h-12 hover:bg-green-700"
+              >
+                +
+              </button>
+              <button
+                onClick={updateData}
+                className="w-full text-center bg-blue-700 h-12 hover:bg-blue-600"
+              >
+                Update
+              </button>
+            </>
+          ) : null}
+        </div>
+        <div className="xl:w-[50%] m-auto w-full flex order-first xl:order-none max-w-[700px] pl-[50px] bg-[#161a1e]">
+          <Line options={options} datasetIdKey="id" data={tableData} />
+        </div>
       </div>
     </main>
   );
