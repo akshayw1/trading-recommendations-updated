@@ -7,11 +7,11 @@ import Button2 from "../buttons/button2";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useOnboardingContext } from "@/context/MyContext";
+import pagesWithTable from "./pagesWithTable";
 
 export default function Aside() {
   const { session, status } = useOnboardingContext();
   const pathname = usePathname();
-  const pagesWithTable = ["/bitcoin", "/admin/allusers"];
   const hideAside = pagesWithTable.includes(pathname) ? true : false;
   const [menuOption, setMenuOption] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -140,42 +140,48 @@ export default function Aside() {
             </Link>
           </li>
           <li className={styles.white}>
-            <div>
-              <svg
-                className={styles.fill}
-                width="29"
-                height="29"
-                viewBox="0 0 29 29"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M14.4993 5.17856L14.3711 5.60341V17.9305L14.4993 18.0553L20.3658 14.673L14.4993 5.17856Z"
-                  fill="white"
-                />
-                <path
-                  d="M14.4975 5.17856L8.63086 14.673L14.4975 18.0553V12.072V5.17856Z"
-                  fill="white"
-                />
-                <path
-                  d="M14.499 19.1386L14.4268 19.2245V23.6156L14.499 23.8214L20.3691 15.758L14.499 19.1386Z"
-                  fill="#E8E8E8"
-                />
-                <path
-                  d="M14.4975 23.8214V19.1386L8.63086 15.758L14.4975 23.8214Z"
-                  fill="white"
-                />
-                <path
-                  d="M14.4971 18.0551L20.3635 14.6728L14.4971 12.0718V18.0551Z"
-                  fill="#E8E8E8"
-                />
-                <path
-                  d="M8.63086 14.6728L14.4975 18.0551V12.0718L8.63086 14.6728Z"
-                  fill="#E8E8E8"
-                />
-              </svg>
-            </div>
-            Ethereum
+            <Link
+              onClick={() => setMenuOpen(false)}
+              className={styles.white}
+              href="/ethereum"
+            >
+              <div>
+                <svg
+                  className={styles.fill}
+                  width="29"
+                  height="29"
+                  viewBox="0 0 29 29"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14.4993 5.17856L14.3711 5.60341V17.9305L14.4993 18.0553L20.3658 14.673L14.4993 5.17856Z"
+                    fill="white"
+                  />
+                  <path
+                    d="M14.4975 5.17856L8.63086 14.673L14.4975 18.0553V12.072V5.17856Z"
+                    fill="white"
+                  />
+                  <path
+                    d="M14.499 19.1386L14.4268 19.2245V23.6156L14.499 23.8214L20.3691 15.758L14.499 19.1386Z"
+                    fill="#E8E8E8"
+                  />
+                  <path
+                    d="M14.4975 23.8214V19.1386L8.63086 15.758L14.4975 23.8214Z"
+                    fill="white"
+                  />
+                  <path
+                    d="M14.4971 18.0551L20.3635 14.6728L14.4971 12.0718V18.0551Z"
+                    fill="#E8E8E8"
+                  />
+                  <path
+                    d="M8.63086 14.6728L14.4975 18.0551V12.0718L8.63086 14.6728Z"
+                    fill="#E8E8E8"
+                  />
+                </svg>
+              </div>
+              Ethereum
+            </Link>
           </li>
           <li className={styles.blue}>Futures OI</li>
           <li className={styles.white}>

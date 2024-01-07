@@ -1,18 +1,43 @@
 .main {
   width: 100%;
   font-size: 0.9rem;
-  display: block;
+  display: flex;
   overflow-x: scroll;
   overflow-y: visible;
+  padding: 0;
+  margin-bottom: 3rem;
+  flex-direction: row;
+  align-items: flex-start;
+  height: fit-content;
 }
+/* width */
+.main::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.main::-webkit-scrollbar-track {
+  background: #181a1b;
+}
+
+/* Handle */
+.main::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.main::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .main input[type="checkbox"],
 .main input[type="radio"] {
   display: none;
 }
 .main table {
-  overflow-y: visible;
-  white-space: nowrap;
   width: 100%;
+  white-space: nowrap;
 }
 .main thead {
   background-color: #1c2021;
@@ -45,13 +70,8 @@
   width: 100%;
   align-items: center;
 }
-.main td:nth-of-type(6),
-.main td:nth-of-type(7),
-.main td:nth-of-type(8),
-.main td:nth-of-type(10),
-.main td:nth-of-type(11),
-.main td:nth-of-type(12) {
-  padding: 0 0.25rem;
+.dropdown {
+  padding: 0 0.25rem !important;
 }
 .main td > label {
   margin: auto;
@@ -74,9 +94,12 @@
   top: 48px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #222627;
+  background-color: #2e3335;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  z-index: 1;
+  font-weight: 500;
+  padding-bottom: 4px;
 }
 .label1 > input[type="radio"]:not(:checked) ~ label {
   display: none;
@@ -89,7 +112,7 @@
   width: 100%;
 }
 .main .input1[type="checkbox"]:checked ~ .label1 > label:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .green {

@@ -2,10 +2,10 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { usePathname } from "next/navigation";
+import pagesWithTable from "../header/pagesWithTable";
 
 export default function Footer() {
   const pathname = usePathname();
-  const pagesWithTable = ["/bitcoin", "/admin/allusers"];
   const hideAside = pagesWithTable.includes(pathname) ? true : false;
   return (
     <footer className={`${hideAside ? styles.onTable : ""} ${styles.footer}`}>

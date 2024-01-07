@@ -1,10 +1,10 @@
 "use client";
 import { useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import pagesWithTable from "../header/pagesWithTable";
 
 export default function MainContainerShadow({ children }) {
   const pathname = usePathname();
-  const pagesWithTable = ["/bitcoin", "/admin/allusers"];
   const hideAside = pagesWithTable.includes(pathname) ? true : false;
   const shadowMainRef = useRef(null);
   useEffect(() => {
