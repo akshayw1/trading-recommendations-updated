@@ -167,3 +167,6 @@ main {
     height: 52px;
   }
 }
+.rotate0 {
+  transform: rotate(0) !important;
+}

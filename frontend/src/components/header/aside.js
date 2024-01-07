@@ -119,7 +119,7 @@ export default function Aside() {
             <Link
               onClick={() => setMenuOpen(false)}
               className={styles.white}
-              href="/bitcoin"
+              href="/user/bitcoin"
             >
               <div>
                 <svg
@@ -143,7 +143,7 @@ export default function Aside() {
             <Link
               onClick={() => setMenuOpen(false)}
               className={styles.white}
-              href="/ethereum"
+              href="/user/ethereum"
             >
               <div>
                 <svg
