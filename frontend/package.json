@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "chart.js": "^4.4.1",
     "framer-motion": "^10.16.16",
     "i": "^0.3.7",
     "mongoose": "^8.0.3",
@@ -17,6 +18,7 @@
     "next-auth": "^4.24.5",
     "npm": "^10.2.5",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18",
     "react-slot-counter": "^2.2.3",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/chart.js": "^2.9.41",
     "@types/react": "18.2.46",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

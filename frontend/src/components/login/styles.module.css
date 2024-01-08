@@ -6,6 +6,7 @@
 .main {
   gap: 2rem;
 }
+
 .authOptions {
   display: flex;
   flex-direction: column;

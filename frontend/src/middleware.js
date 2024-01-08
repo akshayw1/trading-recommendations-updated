@@ -2,6 +2,11 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
 export async function middleware(req) {
+  const session = await getToken({
+    req,
+    secret: process.env.JWT_SECRET,
+    secureCookie: process.env.NODE_ENV === "production",
+  });
   const blockedRoutesWithoutLogin = [
     "/user/ethereum",
     "/user/cosmos",
@@ -25,14 +30,11 @@ export async function middleware(req) {
     return NextResponse.redirect(home);
   }
   if (blockedRoutesWithoutLogin.includes(req.nextUrl.pathname)) {
-    const session = await getToken({
-      req,
-      secret: process.env.JWT_SECRET,
-      secureCookie: process.env.NODE_ENV === "production",
-    });
     //just push
     // You could also check for any property on the session object,
     // like role === "admin" or name === "Angelo", etc.
+    if (req.nextUrl.pathname === "/admin/allusers" && session && !session.admin)
+      return NextResponse.redirect(home);
     if (!session) return NextResponse.redirect(auth);
     // If user is unauthenticated, continue.
   }
@@ -41,12 +43,6 @@ export async function middleware(req) {
     req.nextUrl.pathname === "/auth/login" ||
     req.nextUrl.pathname === "/auth/signup"
   ) {
-    const session = await getToken({
-      req,
-      secret: process.env.JWT_SECRET,
-      secureCookie: process.env.NODE_ENV === "production",
-    });
-
     if (session)
       //just push
       // You could also check for any property on the session object,

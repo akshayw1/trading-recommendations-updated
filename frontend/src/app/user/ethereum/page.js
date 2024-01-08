@@ -1,3 +1,5 @@
-export default function Home() {
-  return <main></main>;
+import Ethereum from "@/components/ethereum/ethereum";
+
+export default function Page() {
+  return <Ethereum />;
 }

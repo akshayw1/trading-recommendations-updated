@@ -36,7 +36,6 @@ export default function UsersTable() {
   useEffect(() => {
     getUsers();
   }, []);
-  console.log(users);
 
   return (
     <main className={styles.main}>

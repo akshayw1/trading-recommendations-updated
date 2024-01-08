@@ -1,3 +1,5 @@
-export default function Home() {
-  return <main></main>;
+import Bitcoin from "@/components/bitcoin/bitcoin";
+
+export default function Page() {
+  return <Bitcoin />;
 }
