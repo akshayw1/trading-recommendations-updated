@@ -5,21 +5,17 @@ import Link from "next/link";
 import Button1 from "../buttons/button1";
 import Button2 from "../buttons/button2";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { useOnboardingContext } from "@/context/MyContext";
-import pagesWithTable from "./pagesWithTable";
 
 export default function Aside() {
-  const { session, status } = useOnboardingContext();
-  const pathname = usePathname();
-  const hideAside = pagesWithTable.includes(pathname) ? true : false;
+  const { session, status, menuOpen, setMenuOpen, hideAside } =
+    useOnboardingContext();
   const [menuOption, setMenuOption] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
       <Image
-        onClick={() => setMenuOpen(true)}
+        onClick={() => setMenuOpen(!menuOpen)}
         className={`${styles.mobile} ${styles.menuIcon}`}
         alt="menu"
         width={256}

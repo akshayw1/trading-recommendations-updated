@@ -82,7 +82,7 @@ export default function UsersTable() {
             {users.map((user, index) => (
               <tr key={index}>
                 <td>{user.email}</td>
-                <td>
+                <td className="flex justify-center">
                   <input
                     onChange={() =>
                       verifyUser(user.email, !user.isVerifiedUser)

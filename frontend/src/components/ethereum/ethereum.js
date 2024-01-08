@@ -107,9 +107,16 @@ export default function Ethereum() {
       datasets: [
         {
           label: "Users Gained",
-          data: data.map((item) => item.IV1),
+          data: data.map((item, i) => item.IV1 * (i + 1) * 10000),
           backgroundColor: ["white"],
           borderColor: "#a33131",
+          borderWidth: 2,
+        },
+        {
+          label: "Users Loss",
+          data: data.map((item, i) => item.IV1 * (i + 1) * 15000),
+          backgroundColor: ["white"],
+          borderColor: "#e2b75a",
           borderWidth: 2,
         },
       ],
@@ -161,8 +168,8 @@ export default function Ethereum() {
   };
   return (
     <main className={`${styles.main}`}>
-      <div className="w-full flex items-center xl:flex-row flex-col">
-        <div className="xl:w-[50%] w-full">
+      <div className="w-full flex lg:flex-row flex-col">
+        <div className="lg:w-[60%] w-full">
           <table>
             <thead>
               <tr>
@@ -456,8 +463,16 @@ export default function Ethereum() {
             </>
           ) : null}
         </div>
-        <div className="xl:w-[50%] m-auto w-full flex order-first xl:order-none max-w-[700px] pl-[50px] bg-[#161a1e]">
-          <Line options={options} datasetIdKey="id" data={tableData} />
+        <div
+          className="lg:w-[40%] w-full flex order-first lg:order-none max-w-[700px] max-lg:h-[40vh]
+         max-lg:max-h-[350px]"
+        >
+          <Line
+            className="bg-[#161a1e] lg:pl-[50px]"
+            options={options}
+            datasetIdKey="id"
+            data={tableData}
+          />
         </div>
       </div>
     </main>

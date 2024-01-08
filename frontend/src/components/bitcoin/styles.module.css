@@ -5,10 +5,11 @@
   overflow-x: scroll;
   overflow-y: visible;
   padding: 0;
-  padding-bottom: 240px;
+  padding-bottom: 122px;
   flex-direction: row;
   align-items: flex-start;
-  height: fit-content;
+  min-height: calc(100vh - 94px);
+  box-sizing: border-box;
 }
 /* width */
 .main::-webkit-scrollbar {

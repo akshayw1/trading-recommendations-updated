@@ -141,7 +141,7 @@ export default function Bitcoin() {
   };
   return (
     <main className={styles.main}>
-      <div className="w-full">
+      <div className=" flex justify-center flex-col">
         <table>
           <thead>
             <tr>
@@ -773,7 +773,7 @@ export default function Bitcoin() {
           </tbody>
         </table>
         {session && session.user.admin ? (
-          <>
+          <div className="w-full">
             <button
               onClick={addItem}
               className="w-full text-center bg-green-800 h-12 hover:bg-green-700"
@@ -786,7 +786,7 @@ export default function Bitcoin() {
             >
               Update
             </button>
-          </>
+          </div>
         ) : null}
       </div>
     </main>
