@@ -7,6 +7,5 @@ export async function GET(req: Request) {
   await connectMongoDB();
 
   const users = await User.find({}).select("email isVerifiedUser admin");
-
   return NextResponse.json({ users }, { status: 201 });
 }

@@ -56,6 +56,7 @@ export default function UsersTable() {
                   onChange={() => verifyUser(user.email, !user.isVerifiedUser)}
                   style={{ display: "block" }}
                   type="checkbox"
+                  disabled={user.admin}
                   defaultChecked={user.isVerifiedUser}
                 />
               </td>
