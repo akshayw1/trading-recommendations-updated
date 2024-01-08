@@ -141,7 +141,7 @@ export default function Bitcoin() {
   };
   return (
     <main className={styles.main}>
-      <div className=" flex justify-center flex-col">
+      <div className="w-full flex justify-center flex-col">
         <table>
           <thead>
             <tr>
