@@ -25,7 +25,6 @@ export const OnboardingProvider = ({
 
   useEffect(() => {
     const newHideAside = calculateHideAside();
-    console.log(newHideAside);
     setOnTable(pagesWithTable.includes(pathname));
     if (hideAside !== newHideAside) {
       setHideAside(newHideAside);

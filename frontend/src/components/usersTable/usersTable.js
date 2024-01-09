@@ -25,7 +25,8 @@ export default function UsersTable() {
       });
 
       if (res.ok) {
-        getUsers();
+        const updatedUsers = await getUsers();
+        setUsers(updatedUsers);
         toast.update(toastId, {
           render: "User update successfully",
           type: "success",
@@ -56,16 +57,26 @@ export default function UsersTable() {
       });
       if (res.ok) {
         const data = await res.json();
-        console.log({ users: data.users });
-        setUsers(data.users);
+        console.log(data.users);
+        return data.users;
       }
     } catch (error) {
       console.log(error);
+      return [];
     }
   };
 
   useEffect(() => {
-    getUsers();
+    const fetchData = async () => {
+      try {
+        const updatedUsers = await getUsers();
+        setUsers(updatedUsers);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -81,23 +92,22 @@ export default function UsersTable() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr key={index}>
-                <td>{user.email}</td>
-                <td className="flex justify-center">
-                  <input
-                    onChange={() =>
-                      verifyUser(user.email, !user.isVerifiedUser)
-                    }
-                    style={{ display: "block" }}
-                    type="checkbox"
-                    disabled={user.admin}
-                    defaultChecked={user.isVerifiedUser}
-                  />
-                </td>
-                <td>{user.admin ? "admin" : "user"}</td>
-              </tr>
-            ))}
+            {Array.isArray(users) &&
+              users.map((user, index) => (
+                <tr key={index}>
+                  <td>{user.email}</td>
+                  <td className="flex justify-center">
+                    <input
+                      onChange={(e) => verifyUser(user.email, e.target.checked)}
+                      style={{ display: "block" }}
+                      type="checkbox"
+                      disabled={user.admin}
+                      defaultChecked={user.isVerifiedUser}
+                    />
+                  </td>
+                  <td>{user.admin ? "admin" : "user"}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </main>

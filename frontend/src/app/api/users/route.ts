@@ -7,6 +7,6 @@ export async function GET(req: Request) {
   await connectMongoDB();
 
   const users = await User.find({}).select("email isVerifiedUser admin");
-  console.log(users.length);
+  console.log({ usersCount: users.length });
   return NextResponse.json({ users }, { status: 201 });
 }
