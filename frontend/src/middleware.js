@@ -2,11 +2,11 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
 export async function middleware(req) {
-  console.log(process.env.NODE_ENV);
+  console.log(!(process.env.SECURE_COOKIE === "false"));
   const session = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
-    secureCookie: true,
+    secureCookie: !(process.env.SECURE_COOKIE === "false"),
   });
   const blockedRoutesWithoutLogin = [
     "/user/ethereum",
