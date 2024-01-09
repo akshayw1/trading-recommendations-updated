@@ -10,7 +10,7 @@ import { useOnboardingContext } from "@/context/MyContext";
 export default function Aside() {
   const { session, status, menuOpen, setMenuOpen, hideAside } =
     useOnboardingContext();
-  const [menuOption, setMenuOption] = useState(0);
+  const [menuOption, setMenuOption] = useState(false);
 
   return (
     <>
@@ -52,7 +52,7 @@ export default function Aside() {
         />
         <div className={`${styles.menuOptions} ${styles.mobile}`}>
           <Button1
-            onClick={() => toggleMenuOption(0)}
+            onClick={() => setMenuOption(false)}
             style2={{
               fontWeight: 600,
               fontSize: "1.5rem",
@@ -65,7 +65,7 @@ export default function Aside() {
             Crypto
           </Button1>
           <Button1
-            onClick={() => toggleMenuOption(1)}
+            onClick={() => setMenuOption(true)}
             style2={{
               fontWeight: 600,
               fontSize: "1.5rem",
@@ -80,7 +80,7 @@ export default function Aside() {
         </div>
         <ul
           className={`${styles.mobile} ${styles.navMenu} ${
-            menuOption === 1 ? styles.menuSelected : ""
+            menuOption ? styles.menuSelected : ""
           }`}
         >
           <li>
@@ -109,7 +109,7 @@ export default function Aside() {
             </Link>
           </li>
         </ul>
-        <ul className={`${menuOption === 0 ? styles.menuSelected : ""}`}>
+        <ul className={`${!menuOption ? styles.menuSelected : ""}`}>
           <li className={styles.blue}>Futures & Options OI</li>
           <li>
             <Link

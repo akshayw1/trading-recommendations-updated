@@ -22,7 +22,6 @@ export async function POST(req: Request) {
   return NextResponse.json({ message: "table no updated" }, { status: 201 });
 }
 export async function GET(req: Request) {
-  console.log("bitcoin");
   try {
     await connectMongoDB();
 
