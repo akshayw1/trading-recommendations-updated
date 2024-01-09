@@ -368,31 +368,33 @@ export default function Aside() {
             </li>
           ) : null}
         </ul>
-        <div className={`${styles.authBox} ${styles.mobile}`}>
-          <Link onClick={() => setMenuOpen(false)} href="/auth/login">
-            <Button1
-              style2={{
-                fontWeight: 600,
-                fontSize: "1.5rem",
-                height: 46,
-              }}
-              borderSize={3}
-            >
-              Log in
-            </Button1>
-          </Link>
-          <Link onClick={() => setMenuOpen(false)} href="/auth/signup">
-            <Button2
-              style2={{
-                fontWeight: 600,
-                fontSize: "1.5rem",
-                height: 46,
-              }}
-            >
-              Sign up
-            </Button2>
-          </Link>
-        </div>
+        {session ? null : (
+          <div className={`${styles.authBox} ${styles.mobile}`}>
+            <Link onClick={() => setMenuOpen(false)} href="/auth/login">
+              <Button1
+                style2={{
+                  fontWeight: 600,
+                  fontSize: "1.5rem",
+                  height: 46,
+                }}
+                borderSize={3}
+              >
+                Log in
+              </Button1>
+            </Link>
+            <Link onClick={() => setMenuOpen(false)} href="/auth/signup">
+              <Button2
+                style2={{
+                  fontWeight: 600,
+                  fontSize: "1.5rem",
+                  height: 46,
+                }}
+              >
+                Sign up
+              </Button2>
+            </Link>
+          </div>
+        )}
       </aside>
     </>
   );
