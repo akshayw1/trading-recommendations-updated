@@ -55,6 +55,7 @@ export default function UsersTable() {
       });
       if (res.ok) {
         const data = await res.json();
+        console.log({ users: data.users });
         setUsers(data.users);
       }
     } catch (error) {
