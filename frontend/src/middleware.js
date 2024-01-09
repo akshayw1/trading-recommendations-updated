@@ -5,9 +5,8 @@ export async function middleware(req) {
   const session = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
-    secureCookie: process.env.NODE_ENV !== "development",
+    secureCookie: process.env.SECURE_COOKIE === "true",
   });
-
   const blockedRoutesWithoutLogin = [
     "/user/ethereum",
     "/user/cosmos",

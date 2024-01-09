@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import styles from "../bitcoin/styles.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -49,23 +49,6 @@ export default function UsersTable() {
     }
   };
 
-  const getUsers = async () => {
-    try {
-      const res = await fetch("/api/users", {
-        method: "GET",
-        headers: { "Content-type": "application/json" },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        console.log(data.users);
-        return data.users;
-      }
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,6 +61,28 @@ export default function UsersTable() {
 
     fetchData();
   }, []);
+
+  const getUsers = async () => {
+    try {
+      const res = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        return data.users;
+      } else if (res.status === 404) {
+        console.warn("API endpoint not found");
+        return [];
+      } else {
+        console.error("Error in the request:", res.status);
+        return [];
+      }
+    } catch (error) {
+      console.error("Error in the request:", error);
+      return [];
+    }
+  };
 
   return (
     <>

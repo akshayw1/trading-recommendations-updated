@@ -77,35 +77,18 @@ export default function Bitcoin() {
         const data = await getData();
         setData(data);
       } catch (error) {
-        console.error("Error al obtener los datos:", error);
+        console.error("Error fetching users:", error);
       }
     };
 
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    setTableData({
-      labels: data.map((item) => item.Time),
-      datasets: [
-        {
-          label: "Users Gained",
-          data: data.map((item) => item.IV1),
-          backgroundColor: ["white"],
-          borderColor: "#a33131",
-          borderWidth: 2,
-        },
-      ],
-    });
-  }, [data]);
   const getData = async () => {
     try {
       const res = await fetch("/api/bitcoin", {
         method: "GET",
         headers: { "Content-type": "application/json" },
       });
-
       if (res.ok) {
         const data = await res.json();
         return data.data;
@@ -121,6 +104,21 @@ export default function Bitcoin() {
       return [];
     }
   };
+
+  useEffect(() => {
+    setTableData({
+      labels: data.map((item) => item.Time),
+      datasets: [
+        {
+          label: "Users Gained",
+          data: data.map((item) => item.IV1),
+          backgroundColor: ["white"],
+          borderColor: "#a33131",
+          borderWidth: 2,
+        },
+      ],
+    });
+  }, [data]);
 
   const onChange = (value, property, index) => {
     closeAllDropdown();
