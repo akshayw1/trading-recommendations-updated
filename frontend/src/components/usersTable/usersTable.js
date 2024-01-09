@@ -14,6 +14,7 @@ const LoadingToast = () => (
 export default function UsersTable() {
   const [users, setUsers] = useState([]);
   const verifyUser = async (email, isVerifiedUser) => {
+    console.log({ email, isVerifiedUser });
     let toastId;
     try {
       toastId = toast(<LoadingToast />, { autoClose: false });

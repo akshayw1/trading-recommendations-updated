@@ -7,7 +7,6 @@ export async function middleware(req) {
     secret: process.env.NEXTAUTH_SECRET,
     secureCookie: true,
   });
-  console.log({ session });
   const blockedRoutesWithoutLogin = [
     "/user/ethereum",
     "/user/cosmos",
