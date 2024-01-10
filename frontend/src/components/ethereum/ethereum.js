@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "../bitcoin/styles.module.css";
 import Image from "next/image";
 import {
@@ -39,7 +39,7 @@ export default function Ethereum() {
   };
   const dataFreeText = {
     Time: "15:25-15:30",
-    FreeText: 31.89,
+    FreeText: "text",
   };
   const { session, status } = useOnboardingContext();
 
@@ -57,12 +57,18 @@ export default function Ethereum() {
     ],
   });
   const [freeTextTable, setFreeTextTable] = useState([]);
-  const updateData = async () => {
+  const updateData = async (dataSelect = "Ethereum") => {
+    let newData;
+    if (dataSelect === "Ethereum") {
+      newData = [...data];
+    } else {
+      newData = [...freeTextTable];
+    }
     try {
       const res = await fetch("/api/ethereum", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ data }),
+        body: JSON.stringify({ newData, dataSelect }),
       });
 
       if (res.ok) {
@@ -80,21 +86,31 @@ export default function Ethereum() {
       return [];
     }
   };
-  const addItem = () => {
+  const addItem = (dataSelect = "data") => {
     closeAllDropdown();
-    let newDataExample = { ...dataExample };
-
-    if (data.length > 0) {
-      const lastEntryTime = data[0].Time;
+    let newDataExample;
+    let newData;
+    if (dataSelect === "data") {
+      newData = [...data];
+      newDataExample = { ...dataExample };
+    } else {
+      newData = [...freeTextTable];
+      newDataExample = { ...dataFreeText };
+    }
+    if (newData.length > 0) {
+      const lastEntryTime = newData[0].Time;
       const newTime = calculateNewTime(lastEntryTime);
       newDataExample.Time = newTime;
     } else {
       const currentTime = getCurrentTime();
       newDataExample.Time = currentTime;
     }
-    let newData = [...data];
     newData.unshift(newDataExample);
-    setData((prevData) => [newDataExample, ...prevData]);
+    if (dataSelect === "data") {
+      setData((prevData) => [newDataExample, ...prevData]);
+    } else {
+      setFreeTextTable((prevData) => [newDataExample, ...prevData]);
+    }
   };
   const calculateNewTime = (lastEntryTime) => {
     const [start, end] = lastEntryTime.split("-");
@@ -121,24 +137,79 @@ export default function Ethereum() {
 
     return `${formattedStartTime}-${formattedEndTime}`;
   };
-  const deleteItem = (index) => {
+  const deleteItem = (index, dataSelect = "Ethereum") => {
     closeAllDropdown();
-    let newData = [...data];
-    newData.splice(index, 1);
-    setData(newData);
+    let newData;
+    if (dataSelect === "Ethereum") {
+      newData = [...data];
+      newData.splice(index, 1);
+      setData(newData);
+    } else {
+      newData = [...freeTextTable];
+      newData.splice(index, 1);
+      setFreeTextTable(newData);
+    }
   };
+  const playSound = () => {
+    const audio = new Audio("/sounds/Telephone_Ring_-_Sound_Effects_1.mp3");
+    audio.play();
+  };
+  const prevData = useRef(data);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getData();
-        setData(data);
+        const dataFetch = await getData();
+        const dataFetch2 = await getData("freeTextEth");
+        setData(dataFetch);
+        setFreeTextTable(dataFetch2);
+        if (
+          JSON.stringify(data) !== JSON.stringify(dataFetch) ||
+          JSON.stringify(freeTextTable) !== JSON.stringify(dataFetch2)
+        )
+          return true;
+        return false;
       } catch (error) {
-        console.error("Error al obtener los datos:", error);
+        console.error(error);
+        return false;
       }
     };
+    const intervalId = setInterval(async () => {
+      if (session && session.user && !session.user.admin) {
+        const beep = await fetchData();
+        if (beep) playSound();
+        console.log("check", beep);
+      }
+    }, 5000);
 
+    return () => clearInterval(intervalId);
+  }, [session, data, freeTextTable]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dataFetch = await getData();
+        const dataFetch2 = await getData("freeTextEth");
+        let beep = false;
+        setData((prevState) => {
+          if (JSON.stringify(prevState) !== JSON.stringify(dataFetch))
+            beep = true;
+          return dataFetch;
+        });
+        setFreeTextTable((prevState) => {
+          /*  console.log({ prevState, dataFetch2 });*/
+          if (JSON.stringify(prevState) !== JSON.stringify(dataFetch2))
+            beep = true;
+          return dataFetch2;
+        });
+
+        return beep;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    };
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -165,9 +236,11 @@ export default function Ethereum() {
     });
   }, [data]);
 
-  const getData = async () => {
+  const getData = async (dataSelect = "Ethereum") => {
     try {
-      const res = await fetch("/api/ethereum", {
+      const queryParams = new URLSearchParams({ dataSelect });
+
+      const res = await fetch(`/api/ethereum?${queryParams}`, {
         method: "GET",
         headers: { "Content-type": "application/json" },
       });
@@ -188,12 +261,18 @@ export default function Ethereum() {
     }
   };
 
-  const onChange = (value, property, index) => {
+  const onChange = (value, property, index, dataSelect = "Ethereum") => {
     closeAllDropdown();
-    let newData = [...data];
-    data[index][property] = value;
-    console.log(newData);
-    setData(newData);
+    let newData;
+    if (dataSelect === "Ethereum") {
+      newData = [...data];
+      newData[index][property] = value;
+      setData(newData);
+    } else {
+      newData = [...freeTextTable];
+      newData[index][property] = value;
+      setFreeTextTable(newData);
+    }
   };
   const closeAllDropdown = (id = "") => {
     for (let i = 1; i <= 6 * data.length; i++) {
@@ -211,7 +290,11 @@ export default function Ethereum() {
   };
   return (
     <main className={`${styles.main}`}>
-      <h1 className={styles.zigZagText}> Zig Zag Moves - STAY AWAY</h1>
+      <h1 className={styles.zigZagText}>
+        {freeTextTable.length === 0
+          ? "Zig Zag Moves - STAY AWAY"
+          : freeTextTable[0].FreeText}
+      </h1>
       <div className="w-full flex lg:flex-row flex-col">
         <div className="scrollbar1 overflow-x-scroll lg:w-[35vw] w-full h-[max-content] pb-44">
           <table>
@@ -227,7 +310,7 @@ export default function Ethereum() {
             <tbody>
               {data.map((item, index) => (
                 <tr key={item.Time}>
-                  <td className="flex flex-row gap-2">
+                  <td className="flex flex-row gap-2 justify-center">
                     {session && session.user.admin ? (
                       <div
                         onClick={() => deleteItem(index)}
@@ -493,13 +576,13 @@ export default function Ethereum() {
                   <td colSpan="5">
                     <div className="flex flex-start">
                       <button
-                        onClick={addItem}
+                        onClick={() => addItem()}
                         className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
                       >
                         +
                       </button>
                       <button
-                        onClick={updateData}
+                        onClick={() => updateData()}
                         className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                       >
                         Update
@@ -538,7 +621,7 @@ export default function Ethereum() {
                 <td className="flex flex-row gap-2">
                   {session && session.user.admin ? (
                     <div
-                      onClick={() => deleteItem(index)}
+                      onClick={() => deleteItem(index, "freeTableEth")}
                       className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
                     >
                       X
@@ -560,13 +643,18 @@ export default function Ethereum() {
                 </td>
                 <td>
                   {session && !session.user.admin ? (
-                    item.Strike
+                    item.FreeText
                   ) : (
                     <input
                       onChange={(e) =>
-                        onChange(e.target.value, "Strike", index)
+                        onChange(
+                          e.target.value,
+                          "FreeText",
+                          index,
+                          "freeTextEth"
+                        )
                       }
-                      defaultValue={item.Strike}
+                      defaultValue={item.FreeText}
                       className={styles.inputTable}
                       type="text"
                     />
@@ -579,13 +667,13 @@ export default function Ethereum() {
                 <td colSpan="5">
                   <div className="flex flex-start">
                     <button
-                      onClick={addItem}
+                      onClick={() => addItem("freeTextEth")}
                       className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
                     >
                       +
                     </button>
                     <button
-                      onClick={updateData}
+                      onClick={() => updateData("freeTextEth")}
                       className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                     >
                       Update

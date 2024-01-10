@@ -135,7 +135,7 @@ export default function Bitcoin() {
   const onChange = (value, property, index) => {
     closeAllDropdown();
     let newData = [...data];
-    data[index][property] = value;
+    newData[index][property] = value;
     setData(newData);
   };
   const closeAllDropdown = (id = "") => {
