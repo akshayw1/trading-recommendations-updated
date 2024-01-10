@@ -150,7 +150,8 @@ export default function Bitcoin() {
   };
   return (
     <main className={styles.main}>
-      <div className="w-full flex justify-center flex-col">
+      <h1 className={styles.zigZagText}> Zig Zag Moves - STAY AWAY</h1>
+      <div className="scrollbar1 w-full flex overflow-x-scroll justify-center flex-col pb-28">
         <table>
           <thead>
             <tr>
@@ -799,24 +800,28 @@ export default function Bitcoin() {
                 </tr>
               );
             })}
+            {session && session.user.admin ? (
+              <tr>
+                <td colSpan="15">
+                  <div className="flex flex-start">
+                    <button
+                      onClick={addItem}
+                      className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                    >
+                      +
+                    </button>
+                    <button
+                      onClick={updateData}
+                      className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                    >
+                      Update
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ) : null}
           </tbody>
         </table>
-        {session && session.user.admin ? (
-          <div className="w-full">
-            <button
-              onClick={addItem}
-              className="w-full text-center bg-green-800 h-12 hover:bg-green-700"
-            >
-              +
-            </button>
-            <button
-              onClick={updateData}
-              className="w-full text-center bg-blue-700 h-12 hover:bg-blue-600"
-            >
-              Update
-            </button>
-          </div>
-        ) : null}
       </div>
     </main>
   );

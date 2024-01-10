@@ -193,3 +193,23 @@ main {
     transform: rotate(360deg);
   }
 }
+/* width */
+.scrollbar1::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.scrollbar1::-webkit-scrollbar-track {
+  background: #181a1b;
+}
+
+/* Handle */
+.scrollbar1::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.scrollbar1::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
