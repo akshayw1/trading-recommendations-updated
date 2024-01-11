@@ -35,6 +35,8 @@ export async function middleware(req) {
     // like role === "admin" or name === "Angelo", etc.
     if (req.nextUrl.pathname === "/admin/allusers" && session && !session.admin)
       return NextResponse.redirect(home);
+
+    if (!session) console.log("unlloged");
     if (!session) return NextResponse.redirect(auth);
     // If user is unauthenticated, continue.
   }
