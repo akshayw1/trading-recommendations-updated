@@ -122,6 +122,11 @@ export default function Bitcoin() {
     newData.splice(index, 1);
     setData(newData);
   };
+  const playSound = () => {
+    const audio = new Audio("/sounds/Telephone_Ring_-_Sound_Effects_1.mp3");
+    audio.play();
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -134,6 +139,29 @@ export default function Bitcoin() {
 
     fetchData();
   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dataFetch = await getData();
+        setData(dataFetch);
+        if (JSON.stringify(data) !== JSON.stringify(dataFetch)) return true;
+        return false;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    };
+    const intervalId = setInterval(async () => {
+      if (session && session.user && !session.user.admin) {
+        const beep = await fetchData();
+        if (beep) playSound();
+        console.log("check", beep);
+      }
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [session, data]);
+
   const getData = async () => {
     try {
       const res = await fetch("/api/bitcoin", {

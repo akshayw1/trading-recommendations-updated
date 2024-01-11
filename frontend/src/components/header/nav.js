@@ -94,7 +94,7 @@ export default function Nav() {
             height={122}
             src="/images/nav/user-identity-svgrepo-com.png"
           ></Image>
-          <Button1 onClick={signOut}>Log out</Button1>
+          {session && <Button1 onClick={signOut}>Log out</Button1>}
         </li>
       </ul>
     </nav>

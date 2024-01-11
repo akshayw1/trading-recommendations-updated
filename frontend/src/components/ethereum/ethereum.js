@@ -44,6 +44,11 @@ export default function Ethereum() {
     Time: "15:25-15:30",
     FreeText: "text",
   };
+  const chartDataExample = {
+    Time: "15:25-15:30",
+    Value1: 13333,
+    Value2: 30000,
+  };
   const { session, status } = useOnboardingContext();
 
   const [data, setData] = useState([]);
@@ -60,10 +65,14 @@ export default function Ethereum() {
     ],
   });
   const [freeTextTable, setFreeTextTable] = useState([]);
+  const [chartData, setChartData] = useState([]);
+
   const updateData = async (dataSelect = "Ethereum") => {
     let newData;
     if (dataSelect === "Ethereum") {
       newData = [...data];
+    } else if (dataSelect === "chartDataEth") {
+      newData = [...chartData];
     } else {
       newData = [...freeTextTable];
     }
@@ -120,6 +129,9 @@ export default function Ethereum() {
     if (dataSelect === "data") {
       newData = [...data];
       newDataExample = { ...dataExample };
+    } else if (dataSelect === "chartDataEth") {
+      newData = [...chartData];
+      newDataExample = { ...chartDataExample };
     } else {
       newData = [...freeTextTable];
       newDataExample = { ...dataFreeText };
@@ -135,6 +147,8 @@ export default function Ethereum() {
     newData.unshift(newDataExample);
     if (dataSelect === "data") {
       setData((prevData) => [newDataExample, ...prevData]);
+    } else if (dataSelect === "chartDataEth") {
+      setChartData((prevData) => [newDataExample, ...prevData]);
     } else {
       setFreeTextTable((prevData) => [newDataExample, ...prevData]);
     }
@@ -148,7 +162,6 @@ export default function Ethereum() {
     const formattedEndTime = endTime.toTimeString().slice(0, 5);
     return `${end}-${formattedEndTime}`;
   };
-
   const getCurrentTime = () => {
     const currentTime = new Date();
     const currentMinutes = currentTime.getMinutes();
@@ -171,27 +184,35 @@ export default function Ethereum() {
       newData = [...data];
       newData.splice(index, 1);
       setData(newData);
+    } else if (dataSelect === "chartDataEth") {
+      newData = [...chartData];
+      newData.splice(index, 1);
+      setChartData(newData);
     } else {
       newData = [...freeTextTable];
       newData.splice(index, 1);
       setFreeTextTable(newData);
     }
   };
+
   const playSound = () => {
     const audio = new Audio("/sounds/Telephone_Ring_-_Sound_Effects_1.mp3");
     audio.play();
   };
-  const prevData = useRef(data);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const dataFetch = await getData();
         const dataFetch2 = await getData("freeTextEth");
+        const dataFetch3 = await getData("chartDataEth");
+
         setData(dataFetch);
         setFreeTextTable(dataFetch2);
+        setChartData(dataFetch3);
+
         if (
           JSON.stringify(data) !== JSON.stringify(dataFetch) ||
+          JSON.stringify(chartData) !== JSON.stringify(dataFetch3) ||
           JSON.stringify(freeTextTable) !== JSON.stringify(dataFetch2)
         )
           return true;
@@ -210,13 +231,15 @@ export default function Ethereum() {
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, [session, data, freeTextTable]);
+  }, [session, data, freeTextTable, chartData]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const dataFetch = await getData();
         const dataFetch2 = await getData("freeTextEth");
+        const dataFetch3 = await getData("chartDataEth");
+
         let beep = false;
         setData((prevState) => {
           if (JSON.stringify(prevState) !== JSON.stringify(dataFetch))
@@ -229,6 +252,12 @@ export default function Ethereum() {
             beep = true;
           return dataFetch2;
         });
+        setChartData((prevState) => {
+          /*  console.log({ prevState, dataFetch2 });*/
+          if (JSON.stringify(prevState) !== JSON.stringify(dataFetch3))
+            beep = true;
+          return dataFetch3;
+        });
 
         return beep;
       } catch (error) {
@@ -240,28 +269,28 @@ export default function Ethereum() {
   }, []);
 
   useEffect(() => {
-    const reversedData = [...data].reverse();
+    const reversedData = [...chartData].reverse();
 
     setTableData({
       labels: reversedData.map((item) => item.Time),
       datasets: [
         {
           label: "Users Gained",
-          data: reversedData.map((item, i) => item.Strike * (i + 1) * 10000),
+          data: reversedData.map((item, i) => item.Value1),
           backgroundColor: ["white"],
           borderColor: "#a33131",
           borderWidth: 2,
         },
         {
           label: "Users Loss",
-          data: reversedData.map((item, i) => item.Strike * i * 15000),
+          data: reversedData.map((item, i) => item.Value2),
           backgroundColor: ["white"],
           borderColor: "#e2b75a",
           borderWidth: 2,
         },
       ],
     });
-  }, [data]);
+  }, [chartData]);
 
   const getData = async (dataSelect = "Ethereum") => {
     try {
@@ -295,6 +324,10 @@ export default function Ethereum() {
       newData = [...data];
       newData[index][property] = value;
       setData(newData);
+    } else if (dataSelect === "chartDataEth") {
+      newData = [...chartData];
+      newData[index][property] = value;
+      setChartData(newData);
     } else {
       newData = [...freeTextTable];
       newData[index][property] = value;
@@ -633,84 +666,179 @@ export default function Ethereum() {
           />
         </div>
       </div>
-      <div className="scrollbar1 overflow-x-scroll lg:w-[35vw] w-full h-[max-content] pb-44">
-        <table>
-          <thead>
-            <tr>
-              <th>N</th>
-              <th>Time</th>
-              <th>Free text</th>
-            </tr>
-          </thead>
-          <tbody>
-            {freeTextTable.map((item, index) => (
-              <tr key={item.Time}>
-                <td className="flex flex-row gap-2">
-                  {session && session.user.admin ? (
-                    <div
-                      onClick={() => deleteItem(index, "freeTableEth")}
-                      className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
-                    >
-                      X
-                    </div>
-                  ) : null}
-                  {index + 1}
-                </td>
-                <td>
-                  {session && !session.user.admin ? (
-                    item.Time
-                  ) : (
-                    <input
-                      onChange={(e) => onChange(e.target.value, "Time", index)}
-                      defaultValue={item.Time}
-                      className={styles.inputTable}
-                      type="text"
-                    />
-                  )}
-                </td>
-                <td>
-                  {session && !session.user.admin ? (
-                    item.FreeText
-                  ) : (
-                    <input
-                      onChange={(e) =>
-                        onChange(
-                          e.target.value,
-                          "FreeText",
-                          index,
-                          "freeTextEth"
-                        )
-                      }
-                      defaultValue={item.FreeText}
-                      className={styles.inputTable}
-                      type="text"
-                    />
-                  )}
-                </td>
-              </tr>
-            ))}
-            {session && session.user.admin ? (
+      <div className="flex flex-row w-full">
+        <div className="scrollbar1 overflow-x-scroll w-full h-[max-content] pb-44">
+          <table>
+            <thead>
               <tr>
-                <td colSpan="5">
-                  <div className="flex flex-start">
-                    <button
-                      onClick={() => addItem("freeTextEth")}
-                      className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                    >
-                      +
-                    </button>
-                    <button
-                      onClick={() => updateData("freeTextEth")}
-                      className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                    >
-                      Update
-                    </button>
-                  </div>
-                </td>
+                <th>N</th>
+                <th>Time</th>
+                <th>Free text</th>
               </tr>
-            ) : null}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {freeTextTable.map((item, index) => (
+                <tr key={item.Time}>
+                  <td className="flex flex-row gap-2 justify-center">
+                    {session && session.user.admin ? (
+                      <div
+                        onClick={() => deleteItem(index, "freeTableEth")}
+                        className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
+                      >
+                        X
+                      </div>
+                    ) : null}
+                    {index + 1}
+                  </td>
+                  <td>
+                    {session && !session.user.admin ? (
+                      item.Time
+                    ) : (
+                      <input
+                        onChange={(e) =>
+                          onChange(e.target.value, "Time", index, "freeTextEth")
+                        }
+                        defaultValue={item.Time}
+                        className={styles.inputTable}
+                        type="text"
+                      />
+                    )}
+                  </td>
+                  <td>
+                    {session && !session.user.admin ? (
+                      item.FreeText
+                    ) : (
+                      <input
+                        onChange={(e) =>
+                          onChange(
+                            e.target.value,
+                            "FreeText",
+                            index,
+                            "freeTextEth"
+                          )
+                        }
+                        defaultValue={item.FreeText}
+                        className={styles.inputTable}
+                        type="text"
+                      />
+                    )}
+                  </td>
+                </tr>
+              ))}
+              {session && session.user.admin ? (
+                <tr>
+                  <td colSpan="5">
+                    <div className="flex flex-start">
+                      <button
+                        onClick={() => addItem("freeTextEth")}
+                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() => updateData("freeTextEth")}
+                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+        </div>
+        {session && session.user.admin ? (
+          <div className="scrollbar1 overflow-x-scroll w-full h-[max-content] pb-44">
+            <table>
+              <thead>
+                <tr>
+                  <th>N</th>
+                  <th>Time</th>
+                  <th>Value1</th> <th>Value2</th>
+                </tr>
+              </thead>
+              <tbody>
+                {chartData.map((item, index) => (
+                  <tr key={item.Time}>
+                    <td className="flex flex-row gap-2 justify-center">
+                      <div
+                        onClick={() => deleteItem(index, "chartDataEth")}
+                        className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
+                      >
+                        X
+                      </div>
+                      {index + 1}
+                    </td>
+                    <td>
+                      <input
+                        onChange={(e) =>
+                          onChange(
+                            e.target.value,
+                            "Time",
+                            index,
+                            "chartDataEth"
+                          )
+                        }
+                        defaultValue={item.Time}
+                        className={styles.inputTable}
+                        type="text"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        onChange={(e) =>
+                          onChange(
+                            e.target.value,
+                            "Value1",
+                            index,
+                            "chartDataEth"
+                          )
+                        }
+                        defaultValue={item.Value1}
+                        className={styles.inputTable}
+                        type="text"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        onChange={(e) =>
+                          onChange(
+                            e.target.value,
+                            "Value2",
+                            index,
+                            "chartDataEth"
+                          )
+                        }
+                        defaultValue={item.Value2}
+                        className={styles.inputTable}
+                        type="text"
+                      />
+                    </td>
+                  </tr>
+                ))}
+                <tr>
+                  <td colSpan="5">
+                    <div className="flex flex-start">
+                      <button
+                        onClick={() => addItem("chartDataEth")}
+                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() => updateData("chartDataEth")}
+                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        ) : null}
       </div>
     </main>
   );
