@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useOnboardingContext } from "@/context/MyContext";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoadingToast from "../usersTable/loading";
 export default function Bitcoin() {
   const dataExample = {
     Time: "15:25-15:30",
@@ -26,7 +28,11 @@ export default function Bitcoin() {
   const [data, setData] = useState([]);
 
   const updateData = async () => {
+    let toastId;
     try {
+      toastId = toast(<LoadingToast text="Updating table..." />, {
+        autoClose: false,
+      });
       const res = await fetch("/api/bitcoin", {
         method: "POST",
         headers: { "Content-type": "application/json" },
@@ -34,16 +40,36 @@ export default function Bitcoin() {
       });
 
       if (res.ok) {
+        toast.update(toastId, {
+          render: "Table update successfully",
+          type: "success",
+          autoClose: 5000,
+        });
         const data = await res.json();
         return data.data;
       } else if (res.status === 404) {
         console.warn("API endpoint not found");
+        toast.update(toastId, {
+          render: res.error,
+          type: toast.TYPE.ERROR,
+          autoClose: 5000,
+        });
         return [];
       } else {
+        toast.update(toastId, {
+          render: res.error,
+          type: toast.TYPE.ERROR,
+          autoClose: 5000,
+        });
         console.error("Error in the request:", res.status);
         return [];
       }
     } catch (error) {
+      toast.update(toastId, {
+        render: res.error,
+        type: toast.TYPE.ERROR,
+        autoClose: 5000,
+      });
       console.error("Error in the request:", error);
       return [];
     }

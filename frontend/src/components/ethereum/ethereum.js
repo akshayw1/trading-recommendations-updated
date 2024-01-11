@@ -2,6 +2,9 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "../bitcoin/styles.module.css";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,7 +22,7 @@ ChartJS.register(
 );
 import { useOnboardingContext } from "@/context/MyContext";
 import { Line } from "react-chartjs-2";
-
+import LoadingToast from "../usersTable/loading";
 export default function Ethereum() {
   const dataExample = {
     Time: "15:25-15:30",
@@ -64,7 +67,11 @@ export default function Ethereum() {
     } else {
       newData = [...freeTextTable];
     }
+    let toastId;
     try {
+      toastId = toast(<LoadingToast text="Updating table..." />, {
+        autoClose: false,
+      });
       const res = await fetch("/api/ethereum", {
         method: "POST",
         headers: { "Content-type": "application/json" },
@@ -72,16 +79,36 @@ export default function Ethereum() {
       });
 
       if (res.ok) {
+        toast.update(toastId, {
+          render: "Table update successfully",
+          type: "success",
+          autoClose: 5000,
+        });
         const data = await res.json();
         return data.data;
       } else if (res.status === 404) {
+        toast.update(toastId, {
+          render: res.error,
+          type: toast.TYPE.ERROR,
+          autoClose: 5000,
+        });
         console.warn("API endpoint not found");
         return [];
       } else {
+        toast.update(toastId, {
+          render: res.error,
+          type: toast.TYPE.ERROR,
+          autoClose: 5000,
+        });
         console.error("Error in the request:", res.status);
         return [];
       }
     } catch (error) {
+      toast.update(toastId, {
+        render: res.error,
+        type: toast.TYPE.ERROR,
+        autoClose: 5000,
+      });
       console.error("Error in the request:", error);
       return [];
     }

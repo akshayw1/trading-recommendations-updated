@@ -1,15 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from "../bitcoin/styles.module.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const LoadingToast = () => (
-  <div className="loading-toast">
-    <div className="loading-circle"></div>
-    <div>Verifying user...</div>
-  </div>
-);
+import LoadingToast from "./loading";
 
 export default function UsersTable() {
   const [users, setUsers] = useState([]);
@@ -86,7 +80,6 @@ export default function UsersTable() {
 
   return (
     <>
-      <ToastContainer />
       <main className={styles.main}>
         <table>
           <thead>
