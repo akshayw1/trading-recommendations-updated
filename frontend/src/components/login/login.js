@@ -49,7 +49,8 @@ export default function Login() {
     });
     if (res.ok) {
       toast.success("Logged");
-      router.push("/home");
+      router.replace("/home");
+      window.location.reload();
     } else {
       toast.warning(res.error);
     }
