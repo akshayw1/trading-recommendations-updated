@@ -35,7 +35,7 @@
 }
 .main tbody td,
 .main tr {
-  height: 48px;
+  max-height: 48px;
   background-color: #181a1b;
   padding: 8px 0.25rem;
   text-align: center;

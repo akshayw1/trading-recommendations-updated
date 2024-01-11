@@ -23,7 +23,6 @@ export default async function middleware(req) {
   home.pathname = "/home";
   afterAuth.pathname = "/home";
   // Store current request url in a custom header, which you can read later
-  console.log(req.nextUrl.pathname);
 
   if (req.nextUrl.pathname === "/") {
     return NextResponse.redirect(home);

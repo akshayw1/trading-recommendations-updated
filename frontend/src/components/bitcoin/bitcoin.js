@@ -205,7 +205,7 @@ export default function Bitcoin() {
   return (
     <main className={styles.main}>
       <h1 className={styles.zigZagText}> Zig Zag Moves - STAY AWAY</h1>
-      <div className="scrollbar1 w-full flex overflow-x-scroll justify-center flex-col pb-28">
+      <div className="scrollbar1 w-full flex overflow-x-scroll justify-start flex-col pb-28 min-h-[50rem] bg-[#181a1b]">
         <table>
           <thead>
             <tr>
