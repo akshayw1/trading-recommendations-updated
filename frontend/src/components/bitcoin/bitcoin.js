@@ -205,7 +205,11 @@ export default function Bitcoin() {
   return (
     <main className={styles.main}>
       <h1 className={styles.zigZagText}> Zig Zag Moves - STAY AWAY</h1>
-      <div className="scrollbar1 w-full flex overflow-x-scroll justify-start flex-col pb-28 min-h-[50rem] bg-[#181a1b]">
+      <div className={styles.head1}>
+        <p>CALL</p>
+        <p>PUT</p>
+      </div>
+      <div className="scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[40rem] bg-[#181a1b]">
         <table>
           <thead>
             <tr>
@@ -214,13 +218,13 @@ export default function Bitcoin() {
               <th>Call OI</th>
               <th>IV</th>
               <th>Delta</th>
-              <th>OI Inter.</th>
+              <th>Trend</th>
               <th>Price</th>
               <th>Call OI Interpretation</th>
               <th>Strike</th>
               <th>Put Oi Interpretation</th>
               <th>Price</th>
-              <th>OI Inter.</th>
+              <th>Trend</th>
               <th>Delta</th>
               <th>IV</th>
               <th>Put OI</th>
@@ -230,7 +234,7 @@ export default function Bitcoin() {
             {data.map((item, index) => {
               return (
                 <tr key={item.Time}>
-                  <td className="flex flex-row gap-2">
+                  <td className="flex flex-row gap-2 justify-center">
                     {session && session.user.admin ? (
                       <div
                         onClick={() => deleteItem(index)}
@@ -500,7 +504,7 @@ export default function Bitcoin() {
                           }
                         >
                           <div className={`${styles.yellow} ${styles.wide}`}>
-                            Long Build Up
+                            Long Unwinding
                             <Image
                               alt="arrow up"
                               width={32}
@@ -523,8 +527,9 @@ export default function Bitcoin() {
                       >
                         {item.CallOIInterpretation === 0
                           ? "Shorts Covering"
-                          : item.CallOIInterpretation === 1 ||
-                            item.CallOIInterpretation === 3
+                          : item.CallOIInterpretation === 3
+                          ? "Long Unwinding"
+                          : item.CallOIInterpretation === 1
                           ? "Long Build Up"
                           : "Short Build Up"}
                         <Image
@@ -624,7 +629,7 @@ export default function Bitcoin() {
                           }
                         >
                           <div className={`${styles.yellow} ${styles.wide}`}>
-                            Long Build Up
+                            Long Unwinding
                             <Image
                               alt="arrow up"
                               width={32}
@@ -647,8 +652,9 @@ export default function Bitcoin() {
                       >
                         {item.PutOiInterpretation === 0
                           ? "Shorts Covering"
-                          : item.PutOiInterpretation === 1 ||
-                            item.PutOiInterpretation === 3
+                          : item.PutOiInterpretation === 3
+                          ? "Long Unwinding"
+                          : item.PutOiInterpretation === 1
                           ? "Long Build Up"
                           : "Short Build Up"}
                         <Image
@@ -857,7 +863,7 @@ export default function Bitcoin() {
             {session && session.user.admin ? (
               <tr>
                 <td colSpan="15">
-                  <div className="flex flex-start">
+                  <div className="flex flex-start pb-28 ">
                     <button
                       onClick={addItem}
                       className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
@@ -869,6 +875,12 @@ export default function Bitcoin() {
                       className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                     >
                       Update
+                    </button>
+                    <button
+                      onClick={() => setData([])}
+                      className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
+                    >
+                      Delete All
                     </button>
                   </div>
                 </td>

@@ -271,25 +271,38 @@ export default function Ethereum() {
   useEffect(() => {
     const reversedData = [...chartData].reverse();
 
-    setTableData({
-      labels: reversedData.map((item) => item.Time),
-      datasets: [
-        {
-          label: "Users Gained",
-          data: reversedData.map((item, i) => item.Value1),
-          backgroundColor: ["white"],
-          borderColor: "#a33131",
-          borderWidth: 2,
+    setTableData(
+      {
+        labels: reversedData.map((item) => item.Time),
+        datasets: [
+          {
+            label: "Selling Pressure",
+            data: reversedData.map((item, i) => item.Value1),
+            backgroundColor: ["white"],
+            borderColor: "#a33131",
+            borderWidth: 4,
+            pointBackgroundColor: "white",
+            pointRadius: 6,
+          },
+          {
+            label: "Buying Pressure",
+            data: reversedData.map((item, i) => item.Value2),
+            backgroundColor: ["white"],
+            borderColor: "green",
+            borderWidth: 4,
+          },
+        ],
+      },
+      {
+        scales: {
+          y: {
+            ticks: {
+              min: 10000000, // Valor mínimo en el eje y
+            },
+          },
         },
-        {
-          label: "Users Loss",
-          data: reversedData.map((item, i) => item.Value2),
-          backgroundColor: ["white"],
-          borderColor: "#e2b75a",
-          borderWidth: 2,
-        },
-      ],
-    });
+      }
+    );
   }, [chartData]);
 
   const getData = async (dataSelect = "Ethereum") => {
@@ -347,6 +360,11 @@ export default function Ethereum() {
   const options = {
     type: "line",
     maintainAspectRatio: false,
+    scales: {
+      y: {
+        max: 10000000,
+      },
+    },
   };
   return (
     <main className={`${styles.main}`}>
@@ -356,14 +374,15 @@ export default function Ethereum() {
           : freeTextTable[0].FreeText}
       </h1>
       <div className="w-full flex lg:flex-row flex-col">
-        <div className="scrollbar1 overflow-x-scroll lg:w-[35vw] w-full h-[max-content] pb-44">
+        <div className="scrollbar1 overflow-scroll lg:w-[35vw] w-full  h-[33.5rem]">
           <table>
             <thead>
               <tr>
                 <th>N</th>
                 <th>Time</th>
-                <th>OI Interpretation</th>
                 <th>Trend</th>
+                <th>OI Interpretation</th>
+
                 <th>Some text</th>
               </tr>
             </thead>
@@ -394,6 +413,116 @@ export default function Ethereum() {
                         type="text"
                       />
                     )}
+                  </td>{" "}
+                  <td className={styles.dropdown}>
+                    <label htmlFor={`check${4 + 6 * index}`}>
+                      <input
+                        disabled={session && !session.user.admin ? true : false}
+                        className={styles.input1}
+                        type="checkbox"
+                        id={`check${4 + 6 * index}`}
+                        onChange={() =>
+                          closeAllDropdown(`check${4 + 6 * index}`)
+                        }
+                      />
+                      <label className={styles.label1}>
+                        <label
+                          onClick={() =>
+                            onChange(0, "PutOiInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.blue} ${styles.wide}`}>
+                            Shorts Covering
+                            <Image
+                              alt="arrow horizontal"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                        <label
+                          onClick={() =>
+                            onChange(2, "PutOiInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.red} ${styles.wide}`}>
+                            Short Build Up
+                            <Image
+                              alt="arrow down"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                        <label
+                          onClick={() =>
+                            onChange(1, "PutOiInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.green} ${styles.wide}`}>
+                            Long Build Up
+                            <Image
+                              alt="arrow up"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                        <label
+                          onClick={() =>
+                            onChange(3, "PutOiInterpretation", index)
+                          }
+                        >
+                          <div className={`${styles.yellow} ${styles.wide}`}>
+                            Long Unwinding
+                            <Image
+                              alt="arrow up"
+                              width={32}
+                              height={32}
+                              src="/images/table/arrow.png"
+                            />
+                          </div>
+                        </label>
+                      </label>
+                      <div
+                        className={`${
+                          item.PutOiInterpretation === 0
+                            ? styles.blue
+                            : item.PutOiInterpretation === 1
+                            ? styles.green
+                            : item.PutOiInterpretation === 2
+                            ? styles.red
+                            : styles.yellow
+                        } ${styles.wide}`}
+                      >
+                        {item.PutOiInterpretation === 0
+                          ? "Shorts Covering"
+                          : item.PutOiInterpretation === 1 ||
+                            item.PutOiInterpretation === 3
+                          ? "Long Build Up"
+                          : "Short Build Up"}
+                        <Image
+                          alt={
+                            item.PutOiInterpretation === 0
+                              ? "arrow horizontal"
+                              : item.PutOiInterpretation === 1
+                              ? "arrow up"
+                              : "arrow down"
+                          }
+                          width={32}
+                          height={32}
+                          src={
+                            "/images/table/" +
+                            (item.PutOiInterpretation === 0
+                              ? "arrow.png"
+                              : "arrow.png")
+                          }
+                        />
+                      </div>
+                    </label>
                   </td>
                   <td className={styles.dropdown}>
                     <label htmlFor={`check${3 + 6 * index}`}>
@@ -413,14 +542,13 @@ export default function Ethereum() {
                           }
                         >
                           <div className={`${styles.blue} ${styles.wide}`}>
+                            Neutral
                             <Image
-                              className="rotate0"
                               alt="arrow horizontal"
                               width={32}
                               height={32}
-                              src="/images/table/arrow h.png"
+                              src="/images/table/arrow.png"
                             />
-                            Neutral
                           </div>
                         </label>
                         <label
@@ -520,101 +648,6 @@ export default function Ethereum() {
                       </div>
                     </label>
                   </td>
-                  <td className={styles.dropdown}>
-                    <label htmlFor={`check${4 + 6 * index}`}>
-                      <input
-                        disabled={session && !session.user.admin ? true : false}
-                        className={styles.input1}
-                        type="checkbox"
-                        id={`check${4 + 6 * index}`}
-                        onChange={() =>
-                          closeAllDropdown(`check${4 + 6 * index}`)
-                        }
-                      />
-                      <label className={styles.label1}>
-                        <label
-                          onClick={() =>
-                            onChange(0, "PutOiInterpretation", index)
-                          }
-                        >
-                          <div className={`${styles.blue} ${styles.wide}`}>
-                            Shorts Covering
-                            <Image
-                              alt="arrow horizontal"
-                              width={32}
-                              height={32}
-                              src="/images/table/arrow.png"
-                            />
-                          </div>
-                        </label>
-                        <label
-                          onClick={() =>
-                            onChange(2, "PutOiInterpretation", index)
-                          }
-                        >
-                          <div className={`${styles.red} ${styles.wide}`}>
-                            Short Build Up
-                            <Image
-                              alt="arrow down"
-                              width={32}
-                              height={32}
-                              src="/images/table/arrow.png"
-                            />
-                          </div>
-                        </label>
-                        <label
-                          onClick={() =>
-                            onChange(1, "PutOiInterpretation", index)
-                          }
-                        >
-                          <div className={`${styles.green} ${styles.wide}`}>
-                            Long Build Up
-                            <Image
-                              alt="arrow up"
-                              width={32}
-                              height={32}
-                              src="/images/table/arrow.png"
-                            />
-                          </div>
-                        </label>
-                      </label>
-                      <div
-                        className={`${
-                          item.PutOiInterpretation === 0
-                            ? styles.blue
-                            : item.PutOiInterpretation === 1
-                            ? styles.green
-                            : item.PutOiInterpretation === 2
-                            ? styles.red
-                            : styles.yellow
-                        } ${styles.wide}`}
-                      >
-                        {item.PutOiInterpretation === 0
-                          ? "Shorts Covering"
-                          : item.PutOiInterpretation === 1 ||
-                            item.PutOiInterpretation === 3
-                          ? "Long Build Up"
-                          : "Short Build Up"}
-                        <Image
-                          alt={
-                            item.PutOiInterpretation === 0
-                              ? "arrow horizontal"
-                              : item.PutOiInterpretation === 1
-                              ? "arrow up"
-                              : "arrow down"
-                          }
-                          width={32}
-                          height={32}
-                          src={
-                            "/images/table/" +
-                            (item.PutOiInterpretation === 0
-                              ? "arrow.png"
-                              : "arrow.png")
-                          }
-                        />
-                      </div>
-                    </label>
-                  </td>
                   <td>
                     {session && !session.user.admin ? (
                       item.Strike
@@ -634,7 +667,7 @@ export default function Ethereum() {
               {session && session.user.admin ? (
                 <tr>
                   <td colSpan="5">
-                    <div className="flex flex-start">
+                    <div className="flex flex-start pb-36">
                       <button
                         onClick={() => addItem()}
                         className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
@@ -646,6 +679,12 @@ export default function Ethereum() {
                         className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                       >
                         Update
+                      </button>
+                      <button
+                        onClick={() => setData([])}
+                        className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
+                      >
+                        Delete All
                       </button>
                     </div>
                   </td>
@@ -659,7 +698,7 @@ export default function Ethereum() {
         max-lg:h-[40vh] max-lg:max-h-[350px]"
         >
           <Line
-            className="bg-[#161a1e] pt-4 lg:pl-4"
+            className="bg-[#000000] pt-4 lg:pl-4"
             options={options}
             datasetIdKey="id"
             data={tableData}
@@ -741,6 +780,12 @@ export default function Ethereum() {
                       >
                         Update
                       </button>
+                      <button
+                        onClick={() => setFreeTextTable([])}
+                        className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
+                      >
+                        Delete All
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -755,7 +800,7 @@ export default function Ethereum() {
                 <tr>
                   <th>N</th>
                   <th>Time</th>
-                  <th>Value1</th> <th>Value2</th>
+                  <th>Selling Pressure</th> <th>Buying Pressure</th>
                 </tr>
               </thead>
               <tbody>
@@ -831,6 +876,12 @@ export default function Ethereum() {
                         className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                       >
                         Update
+                      </button>
+                      <button
+                        onClick={() => setChartData([])}
+                        className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
+                      >
+                        Delete All
                       </button>
                     </div>
                   </td>
