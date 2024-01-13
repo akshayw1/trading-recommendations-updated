@@ -87,13 +87,13 @@
 .zigZagBox img {
   width: 100%;
 }
-.zigZagBox img:nth-of-type(2) {
+.zigZagBox > img:nth-of-type(1) {
   left: 0;
   top: 4.75rem;
   width: 13% !important;
   position: absolute;
 }
-.zigZagBox img:nth-of-type(3) {
+.zigZagBox > img:nth-of-type(2) {
   right: 0;
   top: 4.75rem;
   width: 13% !important;

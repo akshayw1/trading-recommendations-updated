@@ -4,6 +4,7 @@ import styles from "../bitcoin/styles.module.css";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import isEqual from "lodash/isEqual";
 
 import {
   Chart as ChartJS,
@@ -208,13 +209,14 @@ export default function Ethereum() {
 
         setData(dataFetch);
         setFreeTextTable(dataFetch2);
-        setChartData(dataFetch3);
 
-        if (
-          JSON.stringify(data) !== JSON.stringify(dataFetch) ||
-          JSON.stringify(chartData) !== JSON.stringify(dataFetch3) ||
-          JSON.stringify(freeTextTable) !== JSON.stringify(dataFetch2)
-        )
+        setChartData((prevState) => {
+          if (!isEqual(prevState, dataFetch3)) {
+            return dataFetch3;
+          }
+          return prevState;
+        });
+        if (JSON.stringify(freeTextTable) !== JSON.stringify(dataFetch2))
           return true;
         return false;
       } catch (error) {
@@ -253,10 +255,11 @@ export default function Ethereum() {
           return dataFetch2;
         });
         setChartData((prevState) => {
-          /*  console.log({ prevState, dataFetch2 });*/
-          if (JSON.stringify(prevState) !== JSON.stringify(dataFetch3))
+          if (!isEqual(prevState, dataFetch3)) {
             beep = true;
-          return dataFetch3;
+            return dataFetch3;
+          }
+          return prevState;
         });
 
         return beep;
@@ -271,38 +274,35 @@ export default function Ethereum() {
   useEffect(() => {
     const reversedData = [...chartData].reverse();
 
-    setTableData(
-      {
-        labels: reversedData.map((item) => item.Time),
-        datasets: [
-          {
-            label: "Selling Pressure",
-            data: reversedData.map((item, i) => item.Value1),
-            backgroundColor: ["white"],
-            borderColor: "#a33131",
-            borderWidth: 4,
-            pointBackgroundColor: "white",
-            pointRadius: 6,
-          },
-          {
-            label: "Buying Pressure",
-            data: reversedData.map((item, i) => item.Value2),
-            backgroundColor: ["white"],
-            borderColor: "green",
-            borderWidth: 4,
-          },
-        ],
-      },
-      {
-        scales: {
-          y: {
-            ticks: {
-              min: 10000000, // Valor mínimo en el eje y
-            },
+    setTableData({
+      labels: reversedData.map((item) => item.Time),
+      datasets: [
+        {
+          label: "Selling Pressure",
+          data: reversedData.map((item, i) => item.Value1),
+          backgroundColor: ["white"],
+          borderColor: "#a33131",
+          borderWidth: 6,
+          pointBackgroundColor: "white",
+          pointRadius: 6,
+        },
+        {
+          label: "Buying Pressure",
+          data: reversedData.map((item, i) => item.Value2),
+          backgroundColor: ["white"],
+          borderColor: "green",
+          borderWidth: 6,
+          pointRadius: 6,
+        },
+      ],
+      scales: {
+        y: {
+          ticks: {
+            min: 10000000, // Valor mínimo en el eje y
           },
         },
-      }
-    );
+      },
+    });
   }, [chartData]);
 
   const getData = async (dataSelect = "Ethereum") => {
@@ -373,8 +373,10 @@ export default function Ethereum() {
           ? "Zig Zag Moves - STAY AWAY"
           : freeTextTable[0].FreeText}
       </h1>
-      <div className="w-full flex lg:flex-row flex-col">
-        <div className="scrollbar1 overflow-scroll lg:w-[35vw] w-full  h-[33.5rem]">
+      <div className="w-full flex lg:flex-row flex-col justify-between">
+        <div
+          className={`scrollbar1 overflow-scroll lg:w-[35vw] w-full  h-[33.5rem] ${styles.table}`}
+        >
           <table>
             <thead>
               <tr>
@@ -413,7 +415,7 @@ export default function Ethereum() {
                         type="text"
                       />
                     )}
-                  </td>{" "}
+                  </td>
                   <td className={styles.dropdown}>
                     <label htmlFor={`check${4 + 6 * index}`}>
                       <input
@@ -500,9 +502,10 @@ export default function Ethereum() {
                       >
                         {item.PutOiInterpretation === 0
                           ? "Shorts Covering"
-                          : item.PutOiInterpretation === 1 ||
-                            item.PutOiInterpretation === 3
+                          : item.PutOiInterpretation === 1
                           ? "Long Build Up"
+                          : item.PutOiInterpretation === 3
+                          ? "Long Unwinding"
                           : "Short Build Up"}
                         <Image
                           alt={
@@ -544,10 +547,11 @@ export default function Ethereum() {
                           <div className={`${styles.blue} ${styles.wide}`}>
                             Neutral
                             <Image
+                              className={styles.rotate90}
                               alt="arrow horizontal"
                               width={32}
                               height={32}
-                              src="/images/table/arrow.png"
+                              src="/images/table/arrow h.png"
                             />
                           </div>
                         </label>
@@ -557,7 +561,7 @@ export default function Ethereum() {
                           }
                         >
                           <div className={`${styles.red} ${styles.wide}`}>
-                            Bullish
+                            Bearish
                             <Image
                               alt="arrow down"
                               width={32}
@@ -572,7 +576,7 @@ export default function Ethereum() {
                           }
                         >
                           <div className={`${styles.green} ${styles.wide}`}>
-                            Bullish
+                            Bearish
                             <Image
                               alt="arrow up"
                               width={32}
@@ -587,7 +591,7 @@ export default function Ethereum() {
                           }
                         >
                           <div className={`${styles.red} ${styles.wide}`}>
-                            Ext Bullish
+                            Ext Bearish
                             <Image
                               alt="arrow down"
                               width={32}
@@ -602,7 +606,7 @@ export default function Ethereum() {
                           }
                         >
                           <div className={`${styles.green} ${styles.wide}`}>
-                            Ext Bullish
+                            Ext Bearish
                             <Image
                               alt="arrow up"
                               width={32}
@@ -626,9 +630,14 @@ export default function Ethereum() {
                           ? "Neutral"
                           : item.CallOIInterpretation === 3 ||
                             item.CallOIInterpretation === 4
-                          ? "Ext Bullish"
-                          : "Bullish"}
+                          ? "Ext Bearish"
+                          : "Bearish"}
                         <Image
+                          className={
+                            item.CallOIInterpretation === 0
+                              ? styles.rotate90
+                              : null
+                          }
                           alt={
                             item.CallOIInterpretation === 0
                               ? "arrow horizontal"
@@ -641,7 +650,7 @@ export default function Ethereum() {
                           src={
                             "/images/table/" +
                             (item.CallOIInterpretation === 0
-                              ? "arrow.png"
+                              ? "arrow h.png"
                               : "arrow.png")
                           }
                         />
@@ -694,11 +703,17 @@ export default function Ethereum() {
           </table>
         </div>
         <div
-          className="lg:w-[65vw] w-full flex order-first lg:order-none 
-        max-lg:h-[40vh] max-lg:max-h-[350px]"
+          className="select-none lg:w-[60vw] w-full flex flex-col  order-first lg:order-none 
+        h-[33.5rem] bg-[#000000]"
         >
+          <div className="flex flex-row w-full justify-center items-center m-2">
+            <div className="h-[70%] w-12 bg-[#a33131] mr-2"></div>
+            <span className="mr-8">Selling Pressure</span>
+            <div className="h-[70%] w-12 bg-green-700 mr-2"></div>Buying
+            Pressure
+          </div>
           <Line
-            className="bg-[#000000] pt-4 lg:pl-4"
+            className="mb-12 lg:pl-4"
             options={options}
             datasetIdKey="id"
             data={tableData}
@@ -706,11 +721,13 @@ export default function Ethereum() {
         </div>
       </div>
       <div className="flex flex-row w-full">
-        <div className="scrollbar1 overflow-x-scroll w-full h-[max-content] pb-44">
+        <div
+          className={`scrollbar1 overflow-x-scroll w-full h-[35rem] bg-[#181a1b] ${styles.table}`}
+        >
           <table>
             <thead>
               <tr>
-                <th>N</th>
+                <th className="w-[25px]">N</th>
                 <th>Time</th>
                 <th>Free text</th>
               </tr>
@@ -743,7 +760,7 @@ export default function Ethereum() {
                       />
                     )}
                   </td>
-                  <td>
+                  <td className="flex items-center justify-center">
                     {session && !session.user.admin ? (
                       item.FreeText
                     ) : (
@@ -757,7 +774,7 @@ export default function Ethereum() {
                           )
                         }
                         defaultValue={item.FreeText}
-                        className={styles.inputTable}
+                        className={`${styles.inputTable} grow`}
                         type="text"
                       />
                     )}
@@ -794,11 +811,13 @@ export default function Ethereum() {
           </table>
         </div>
         {session && session.user.admin ? (
-          <div className="scrollbar1 overflow-x-scroll w-full h-[max-content] pb-44">
+          <div
+            className={`bg-[#181a1b] scrollbar1 overflow-x-scroll w-full h-[35rem] ${styles.table}`}
+          >
             <table>
               <thead>
                 <tr>
-                  <th>N</th>
+                  <th className="w-[25px]">N</th>
                   <th>Time</th>
                   <th>Selling Pressure</th> <th>Buying Pressure</th>
                 </tr>

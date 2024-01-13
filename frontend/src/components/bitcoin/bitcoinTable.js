@@ -6,7 +6,7 @@ import { useOnboardingContext } from "@/context/MyContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingToast from "../usersTable/loading";
-export default function Bitcoin() {
+export default function BitcoinTable() {
   const dataExample = {
     Time: "15:25-15:30",
     CallOI: 31.89,
@@ -154,6 +154,8 @@ export default function Bitcoin() {
     const intervalId = setInterval(async () => {
       if (session && session.user && !session.user.admin) {
         const beep = await fetchData();
+        if (beep) playSound();
+        console.log("check", beep);
       }
     }, 5000);
 
@@ -201,14 +203,13 @@ export default function Bitcoin() {
     }
   };
   return (
-    <main className={styles.main}>
-      <h1 className={styles.zigZagText}> Zig Zag Moves - STAY AWAY</h1>
+    <div className={styles.main}>
       <div className={styles.head1}>
         <p>CALL</p>
         <p>PUT</p>
       </div>
       <div
-        className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[40rem] bg-[#181a1b] ${styles.table}`}
+        className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[20rem] bg-[#181a1b] ${styles.table}`}
       >
         <table>
           <thead>
@@ -889,6 +890,6 @@ export default function Bitcoin() {
           </tbody>
         </table>
       </div>
-    </main>
+    </div>
   );
 }
