@@ -575,7 +575,7 @@ export default function Ethereum() {
                           }
                         >
                           <div className={`${styles.green} ${styles.wide}`}>
-                            Bearish
+                            Bullish
                             <Image
                               alt="arrow up"
                               width={32}
@@ -605,7 +605,7 @@ export default function Ethereum() {
                           }
                         >
                           <div className={`${styles.green} ${styles.wide}`}>
-                            Ext Bearish
+                            Ext Bullish
                             <Image
                               alt="arrow up"
                               width={32}
@@ -627,10 +627,13 @@ export default function Ethereum() {
                       >
                         {item.CallOIInterpretation === 0
                           ? "Neutral"
-                          : item.CallOIInterpretation === 3 ||
-                            item.CallOIInterpretation === 4
-                          ? "Ext Bearish"
-                          : "Bearish"}
+                          : item.CallOIInterpretation === 1
+                          ? "Bullish"
+                          : item.CallOIInterpretation === 4
+                          ? "Ext Bullish"
+                          : item.CallOIInterpretation === 2
+                          ? "Bearish"
+                          : "Ext Bearish"}
                         <Image
                           className={
                             item.CallOIInterpretation === 0
@@ -717,6 +720,57 @@ export default function Ethereum() {
             datasetIdKey="id"
             data={tableData}
           />
+        </div>
+      </div>
+      <div className="flex-col flex bg-black p-4 pt-2 pl-4 w-full">
+        <p className="text-red-200 text-[1.15rem] mb-4">Signals</p>
+        <div className="flex gap-2 flex-row">
+          <div className={`${styles.blue} ${styles.wide}`}>
+            Neutral
+            <Image
+              className={styles.rotate90}
+              alt="arrow horizontal"
+              width={32}
+              height={32}
+              src="/images/table/arrow h.png"
+            />
+          </div>
+          <div className={`${styles.green} ${styles.wide}`}>
+            Ext Bullish
+            <Image
+              alt="arrow up"
+              width={32}
+              height={32}
+              src="/images/table/arrow.png"
+            />
+          </div>
+          <div className={`${styles.red} ${styles.wide}`}>
+            Ext Bearish
+            <Image
+              alt="arrow down"
+              width={32}
+              height={32}
+              src="/images/table/arrow.png"
+            />
+          </div>
+          <div className={`${styles.green} ${styles.wide}`}>
+            Bullish
+            <Image
+              alt="arrow up"
+              width={32}
+              height={32}
+              src="/images/table/arrow.png"
+            />
+          </div>
+          <div className={`${styles.red} ${styles.wide}`}>
+            Bearish
+            <Image
+              alt="arrow down"
+              width={32}
+              height={32}
+              src="/images/table/arrow.png"
+            />
+          </div>
         </div>
       </div>
       <div className="flex flex-row w-full">
