@@ -195,116 +195,6 @@ export default function Ethereum() {
       setFreeTextTable(newData);
     }
   };
-
-  const playSound = () => {
-    const audio = new Audio("/sounds/Telephone_Ring_-_Sound_Effects_1.mp3");
-    audio.play();
-  };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const dataFetch = await getData();
-        const dataFetch2 = await getData("freeTextEth");
-        const dataFetch3 = await getData("chartDataEth");
-
-        setData(dataFetch);
-        setFreeTextTable(dataFetch2);
-
-        setChartData((prevState) => {
-          if (!isEqual(prevState, dataFetch3)) {
-            return dataFetch3;
-          }
-          return prevState;
-        });
-        if (JSON.stringify(freeTextTable) !== JSON.stringify(dataFetch2))
-          return true;
-        return false;
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
-    };
-    const intervalId = setInterval(async () => {
-      if (session && session.user && !session.user.admin) {
-        const beep = await fetchData();
-        if (beep) playSound();
-        console.log("check", beep);
-      }
-    }, 5000);
-
-    return () => clearInterval(intervalId);
-  }, [session, data, freeTextTable, chartData]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const dataFetch = await getData();
-        const dataFetch2 = await getData("freeTextEth");
-        const dataFetch3 = await getData("chartDataEth");
-
-        let beep = false;
-        setData((prevState) => {
-          if (JSON.stringify(prevState) !== JSON.stringify(dataFetch))
-            beep = true;
-          return dataFetch;
-        });
-        setFreeTextTable((prevState) => {
-          /*  console.log({ prevState, dataFetch2 });*/
-          if (JSON.stringify(prevState) !== JSON.stringify(dataFetch2))
-            beep = true;
-          return dataFetch2;
-        });
-        setChartData((prevState) => {
-          if (!isEqual(prevState, dataFetch3)) {
-            beep = true;
-            return dataFetch3;
-          }
-          return prevState;
-        });
-
-        return beep;
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const reversedData = [...chartData].reverse();
-
-    setTableData({
-      labels: reversedData.map((item) => item.Time),
-      datasets: [
-        {
-          label: "Selling Pressure",
-          data: reversedData.map((item, i) => item.Value1),
-          backgroundColor: ["white"],
-          borderColor: "#a33131",
-          borderWidth: 6,
-          pointBackgroundColor: "white",
-          pointRadius: 6,
-        },
-        {
-          label: "Buying Pressure",
-          data: reversedData.map((item, i) => item.Value2),
-          backgroundColor: ["white"],
-          borderColor: "green",
-          borderWidth: 6,
-          pointRadius: 6,
-        },
-      ],
-      scales: {
-        y: {
-          ticks: {
-            min: 10000000, // Valor mínimo en el eje y
-          },
-        },
-      },
-    });
-  }, [chartData]);
-
   const getData = async (dataSelect = "Ethereum") => {
     try {
       const queryParams = new URLSearchParams({ dataSelect });
@@ -347,6 +237,115 @@ export default function Ethereum() {
       setFreeTextTable(newData);
     }
   };
+  const playSound = () => {
+    const audio = new Audio("/sounds/Telephone_Ring_-_Sound_Effects_1.mp3");
+    audio.play();
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dataFetch = await getData();
+        const dataFetch2 = await getData("freeTextEth");
+        const dataFetch3 = await getData("chartDataEth");
+
+        let beep = false;
+        setData((prevState) => {
+          if (JSON.stringify(prevState) !== JSON.stringify(dataFetch))
+            beep = true;
+          return dataFetch;
+        });
+        setFreeTextTable((prevState) => {
+          /*  console.log({ prevState, dataFetch2 });*/
+          if (JSON.stringify(prevState) !== JSON.stringify(dataFetch2))
+            beep = true;
+          return dataFetch2;
+        });
+        setChartData((prevState) => {
+          if (!isEqual(prevState, dataFetch3)) {
+            beep = true;
+            return dataFetch3;
+          }
+          return prevState;
+        });
+
+        return beep;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dataFetch = await getData();
+        const dataFetch2 = await getData("freeTextEth");
+        const dataFetch3 = await getData("chartDataEth");
+
+        setData(dataFetch);
+        setFreeTextTable(dataFetch2);
+
+        setChartData((prevState) => {
+          if (!isEqual(prevState, dataFetch3)) {
+            return dataFetch3;
+          }
+          return prevState;
+        });
+        if (JSON.stringify(freeTextTable) !== JSON.stringify(dataFetch2))
+          return true;
+        return false;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    };
+    const intervalId = setInterval(async () => {
+      if (session && session.user && !session.user.admin) {
+        const beep = await fetchData();
+        if (beep) playSound();
+        console.log("check", beep);
+      }
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [session, data, freeTextTable, chartData]);
+
+  useEffect(() => {
+    const reversedData = [...chartData].reverse();
+
+    setTableData({
+      labels: reversedData.map((item) => item.Time),
+      datasets: [
+        {
+          label: "Selling Pressure",
+          data: reversedData.map((item, i) => item.Value1),
+          backgroundColor: ["white"],
+          borderColor: "#a33131",
+          borderWidth: 6,
+          pointBackgroundColor: "white",
+          pointRadius: 6,
+        },
+        {
+          label: "Buying Pressure",
+          data: reversedData.map((item, i) => item.Value2),
+          backgroundColor: ["white"],
+          borderColor: "green",
+          borderWidth: 6,
+          pointRadius: 6,
+        },
+      ],
+      scales: {
+        y: {
+          ticks: {
+            min: 10000000, // Valor mínimo en el eje y
+          },
+        },
+      },
+    });
+  }, [chartData]);
+
   const closeAllDropdown = (id = "") => {
     for (let i = 1; i <= 6 * data.length; i++) {
       if (id !== `check${i}`) {
@@ -373,9 +372,9 @@ export default function Ethereum() {
           ? "Zig Zag Moves - STAY AWAY"
           : freeTextTable[0].FreeText}
       </h1>
-      <div className="w-full flex lg:flex-row flex-col justify-between">
+      <div className="w-full flex lg:flex-row flex-col justify-between overflow-hidden">
         <div
-          className={`scrollbar1 overflow-scroll lg:w-[35vw] w-full  h-[33.5rem] ${styles.table}`}
+          className={`scrollbar1 overflow-scroll lg:w-[34vw] w-full  h-[33.5rem] ${styles.table}`}
         >
           <table>
             <thead>

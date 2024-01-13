@@ -30,7 +30,7 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
 
   try {
-    const name: string = searchParams.get("dataSelect")!; // Type assertion
+    const name: string = searchParams.get("dataSelect")!; // (!) Type assertion
 
     await connectMongoDB();
 
