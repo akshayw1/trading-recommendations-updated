@@ -340,7 +340,7 @@ export default function Aside() {
                 </defs>
               </svg>
             </div>
-            Quant
+            Sui
           </li>
           {session && session.user.admin ? (
             <li>

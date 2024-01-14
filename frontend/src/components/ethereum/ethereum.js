@@ -47,8 +47,8 @@ export default function Ethereum() {
   };
   const chartDataExample = {
     Time: "15:25-15:30",
-    Value1: 13333,
-    Value2: 30000,
+    Value1: 5000000,
+    Value2: 5000000,
   };
   const { session, status } = useOnboardingContext();
 
@@ -369,22 +369,23 @@ export default function Ethereum() {
     <main className={`${styles.main}`}>
       <h1 className={styles.zigZagText}>
         {freeTextTable.length === 0
-          ? "Zig Zag Moves - STAY AWAY"
+          ? "Ethereum Option Chain: Open Interest Interpretation"
           : freeTextTable[0].FreeText}
       </h1>
       <div className="w-full flex lg:flex-row flex-col justify-between overflow-hidden">
         <div
-          className={`scrollbar1 overflow-scroll lg:w-[34vw] w-full  h-[33.5rem] ${styles.table}`}
+          className={`scrollbar1 overflow-scroll lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}
         >
           <table>
             <thead>
               <tr>
                 <th>N</th>
                 <th>Time</th>
-                <th>Trend</th>
                 <th>OI Interpretation</th>
+                <th>Trend</th>
+               
 
-                <th>Some text</th>
+                <th>Entry Idea</th>
               </tr>
             </thead>
             <tbody>
@@ -705,7 +706,7 @@ export default function Ethereum() {
           </table>
         </div>
         <div
-          className="select-none lg:w-[60vw] w-full flex flex-col  order-first lg:order-none 
+          className="select-none lg:w-[60vw]  w-full flex flex-col  order-first lg:order-none 
         h-[33.5rem] bg-[#000000]"
         >
           <div className="flex flex-row w-full justify-center items-center m-2">
@@ -722,7 +723,7 @@ export default function Ethereum() {
           />
         </div>
       </div>
-      <div className="flex-col flex bg-black p-8 pt-2 pl-4 w-full">
+      {/* <div className="flex-col flex bg-black p-4 pt-2 pl-4 w-full">
         <p className="text-red-200 text-[1.15rem] mb-4">Signals</p>
         <div className="flex gap-2 flex-row">
           <div className={`${styles.blue} ${styles.wide}`}>
@@ -772,8 +773,8 @@ export default function Ethereum() {
             />
           </div>
         </div>
-      </div>
-      <div className="flex flex-row w-full">
+      </div> */}
+      <div className="flex flex-row mt-6 w-full">
         <div
           className={`scrollbar1 overflow-x-scroll w-full h-[35rem] bg-[#181a1b] ${styles.table}`}
         >
@@ -781,8 +782,8 @@ export default function Ethereum() {
             <thead>
               <tr>
                 <th className="w-[25px]">N</th>
-                <th>Time</th>
-                <th>Free text</th>
+                <th className="w-[25px]">Time</th>
+                <th>Live Commentary</th>
               </tr>
             </thead>
             <tbody>

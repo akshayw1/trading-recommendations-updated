@@ -7,6 +7,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingToast from "../usersTable/loading";
 import isEqual from "lodash/isEqual";
+import livelogo from "../../../public/images/Logo.png"
+
+
 
 import {
   Chart as ChartJS,
@@ -339,12 +342,25 @@ export default function Bitcoin() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.zigZagText}> Zig Zag Moves - STAY AWAY</h1>
+      <h1 className={styles.zigZagText}>            
+     
+      <Image
+            width={90}
+            height={90}
+            alt="Live Feed"
+            src="/images/gipy.gif"
+          />
+Bitcoin Option Chain: Open Interest Interpretation</h1>
       <div className="flex flex-col w-full lg:flex-row justify-between overflow-hidden">
-        <div className="w-[35vw]">
+        <div className="w-full">
           <div className={styles.head1}>
-            <p>CALL</p>
-            <p>PUT</p>
+            <div className={styles.prov}>
+            <p >CALL</p>
+            </div>
+           <div className={styles.prov}>
+           <p>PUT</p>
+           </div>
+           
           </div>
           <div
             className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[33.5rem] bg-[#181a1b] ${styles.table}`}
@@ -361,7 +377,7 @@ export default function Bitcoin() {
                   <th>Price</th>
                   <th>Call OI Interpretation</th>
                   <th>Strike</th>
-                  <th>Put Oi Interpretation</th>
+                  <th>Put OI Interpretation</th>
                   <th>Price</th>
                   <th>Trend</th>
                   <th>Delta</th>
@@ -1069,123 +1085,9 @@ export default function Bitcoin() {
             </table>
           </div>
         </div>
-        <div
-          className="select-none lg:w-[60vw] w-full flex flex-col  order-first lg:order-none 
-        h-[35.813rem] bg-[#000000]"
-        >
-          <div className="flex flex-row w-full justify-center items-center m-2">
-            <div className="h-[70%] w-12 bg-[#a33131] mr-2"></div>
-            <span className="mr-8">Selling Pressure</span>
-            <div className="h-[70%] w-12 bg-green-700 mr-2"></div>Buying
-            Pressure
-          </div>
-          <Line
-            className="mb-12 lg:pl-4"
-            options={options}
-            datasetIdKey="id"
-            data={tableData}
-          />
-        </div>
+      
       </div>
-      {session && session.user.admin ? (
-        <div
-          className={`bg-[#181a1b] scrollbar1 overflow-x-scroll w-full h-[35rem] ${styles.table}`}
-        >
-          <table>
-            <thead>
-              <tr>
-                <th className="w-[25px]">N</th>
-                <th>Time</th>
-                <th>Selling Pressure</th> <th>Buying Pressure</th>
-              </tr>
-            </thead>
-            <tbody>
-              {chartData.map((item, index) => (
-                <tr key={item.Time}>
-                  <td className="flex flex-row gap-2 justify-center">
-                    <div
-                      onClick={() => deleteItem(index, "chartDataBitcoin")}
-                      className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
-                    >
-                      X
-                    </div>
-                    {index + 1}
-                  </td>
-                  <td>
-                    <input
-                      onChange={(e) =>
-                        onChange(
-                          e.target.value,
-                          "Time",
-                          index,
-                          "chartDataBitcoin"
-                        )
-                      }
-                      defaultValue={item.Time}
-                      className={styles.inputTable}
-                      type="text"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      onChange={(e) =>
-                        onChange(
-                          e.target.value,
-                          "Value1",
-                          index,
-                          "chartDataBitcoin"
-                        )
-                      }
-                      defaultValue={item.Value1}
-                      className={styles.inputTable}
-                      type="text"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      onChange={(e) =>
-                        onChange(
-                          e.target.value,
-                          "Value2",
-                          index,
-                          "chartDataBitcoin"
-                        )
-                      }
-                      defaultValue={item.Value2}
-                      className={styles.inputTable}
-                      type="text"
-                    />
-                  </td>
-                </tr>
-              ))}
-              <tr>
-                <td colSpan="5">
-                  <div className="flex flex-start">
-                    <button
-                      onClick={() => addItem("chartDataBitcoin")}
-                      className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                    >
-                      +
-                    </button>
-                    <button
-                      onClick={() => updateData("chartDataBitcoin")}
-                      className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                    >
-                      Update
-                    </button>
-                    <button
-                      onClick={() => setChartData([])}
-                      className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
-                    >
-                      Delete All
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      ) : null}
+    
     </main>
   );
 }

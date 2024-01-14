@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import { useOnboardingContext } from "@/context/MyContext";
 
+
 export default function Footer() {
   const { session, status, setMenuOpen, menuOpen, hideAside, onTable } =
     useOnboardingContext();

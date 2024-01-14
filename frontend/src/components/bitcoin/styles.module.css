@@ -13,13 +13,29 @@
 .head1 {
   font-weight: 600;
   color: rgb(179, 179, 179);
-  padding: 8px 1rem;
-  background-color: #181a1b;
+ 
+  background-color: #212223;
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  text-align: center;
 }
+
+.head1 .prov{
+ width:50%;
+ padding: 8px;
+ gap: 2px ;
+}
+
+
+
+.head1 .prov:nth-child(2){
+  width:45%;
+ border-left: 1px solid rgb(200, 200, 200);
+  gap: 2px ;
+ }
+
 .zigZagText {
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
@@ -28,6 +44,10 @@
   padding: 0.5rem 0;
   width: 100%;
   background: linear-gradient(90deg, #2c5cda, #6b15e7, #2a5fda);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
 }
 .table input[type="checkbox"],
 .table input[type="radio"] {
