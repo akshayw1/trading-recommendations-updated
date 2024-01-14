@@ -722,7 +722,7 @@ export default function Ethereum() {
           />
         </div>
       </div>
-      <div className="flex-col flex bg-black p-4 pt-2 pl-4 w-full">
+      <div className="flex-col flex bg-black p-8 pt-2 pl-4 w-full">
         <p className="text-red-200 text-[1.15rem] mb-4">Signals</p>
         <div className="flex gap-2 flex-row">
           <div className={`${styles.blue} ${styles.wide}`}>

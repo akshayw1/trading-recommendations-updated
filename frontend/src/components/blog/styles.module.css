@@ -1,0 +1,88 @@
+.main h2 {
+  font-size: 3.75rem;
+  font-weight: 600;
+}
+.main {
+  width: 90%;
+  margin: auto;
+}
+.main p {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.entry {
+  margin-top: 2rem;
+  width: 100%;
+  background: white;
+  border-radius: 19px;
+  padding: 14px;
+}
+.entry p {
+  font-weight: 600;
+  padding: 0.75rem 0;
+  padding-bottom: 0.65rem;
+  color: black;
+  text-align: left;
+  font-size: 1.1rem;
+}
+.entryGrid {
+  column-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media only screen and (max-width: 1100px) {
+  .entryGrid {
+    column-gap: 1rem;
+  }
+  .entry {
+    margin-top: 1rem;
+  }
+  .entry p {
+    font-size: 0.85rem;
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  .entryGrid {
+    column-gap: 1rem;
+  }
+  .entry {
+    padding: 10px;
+    border-radius: 14px;
+    margin-top: 1rem;
+  }
+  .main p {
+    font-size: 1.5rem;
+  }
+  .entry p {
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .main h2 {
+    font-size: 2.75rem;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .main h2 {
+    font-size: 2.25rem;
+  }
+  .main p {
+    font-size: 1.1rem;
+  }
+  .entryGrid {
+    column-gap: 0.75rem;
+  }
+  .entry {
+    margin-top: 0.75rem;
+    padding: 6px;
+    border-radius: 10px;
+  }
+
+  .entry p {
+    font-size: 0.65rem;
+    padding: 0.25rem 0;
+  }
+}

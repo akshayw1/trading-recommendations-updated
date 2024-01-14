@@ -81,7 +81,7 @@ export default function UsersTable() {
   return (
     <>
       <main className={styles.main}>
-        <table>
+        <table className={`w-full ${styles.table}`}>
           <thead>
             <tr>
               <th>Email</th>
