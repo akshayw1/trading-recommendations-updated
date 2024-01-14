@@ -1,3 +1,5 @@
-export default function Home() {
-  return <main></main>;
+import Cosmos from "@/components/cosmos/cosmos";
+
+export default function Page() {
+  return <Cosmos />;
 }
