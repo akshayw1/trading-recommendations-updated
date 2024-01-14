@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import styles from "./styles.module.css";
-
+import Link from "next/link";
 import { useOnboardingContext } from "@/context/MyContext";
 
 export default function Footer() {
@@ -12,12 +12,26 @@ export default function Footer() {
     <footer className={`${hideAside ? styles.onTable : ""} ${styles.footer}`}>
       <Image alt="logo" width={198} height={122} src="/images/Logo.png"></Image>
       <ul>
-        <li>Disclaimer</li>
-        <li>Blog</li>
-        <li>Careers</li>
-        <li>Privacy Policy</li>
-        <li>Terms & Condition</li>
-        <li>Twitter</li>
+        <li>
+          <Link href="/disclaimer">Disclaimer</Link>
+        </li>
+        <li>
+          <Link href="/blog">Blog</Link>
+        </li>
+        <li>
+          <Link href="/careers">Careers</Link>
+        </li>
+        <li>
+          <Link href="/privacy">Privacy Policy</Link>
+        </li>
+        <li>
+          <Link href="/terms">Terms & Condition</Link>
+        </li>
+        <li>
+          <Link href="https://twitter.com/" target="_blank">
+            Twitter
+          </Link>
+        </li>
       </ul>
     </footer>
   );

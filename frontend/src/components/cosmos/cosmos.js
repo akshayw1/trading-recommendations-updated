@@ -24,7 +24,7 @@ ChartJS.register(
 import { useOnboardingContext } from "@/context/MyContext";
 import { Line } from "react-chartjs-2";
 import LoadingToast from "../usersTable/loading";
-export default function Ethereum() {
+export default function Cosmos() {
   const dataExample = {
     Time: "15:25-15:30",
     CallOI: 31.89,
@@ -68,11 +68,11 @@ export default function Ethereum() {
   const [freeTextTable, setFreeTextTable] = useState([]);
   const [chartData, setChartData] = useState([]);
 
-  const updateData = async (dataSelect = "Ethereum") => {
+  const updateData = async (dataSelect = "Cosmos") => {
     let newData;
-    if (dataSelect === "Ethereum") {
+    if (dataSelect === "Cosmos") {
       newData = [...data];
-    } else if (dataSelect === "chartDataEth") {
+    } else if (dataSelect === "chartDataCosmos") {
       newData = [...chartData];
     } else {
       newData = [...freeTextTable];
@@ -195,7 +195,7 @@ export default function Ethereum() {
       setFreeTextTable(newData);
     }
   };
-  const getData = async (dataSelect = "Ethereum") => {
+  const getData = async (dataSelect = "Cosmos") => {
     try {
       const queryParams = new URLSearchParams({ dataSelect });
 
@@ -245,8 +245,8 @@ export default function Ethereum() {
     const fetchData = async () => {
       try {
         const dataFetch = await getData();
-        const dataFetch2 = await getData("freeTextEth");
-        const dataFetch3 = await getData("chartDataEth");
+        const dataFetch2 = await getData("freeTextCosmos");
+        const dataFetch3 = await getData("chartDataCosmos");
 
         let beep = false;
         setData((prevState) => {
@@ -281,8 +281,8 @@ export default function Ethereum() {
     const fetchData = async () => {
       try {
         const dataFetch = await getData();
-        const dataFetch2 = await getData("freeTextEth");
-        const dataFetch3 = await getData("chartDataEth");
+        const dataFetch2 = await getData("freeTextCosmos");
+        const dataFetch3 = await getData("chartDataCosmos");
 
         setData(dataFetch);
         setFreeTextTable(dataFetch2);
@@ -845,7 +845,7 @@ export default function Ethereum() {
                         +
                       </button>
                       <button
-                        onClick={() => updateData("freeTextEth")}
+                        onClick={() => updateData("freeTextCosmos")}
                         className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                       >
                         Update
@@ -944,7 +944,7 @@ export default function Ethereum() {
                         +
                       </button>
                       <button
-                        onClick={() => updateData("chartDataEth")}
+                        onClick={() => updateData("chartDataCosmos")}
                         className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                       >
                         Update
