@@ -6,6 +6,7 @@ import Button1 from "../buttons/button1";
 import Button2 from "../buttons/button2";
 import { useState } from "react";
 import { useOnboardingContext } from "@/context/MyContext";
+import { signOut } from "next-auth/react";
 
 export default function Aside() {
   const { session, status, menuOpen, setMenuOpen, hideAside } =

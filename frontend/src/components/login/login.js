@@ -2,7 +2,7 @@
 import Button1 from "../buttons/button1";
 import styles from "./styles.module.css";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { signIn } from "next-auth/react";
@@ -49,14 +49,14 @@ export default function Login() {
     });
     if (res.ok) {
       toast.success("Logged");
-      router.push("/home");
+      router.replace("/home");
+      window.location.reload();
     } else {
       toast.warning(res.error);
     }
   };
   return (
     <>
-      <ToastContainer />
       <main className={styles.main}>
         <h2 className={styles.h2}>
           Sign in to <span className="blue">BTCUSDPERP</span>

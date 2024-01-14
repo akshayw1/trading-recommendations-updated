@@ -2,7 +2,7 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-
+import BitcoinTable from "@/components/bitcoin/bitcoinTable";
 export default function Home() {
   const wordlist = ["Open Interest", "Price", "Option Chain", "Futures"];
   const [selectWord, setSelectWord] = useState(0);
@@ -88,12 +88,9 @@ export default function Home() {
       </section>
       <section className={styles.zigZagBox}>
         <h1 className={styles.zigZagText}> Zig Zag Moves - STAY AWAY</h1>
-        <Image
-          src="/images/home/table.png"
-          alt="data table"
-          width={1416}
-          height={348}
-        />
+        <div>
+          <BitcoinTable />
+        </div>
         <Image
           className={styles.bubbles}
           src="/images/home/bubbles.png"

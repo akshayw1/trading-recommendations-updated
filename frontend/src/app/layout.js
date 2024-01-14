@@ -7,6 +7,7 @@ import Footer from "@/components/footer/footer";
 import { NextAuthProvider } from "../providers/Providers";
 import { OnboardingProvider } from "../context/MyContext";
 const font = Commissioner({ subsets: ["latin"] });
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Create Next App",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
       <body className={font.className}>
         <NextAuthProvider>
           <OnboardingProvider>
+            <ToastContainer />
             <Aside />
             <Nav />
             <MainContainerShadow>{children}</MainContainerShadow>

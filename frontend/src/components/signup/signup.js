@@ -2,7 +2,7 @@
 import Button2 from "../buttons/button2";
 import styles from "./../login/styles.module.css";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUp() {
@@ -61,8 +61,6 @@ export default function SignUp() {
   };
   return (
     <>
-      <ToastContainer />
-
       <main className={styles.main}>
         <h2 className={styles.h2}>Get Started</h2>
         <div className="input1">

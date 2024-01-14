@@ -86,7 +86,7 @@ export default function Nav() {
             ></Image>
           </Link>
         </li>
-        <li>
+        <li className="flex gap-4">
           <Image
             className={styles.mobile}
             alt="logo"
@@ -94,6 +94,7 @@ export default function Nav() {
             height={122}
             src="/images/nav/user-identity-svgrepo-com.png"
           ></Image>
+          {session && <Button1 onClick={signOut}>Log out</Button1>}
         </li>
       </ul>
     </nav>
