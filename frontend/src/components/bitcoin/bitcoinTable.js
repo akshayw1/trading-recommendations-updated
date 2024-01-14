@@ -205,11 +205,16 @@ export default function BitcoinTable() {
   return (
     <div className={styles.main}>
       <div className={styles.head1}>
-        <p>CALL</p>
-        <p>PUT</p>
+      <div className={styles.prov}>
+            <p >CALL</p>
+            </div>
+           <div className={styles.prov}>
+           <p>PUT</p>
+           </div>
+           
       </div>
       <div
-        className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[20rem] bg-[#181a1b] ${styles.table}`}
+        className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[25rem] bg-[#181a1b] ${styles.table}`}
       >
         <table>
           <thead>

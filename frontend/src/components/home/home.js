@@ -91,20 +91,8 @@ export default function Home() {
         <div>
           <BitcoinTable />
         </div>
-        <Image
-          className={styles.bubbles}
-          src="/images/home/bubbles.png"
-          alt="bubbles"
-          width={254}
-          height={279}
-        />
-        <Image
-          className={styles.bubbles}
-          src="/images/home/bubbles.png"
-          alt="bubbles"
-          width={254}
-          height={279}
-        />
+      
+        
       </section>
       <section className={styles.lastSection}>
         <div>
