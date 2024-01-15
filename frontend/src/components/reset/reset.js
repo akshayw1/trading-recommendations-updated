@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-export default function SignUp() {
+export default function ResetPass() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -67,20 +67,8 @@ export default function SignUp() {
   return (
     <>
       <main className={styles.main}>
-        <h2 className={styles.h2}>Get Started</h2>
-        <div className="input1">
-          <input
-            onBlur={() => setErrors([])}
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value.replace(" ", ""));
-              setErrors([]);
-            }}
-            type="text"
-            required
-          ></input>
-          <label>Name</label>
-        </div>
+        <h2 className={styles.h2}>Enter Your email to reset the password</h2>
+
         <div className="input1">
           <input
             onBlur={() => setErrors([])}
@@ -94,21 +82,8 @@ export default function SignUp() {
           ></input>
           <label>Email</label>
         </div>
-        <div className="input1">
-          <input
-            onBlur={() => setErrors([])}
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value.replace(" ", ""));
-              setErrors([]);
-            }}
-            type="password"
-            required
-          ></input>
-          <label style={{ "--color1": "rgb(30,49,93)" }}>Password</label>
-        </div>
+
         <Button2
-          onClick={register}
           style1={{ "--blue1": "rgb(27,42,80)" }}
           style2={{
             fontWeight: 600,
@@ -118,12 +93,17 @@ export default function SignUp() {
             paddingLeft: 48,
           }}
         >
-          Sign up
+          Reset Password
         </Button2>
         <div className={styles.authOptions}>
           <p>
             <Link href="/auth/login">
               Already have an account? <span className="blue">Sign in</span>
+            </Link>
+          </p>
+          <p>
+            <Link href="/auth/signup">
+              No Account? <span className="blue">Create One</span>
             </Link>
           </p>
         </div>
