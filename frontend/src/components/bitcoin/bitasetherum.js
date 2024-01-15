@@ -654,9 +654,7 @@ export default function BitasEth() {
                     </label>
                   </td>
                   <td>
-                    {session && !session.user.admin ? (
-                      item.Strike
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(e.target.value, "Strike", index)
@@ -665,6 +663,8 @@ export default function BitasEth() {
                         className={styles.inputTable}
                         type="text"
                       />
+                    ) : (
+                      item.Strike
                     )}
                   </td>
                 </tr>
