@@ -370,14 +370,25 @@ export default function Ethereum() {
   return (
     <main className={`${styles.main}`}>
       <h1 className={styles.zigZagText}>
+      <Image
+            width={90}
+            height={90}
+            alt="Live Feed"
+            src="/images/gipy.gif"
+          />
+           "Ethereum Option Chain: Open Interest Interpretation"
+          
+      </h1>
+
+        <EthTableasBits/>
+
+        <h1 className={styles.zigZagText}  >
         {freeTextTable.length === 0
           ? "Ethereum Option Chain: Open Interest Interpretation"
           : freeTextTable[0].FreeText}
       </h1>
-
-        <EthTableasBits/>
           
-      <div className="w-full flex lg:flex-row flex-col mt-6 justify-between overflow-hidden">
+      <div className="w-full flex lg:flex-row flex-col justify-between overflow-hidden">
       
         <div
           className={`scrollbar1 overflow-scroll lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}

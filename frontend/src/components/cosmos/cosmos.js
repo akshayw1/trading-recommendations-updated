@@ -374,7 +374,7 @@ export default function Cosmos() {
       </h1>
       <div className="w-full flex lg:flex-row flex-col justify-between overflow-hidden">
         <div
-          className={`scrollbar1 overflow-scroll lg:w-[full] w-full  h-[33.5rem] ${styles.table}`}
+          className={`scrollbar1 overflow-scroll lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}
         >
           <table>
             <thead>
