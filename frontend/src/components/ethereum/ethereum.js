@@ -376,7 +376,7 @@ export default function Ethereum() {
             alt="Live Feed"
             src="/images/gipy.gif"
           />
-           "Ethereum Option Chain: Open Interest Interpretation"
+           &quot; Ethereum Option Chain: Open Interest Interpretation&quot;
           
       </h1>
 
