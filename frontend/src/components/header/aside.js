@@ -208,7 +208,13 @@ export default function Aside() {
             </Link>
           </li>
           <li className={styles.white}>
+          <Link
+              onClick={() => setMenuOpen(false)}
+              className={styles.white}
+              href="/user/avalaunch"
+            >
             <div>
+           
               <svg
                 className={styles.fill2}
                 width="29"
@@ -237,8 +243,14 @@ export default function Aside() {
               </svg>
             </div>
             Avalaunch
+            </Link>
           </li>
           <li className={styles.white}>
+          <Link
+              onClick={() => setMenuOpen(false)}
+              className={styles.white}
+              href="/user/solona"
+            >
             <div>
               <svg
                 className={styles.fill}
@@ -267,8 +279,14 @@ export default function Aside() {
               </svg>
             </div>
             Solana
+            </Link>
           </li>
           <li className={styles.white}>
+          <Link
+              onClick={() => setMenuOpen(false)}
+              className={styles.white}
+              href="/user/injective"
+            >
             <div>
               <svg
                 className={styles.fill}
@@ -290,8 +308,14 @@ export default function Aside() {
               </svg>
             </div>
             Injective
+            </Link>
           </li>
           <li className={styles.white}>
+          <Link
+              onClick={() => setMenuOpen(false)}
+              className={styles.white}
+              href="/user/sui"
+            >
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -310,6 +334,7 @@ export default function Aside() {
               </svg>
             </div>
             Sui
+            </Link>
           </li>
           {session && session.user.admin ? (
             <li>

@@ -1,3 +1,5 @@
+import Injective from "../../../components/injective/injective";
+
 export default function Home() {
-  return <main></main>;
+  return <Injective/>;
 }

@@ -87,7 +87,7 @@ export default function Home() {
         </p>
       </section>
       <section className={styles.zigZagBox}>
-        <h1 className={styles.zigZagText}> Zig Zag Moves - STAY AWAY</h1>
+        <h1 className={styles.zigZagText}>  Bitcoin Option Chain: Open Interest Interpretation</h1>
         <div>
           <BitcoinTable />
         </div>
