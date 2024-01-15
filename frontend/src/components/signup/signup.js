@@ -4,8 +4,10 @@ import styles from "./../login/styles.module.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -51,9 +53,12 @@ export default function SignUp() {
       });
       if (res.ok) {
         const data = await res.json();
-        data.message !== "user created"
-          ? toast.warning(data.message)
-          : toast.success("Registered");
+        if (data.message !== "user created") {
+          toast.warning(data.message);
+        } else {
+          toast.success("Registered");
+          router.replace("/auth/login");
+        }
       }
     } catch (error) {
       console.log("error");
