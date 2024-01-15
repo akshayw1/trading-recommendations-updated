@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingToast from "../usersTable/loading";
 import isEqual from "lodash/isEqual";
 import livelogo from "../../../public/images/Logo.png"
+import BitasEth from "./bitasetherum"
 
 
 
@@ -363,7 +364,7 @@ Bitcoin Option Chain: Open Interest Interpretation</h1>
            
           </div>
           <div
-            className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[33.5rem] bg-[#181a1b] ${styles.table}`}
+            className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[39rem] bg-[#181a1b] ${styles.table}`}
           >
             <table>
               <thead>
@@ -1087,6 +1088,9 @@ Bitcoin Option Chain: Open Interest Interpretation</h1>
         </div>
       
       </div>
+      
+        <BitasEth/>
+    
     
     </main>
   );

@@ -24,7 +24,7 @@ ChartJS.register(
 import { useOnboardingContext } from "@/context/MyContext";
 import { Line } from "react-chartjs-2";
 import LoadingToast from "../usersTable/loading";
-export default function Cosmos() {
+export default function BitasEth() {
   const dataExample = {
     Time: "15:25-15:30",
     CallOI: 31.89,
@@ -68,11 +68,11 @@ export default function Cosmos() {
   const [freeTextTable, setFreeTextTable] = useState([]);
   const [chartData, setChartData] = useState([]);
 
-  const updateData = async (dataSelect = "Cosmos") => {
+  const updateData = async (dataSelect = "BitasEth") => {
     let newData;
-    if (dataSelect === "Cosmos") {
+    if (dataSelect === "BitasEth") {
       newData = [...data];
-    } else if (dataSelect === "chartDataCosmos") {
+    } else if (dataSelect === "chartDataBitasEth") {
       newData = [...chartData];
     } else {
       newData = [...freeTextTable];
@@ -195,7 +195,7 @@ export default function Cosmos() {
       setFreeTextTable(newData);
     }
   };
-  const getData = async (dataSelect = "Cosmos") => {
+  const getData = async (dataSelect = "BitasEth") => {
     try {
       const queryParams = new URLSearchParams({ dataSelect });
 
@@ -245,8 +245,8 @@ export default function Cosmos() {
     const fetchData = async () => {
       try {
         const dataFetch = await getData();
-        const dataFetch2 = await getData("freeTextCosmos");
-        const dataFetch3 = await getData("chartDataCosmos");
+        const dataFetch2 = await getData("freeTextBitasEth");
+        const dataFetch3 = await getData("chartDataBitasEth");
 
         let beep = false;
         setData((prevState) => {
@@ -281,8 +281,8 @@ export default function Cosmos() {
     const fetchData = async () => {
       try {
         const dataFetch = await getData();
-        const dataFetch2 = await getData("freeTextCosmos");
-        const dataFetch3 = await getData("chartDataCosmos");
+        const dataFetch2 = await getData("freeTextBitasEth");
+        const dataFetch3 = await getData("chartDataBitasEth");
 
         setData(dataFetch);
         setFreeTextTable(dataFetch2);
@@ -366,7 +366,7 @@ export default function Cosmos() {
     },
   };
   return (
-    <main className={`${styles.main}`}>
+    <main className={`${styles.main} mt-6`}>
       <h1 className={styles.zigZagText}>
         {freeTextTable.length === 0
           ? "Zig Zag Moves - STAY AWAY"
@@ -374,7 +374,7 @@ export default function Cosmos() {
       </h1>
       <div className="w-full flex lg:flex-row flex-col justify-between overflow-hidden">
         <div
-          className={`scrollbar1 overflow-scroll lg:w-[full] w-full  h-[33.5rem] ${styles.table}`}
+          className={`scrollbar1 overflow-scroll  lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}
         >
           <table>
             <thead>
@@ -705,7 +705,7 @@ export default function Cosmos() {
           </table>
         </div>
         <div
-          className="select-none lg:w-[60vw] w-full  flex flex-col  order-first lg:order-none 
+          className="select-none lg:w-[60vw] w-full flex flex-col  order-first lg:order-none 
         h-[33.5rem] bg-[#000000]"
         >
           <div className="flex flex-row w-full justify-center items-center m-2">
@@ -722,8 +722,8 @@ export default function Cosmos() {
           />
         </div>
       </div>
-     
-      <div className="flex flex-row mt-6 w-full">
+   
+      <div className="flex flex-row w-full mt-6">
         <div
           className={`scrollbar1 overflow-x-scroll w-full h-[20rem] bg-[#181a1b] ${styles.table}`}
         >
@@ -795,7 +795,7 @@ export default function Cosmos() {
                         +
                       </button>
                       <button
-                        onClick={() => updateData("freeTextCosmos")}
+                        onClick={() => updateData("freeTextBitasEth")}
                         className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                       >
                         Update
@@ -818,7 +818,7 @@ export default function Cosmos() {
             className={`bg-[#181a1b] scrollbar1 overflow-x-scroll w-full h-[20rem] ${styles.table}`}
           >
             <table>
-              <thead>
+            <thead>
                 <tr>
                   <th className="w-[25px]">N</th>
                   <th>Time</th>
@@ -894,7 +894,7 @@ export default function Cosmos() {
                         +
                       </button>
                       <button
-                        onClick={() => updateData("chartDataCosmos")}
+                        onClick={() => updateData("chartDataBitasEth")}
                         className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                       >
                         Update

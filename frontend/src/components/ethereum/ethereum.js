@@ -5,6 +5,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
+import EthTableasBits from "./ethTableasBit"
 
 import {
   Chart as ChartJS,
@@ -24,6 +25,7 @@ ChartJS.register(
 import { useOnboardingContext } from "@/context/MyContext";
 import { Line } from "react-chartjs-2";
 import LoadingToast from "../usersTable/loading";
+import BitcoinTable from "../bitcoin/bitcoinTable";
 export default function Ethereum() {
   const dataExample = {
     Time: "15:25-15:30",
@@ -372,7 +374,11 @@ export default function Ethereum() {
           ? "Ethereum Option Chain: Open Interest Interpretation"
           : freeTextTable[0].FreeText}
       </h1>
-      <div className="w-full flex lg:flex-row flex-col justify-between overflow-hidden">
+
+        <EthTableasBits/>
+          
+      <div className="w-full flex lg:flex-row flex-col mt-6 justify-between overflow-hidden">
+      
         <div
           className={`scrollbar1 overflow-scroll lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}
         >
@@ -775,8 +781,10 @@ export default function Ethereum() {
         </div>
       </div> */}
       <div className="flex flex-row mt-6 w-full">
+
+
         <div
-          className={`scrollbar1 overflow-x-scroll w-full h-[35rem] bg-[#181a1b] ${styles.table}`}
+          className={`scrollbar1 overflow-x-scroll w-full h-[20rem] bg-[#181a1b] ${styles.table}`}
         >
           <table>
             <thead>
@@ -866,7 +874,7 @@ export default function Ethereum() {
         </div>
         {session && session.user.admin ? (
           <div
-            className={`bg-[#181a1b] scrollbar1 overflow-x-scroll w-full h-[35rem] ${styles.table}`}
+            className={`bg-[#181a1b] scrollbar1 overflow-x-scroll w-full h-[20rem] ${styles.table}`}
           >
             <table>
               <thead>
