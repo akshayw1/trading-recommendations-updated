@@ -47,8 +47,8 @@ export default function Cosmos() {
   };
   const chartDataExample = {
     Time: "15:25-15:30",
-    Value1: 13333,
-    Value2: 30000,
+    Value1: 50000,
+    Value2: 50000,
   };
   const { session, status } = useOnboardingContext();
 
