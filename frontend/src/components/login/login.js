@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -101,9 +101,13 @@ export default function Login() {
           Log in
         </Button1>
         <div className={styles.authOptions}>
-          <p className="blue">Reset Password</p>
+          <p className="blue">
+            <Link href="/auth/resetpass">Reset Password</Link>
+          </p>
           <p>
-            No Account? <span className="blue">Create One</span>
+            <Link href="/auth/signup">
+              No Account? <span className="blue">Create One</span>
+            </Link>
           </p>
         </div>
       </main>
