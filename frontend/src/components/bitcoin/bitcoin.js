@@ -7,10 +7,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingToast from "../usersTable/loading";
 import isEqual from "lodash/isEqual";
-import livelogo from "../../../public/images/Logo.png"
-import BitasEth from "./bitasetherum"
-
-
+import livelogo from "../../../public/images/Logo.png";
+import BitasEth from "./bitasetherum";
 
 import {
   Chart as ChartJS,
@@ -301,11 +299,6 @@ export default function Bitcoin() {
   const options = {
     type: "line",
     maintainAspectRatio: false,
-    scales: {
-      y: {
-        max: 10000000,
-      },
-    },
   };
   useEffect(() => {
     const reversedData = [...chartData].reverse();
@@ -334,7 +327,8 @@ export default function Bitcoin() {
       scales: {
         y: {
           ticks: {
-            min: 10000000, // Valor mínimo en el eje y
+            min: 0,
+            max: 10000000,
           },
         },
       },
@@ -343,25 +337,19 @@ export default function Bitcoin() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.zigZagText}>            
-     
-      <Image
-            width={90}
-            height={90}
-            alt="Live Feed"
-            src="/images/gipy.gif"
-          />
-Bitcoin Option Chain: Open Interest Interpretation</h1>
+      <h1 className={styles.zigZagText}>
+        <Image width={90} height={90} alt="Live Feed" src="/images/gipy.gif" />
+        Bitcoin Option Chain: Open Interest Interpretation
+      </h1>
       <div className="flex flex-col w-full lg:flex-row justify-between overflow-hidden">
         <div className="w-full">
           <div className={styles.head1}>
             <div className={styles.prov}>
-            <p >CALL</p>
+              <p>CALL</p>
             </div>
-           <div className={styles.prov}>
-           <p>PUT</p>
-           </div>
-           
+            <div className={styles.prov}>
+              <p>PUT</p>
+            </div>
           </div>
           <div
             className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[39rem] bg-[#181a1b] ${styles.table}`}
@@ -1086,12 +1074,9 @@ Bitcoin Option Chain: Open Interest Interpretation</h1>
             </table>
           </div>
         </div>
-      
       </div>
-      
-        <BitasEth/>
-    
-    
+
+      <BitasEth />
     </main>
   );
 }

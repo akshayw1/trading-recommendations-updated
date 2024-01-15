@@ -336,13 +336,6 @@ export default function BitasEth() {
           pointRadius: 6,
         },
       ],
-      scales: {
-        y: {
-          ticks: {
-            min: 10000000, // Valor mínimo en el eje y
-          },
-        },
-      },
     });
   }, [chartData]);
 
@@ -362,6 +355,7 @@ export default function BitasEth() {
     scales: {
       y: {
         max: 10000000,
+        min: 0,
       },
     },
   };
@@ -722,7 +716,7 @@ export default function BitasEth() {
           />
         </div>
       </div>
-   
+
       <div className="flex flex-row w-full mt-6">
         <div
           className={`scrollbar1 overflow-x-scroll w-full h-[20rem] bg-[#181a1b] ${styles.table}`}
@@ -818,7 +812,7 @@ export default function BitasEth() {
             className={`bg-[#181a1b] scrollbar1 overflow-x-scroll w-full h-[20rem] ${styles.table}`}
           >
             <table>
-            <thead>
+              <thead>
                 <tr>
                   <th className="w-[25px]">N</th>
                   <th>Time</th>

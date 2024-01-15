@@ -336,13 +336,6 @@ export default function Cosmos() {
           pointRadius: 6,
         },
       ],
-      scales: {
-        y: {
-          ticks: {
-            min: 10000000, // Valor mínimo en el eje y
-          },
-        },
-      },
     });
   }, [chartData]);
 
@@ -362,6 +355,7 @@ export default function Cosmos() {
     scales: {
       y: {
         max: 10000000,
+        min: 0,
       },
     },
   };
@@ -722,7 +716,7 @@ export default function Cosmos() {
           />
         </div>
       </div>
-     
+
       <div className="flex flex-row mt-6 w-full">
         <div
           className={`scrollbar1 overflow-x-scroll w-full h-[20rem] bg-[#181a1b] ${styles.table}`}

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
-import EthTableasBits from "./ethTableasBit"
+import EthTableasBits from "./ethTableasBit";
 
 import {
   Chart as ChartJS,
@@ -338,13 +338,6 @@ export default function Ethereum() {
           pointRadius: 6,
         },
       ],
-      scales: {
-        y: {
-          ticks: {
-            min: 10000000, // Valor mínimo en el eje y
-          },
-        },
-      },
     });
   }, [chartData]);
 
@@ -364,32 +357,26 @@ export default function Ethereum() {
     scales: {
       y: {
         max: 10000000,
+        min: 0,
       },
     },
   };
   return (
     <main className={`${styles.main}`}>
       <h1 className={styles.zigZagText}>
-      <Image
-            width={90}
-            height={90}
-            alt="Live Feed"
-            src="/images/gipy.gif"
-          />
-           &quot; Ethereum Option Chain: Open Interest Interpretation&quot;
-          
+        <Image width={90} height={90} alt="Live Feed" src="/images/gipy.gif" />
+        &quot; Ethereum Option Chain: Open Interest Interpretation&quot;
       </h1>
 
-        <EthTableasBits/>
+      <EthTableasBits />
 
-        <h1 className={styles.zigZagText}  >
+      <h1 className={styles.zigZagText}>
         {freeTextTable.length === 0
           ? "Ethereum Option Chain: Open Interest Interpretation"
           : freeTextTable[0].FreeText}
       </h1>
-          
+
       <div className="w-full flex lg:flex-row flex-col justify-between overflow-hidden">
-      
         <div
           className={`scrollbar1 overflow-scroll lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}
         >
@@ -400,7 +387,6 @@ export default function Ethereum() {
                 <th>Time</th>
                 <th>OI Interpretation</th>
                 <th>Trend</th>
-               
 
                 <th>Entry Idea</th>
               </tr>
@@ -792,8 +778,6 @@ export default function Ethereum() {
         </div>
       </div> */}
       <div className="flex flex-row mt-6 w-full">
-
-
         <div
           className={`scrollbar1 overflow-x-scroll w-full h-[20rem] bg-[#181a1b] ${styles.table}`}
         >
