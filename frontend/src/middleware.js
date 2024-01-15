@@ -1,7 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 const blockedRoutesWithoutLogin = [
-  "/user/bitcoin",
   "/admin/allusers",
   "/user/ethereum",
   "/user/cosmos",

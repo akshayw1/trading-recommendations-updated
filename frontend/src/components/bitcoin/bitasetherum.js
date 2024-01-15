@@ -396,9 +396,7 @@ export default function BitasEth() {
                     {index + 1}
                   </td>
                   <td>
-                    {session && !session.user.admin ? (
-                      item.Time
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(e.target.value, "Time", index)
@@ -407,6 +405,8 @@ export default function BitasEth() {
                         className={styles.inputTable}
                         type="text"
                       />
+                    ) : (
+                      item.Time
                     )}
                   </td>
                   <td className={styles.dropdown}>
@@ -744,9 +744,7 @@ export default function BitasEth() {
                     {index + 1}
                   </td>
                   <td>
-                    {session && !session.user.admin ? (
-                      item.Time
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(e.target.value, "Time", index, "freeTextEth")
@@ -755,12 +753,12 @@ export default function BitasEth() {
                         className={styles.inputTable}
                         type="text"
                       />
+                    ) : (
+                      item.Time
                     )}
                   </td>
                   <td className="flex items-center justify-center">
-                    {session && !session.user.admin ? (
-                      item.FreeText
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(
@@ -774,6 +772,8 @@ export default function BitasEth() {
                         className={`${styles.inputTable} grow`}
                         type="text"
                       />
+                    ) : (
+                      item.FreeText
                     )}
                   </td>
                 </tr>
