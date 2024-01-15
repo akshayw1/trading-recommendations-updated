@@ -108,8 +108,8 @@ export default function Bitcoin() {
 
   const chartDataExample = {
     Time: "15:25-15:30",
-    Value1: 50000,
-    Value2: 50000,
+    Value1: 5000000,
+    Value2: 5000000,
   };
   const addItem = (dataSelect = "data") => {
     closeAllDropdown();

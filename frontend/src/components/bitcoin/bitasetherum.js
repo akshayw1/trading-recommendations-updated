@@ -47,8 +47,8 @@ export default function BitasEth() {
   };
   const chartDataExample = {
     Time: "15:25-15:30",
-    Value1: 50000,
-    Value2: 50000,
+    Value1: 5000000,
+    Value2: 5000000,
   };
   const { session, status } = useOnboardingContext();
 
@@ -378,7 +378,7 @@ export default function BitasEth() {
                 <th>Trend</th>
                 <th>OI Interpretation</th>
 
-                <th>Some text</th>
+                <th>Entry Idea</th>
               </tr>
             </thead>
             <tbody>
@@ -726,7 +726,7 @@ export default function BitasEth() {
               <tr>
                 <th className="w-[25px]">N</th>
                 <th className="w-[25px]">Time</th>
-                <th>Free text</th>
+                <th>Live commentary</th>
               </tr>
             </thead>
             <tbody>
