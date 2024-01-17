@@ -348,6 +348,15 @@ export default function BitasEth() {
         }
       }
     }
+    console.log(id);
+    for (let i = 1; i <= 6 * data.length; i++) {
+      if (id !== `checkd${i}`) {
+        const checkbox = document.getElementById(`checkd${i}`);
+        if (checkbox) {
+          checkbox.checked = false;
+        }
+      }
+    }
   };
   const options = {
     type: "line",
@@ -410,13 +419,14 @@ export default function BitasEth() {
                     )}
                   </td>
                   <td className={styles.dropdown}>
-                    <label htmlFor={`check${400 + 6 * index}`}>
+                    <label htmlFor={`checkd${1 + 6 * index}`}>
                       <input
+                        disabled={session && !session.user.admin ? true : false}
                         className={styles.input1}
                         type="checkbox"
-                        id={`check${400 + 6 * index}`}
+                        id={`checkd${1 + 6 * index}`}
                         onChange={() =>
-                          closeAllDropdown(`check${400 + 6 * index}`)
+                          closeAllDropdown(`checkd${1 + 6 * index}`)
                         }
                       />
                       <label className={styles.label1}>
@@ -520,14 +530,14 @@ export default function BitasEth() {
                     </label>
                   </td>
                   <td className={styles.dropdown}>
-                    <label htmlFor={`check${300 + 6 * index}`}>
+                    <label htmlFor={`checkd${2 + 6 * index}`}>
                       <input
                         disabled={session && !session.user.admin ? true : false}
                         className={styles.input1}
                         type="checkbox"
-                        id={`check${300 + 6 * index}`}
+                        id={`checkd${2 + 6 * index}`}
                         onChange={() =>
-                          closeAllDropdown(`check${300 + 6 * index}`)
+                          closeAllDropdown(`checkd${2 + 6 * index}`)
                         }
                       />
                       <label className={styles.label1}>
