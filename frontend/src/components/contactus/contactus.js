@@ -8,7 +8,7 @@ export default function ContactUs() {
 
   return (
     <main className={styles.main}>
-      <h2 className="blue">E-mail us:- support@btcusdperp.com</h2>
+      <h2 className="blue">Email us at  :    support@btcusdperp.com</h2>
       <div>
         <div className="input1">
           <input type="text" required></input>
