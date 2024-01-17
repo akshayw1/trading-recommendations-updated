@@ -302,7 +302,7 @@ export default function BitasEth() {
       }
     };
     const intervalId = setInterval(async () => {
-      if (session && session.user && !session.user.admin) {
+      if (!session || (session && session.user && !session.user.admin)) {
         const beep = await fetchData();
         if (beep) playSound();
         console.log("check", beep);

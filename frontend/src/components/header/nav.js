@@ -77,7 +77,7 @@ export default function Nav() {
       <ul className={styles.mobile}>
         <li></li>
         <li>
-          <Link href="/home">
+          <Link href="/">
             <Image
               alt="logo"
               width={198}

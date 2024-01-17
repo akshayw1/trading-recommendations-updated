@@ -49,7 +49,7 @@ export default function Login() {
     });
     if (res.ok) {
       toast.success("Logged");
-      router.replace("/home");
+      router.replace("/");
       window.location.reload();
     } else {
       toast.warning(res.error);
