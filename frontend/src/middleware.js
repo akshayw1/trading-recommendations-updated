@@ -36,7 +36,6 @@ export default async function middleware(req) {
     if (req.nextUrl.pathname === "/admin/allusers" && session && !session.admin)
       return NextResponse.redirect(home);
 
-    if (!session) console.log("session status", session);
     if (!session) return NextResponse.redirect(auth);
     // If user is unauthenticated, continue.
   }
@@ -56,6 +55,7 @@ export default async function middleware(req) {
 }
 export const config = {
   matcher: [
+    ...blockedRoutesWithoutLogin,
     "/admin/allusers",
     "/user/ethereum",
     "/user/cosmos",
