@@ -34,7 +34,7 @@ export default function Footer() {
             <Link href="/terms">Terms & Condition</Link>
           </li>
           <li>
-            <Link href="https://twitter.com/" target="_blank">
+            <Link href="https://twitter.com/BTCUSDPERP_" target="_blank">
               Twitter
             </Link>
           </li>

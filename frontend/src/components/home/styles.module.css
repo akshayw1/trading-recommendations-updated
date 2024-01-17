@@ -148,6 +148,7 @@
   display: flex;
   white-space: nowrap;
   margin-top: 6rem;
+  gap: 10rem;
   overflow: hidden;
   background: linear-gradient(#2c5cda, #6b15e7, rgba(42, 95, 218, 0));
   padding: 1rem 1rem;

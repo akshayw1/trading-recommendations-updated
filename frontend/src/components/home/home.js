@@ -122,7 +122,7 @@ export default function Home() {
           <p>• 90% traders lose money in Options trading. </p>
           <p>
             • We don&apos;t provide signals, buy or sell recommendation. You
-            trade on your own risk. This is for Educational purpose Only
+            trade on your own risk. This is for educational purpose only
           </p>
         </div>
         <div>
@@ -143,10 +143,11 @@ export default function Home() {
       </section>
       <section className={styles.infiniteScroll}>
         <p>
-        Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We&apos;re Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision
+        &quot;Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We&apos;re Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision.&quot;
         </p>
+
         <p>
-        Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We&apos;re Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision
+        &quot;Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We&apos;re Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision.&quot;
         </p>
       </section>
     </main>
