@@ -421,7 +421,11 @@ export default function BitasEth() {
                   <td className={styles.dropdown}>
                     <label htmlFor={`checkd${1 + 6 * index}`}>
                       <input
-                        disabled={session && !session.user.admin ? true : false}
+                        disabled={
+                          !session || (session && !session.user.admin)
+                            ? true
+                            : false
+                        }
                         className={styles.input1}
                         type="checkbox"
                         id={`checkd${1 + 6 * index}`}
@@ -532,7 +536,11 @@ export default function BitasEth() {
                   <td className={styles.dropdown}>
                     <label htmlFor={`checkd${2 + 6 * index}`}>
                       <input
-                        disabled={session && !session.user.admin ? true : false}
+                        disabled={
+                          !session || (session && !session.user.admin)
+                            ? true
+                            : false
+                        }
                         className={styles.input1}
                         type="checkbox"
                         id={`checkd${2 + 6 * index}`}
