@@ -122,7 +122,7 @@ export default function Home() {
           <p>• 90% traders lose money in Options trading. </p>
           <p>
             • We don&apos;t provide signals, buy or sell recommendation. You
-            trade on your own risk.
+            trade on your own risk. This is for Educational purpose Only
           </p>
         </div>
         <div>
