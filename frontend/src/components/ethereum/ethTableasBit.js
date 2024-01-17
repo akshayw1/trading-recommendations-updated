@@ -157,8 +157,7 @@ export default function EthTableasBits() {
         if (beep) playSound();
         console.log("check", beep);
       }
-    }, 5000);
-
+    }, 2000);
     return () => clearInterval(intervalId);
   }, [session, data]);
 
@@ -192,6 +191,7 @@ export default function EthTableasBits() {
     newData[index][property] = value;
     setData(newData);
   };
+
   const closeAllDropdown = (id = "") => {
     for (let i = 1; i <= 6 * data.length; i++) {
       if (id !== `check${i}`) {
@@ -201,17 +201,25 @@ export default function EthTableasBits() {
         }
       }
     }
+    console.log(id);
+    for (let i = 1; i <= 6 * data.length; i++) {
+      if (id !== `checkd${i}`) {
+        const checkbox = document.getElementById(`checkd${i}`);
+        if (checkbox) {
+          checkbox.checked = false;
+        }
+      }
+    }
   };
   return (
     <div className={styles.main}>
       <div className={styles.head1}>
-      <div className={styles.prov}>
-            <p >CALL</p>
-            </div>
-           <div className={styles.prov}>
-           <p>PUT</p>
-           </div>
-           
+        <div className={styles.prov}>
+          <p>CALL</p>
+        </div>
+        <div className={styles.prov}>
+          <p>PUT</p>
+        </div>
       </div>
       <div
         className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[39rem] bg-[#181a1b] ${styles.table}`}

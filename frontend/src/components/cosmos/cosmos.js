@@ -307,8 +307,7 @@ export default function Cosmos() {
         if (beep) playSound();
         console.log("check", beep);
       }
-    }, 5000);
-
+    }, 2000);
     return () => clearInterval(intervalId);
   }, [session, data, freeTextTable, chartData]);
 
