@@ -410,14 +410,13 @@ export default function BitasEth() {
                     )}
                   </td>
                   <td className={styles.dropdown}>
-                    <label htmlFor={`check${4 + 6 * index}`}>
+                    <label htmlFor={`check${400 + 6 * index}`}>
                       <input
-                        disabled={session && !session.user.admin ? true : false}
                         className={styles.input1}
                         type="checkbox"
-                        id={`check${4 + 6 * index}`}
+                        id={`check${400 + 6 * index}`}
                         onChange={() =>
-                          closeAllDropdown(`check${4 + 6 * index}`)
+                          closeAllDropdown(`check${400 + 6 * index}`)
                         }
                       />
                       <label className={styles.label1}>
@@ -521,14 +520,14 @@ export default function BitasEth() {
                     </label>
                   </td>
                   <td className={styles.dropdown}>
-                    <label htmlFor={`check${3 + 6 * index}`}>
+                    <label htmlFor={`check${300 + 6 * index}`}>
                       <input
                         disabled={session && !session.user.admin ? true : false}
                         className={styles.input1}
                         type="checkbox"
-                        id={`check${3 + 6 * index}`}
+                        id={`check${300 + 6 * index}`}
                         onChange={() =>
-                          closeAllDropdown(`check${3 + 6 * index}`)
+                          closeAllDropdown(`check${300 + 6 * index}`)
                         }
                       />
                       <label className={styles.label1}>
@@ -656,14 +655,13 @@ export default function BitasEth() {
                   <td>
                     {session && session.user.admin ? (
                       <input
-                      onChange={(e) =>
-                        onChange(e.target.value, "Strike", index)
-                      }
-                      defaultValue={item.Strike}
-                      className={styles.inputTable}
-                      type="text"
-                    />
-                      
+                        onChange={(e) =>
+                          onChange(e.target.value, "Strike", index)
+                        }
+                        defaultValue={item.Strike}
+                        className={styles.inputTable}
+                        type="text"
+                      />
                     ) : (
                       item.Strike
                     )}
