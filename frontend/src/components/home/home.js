@@ -143,12 +143,10 @@ export default function Home() {
       </section>
       <section className={styles.infiniteScroll}>
         <p>
-          Sit Quiet * No Random Trades * Control your Mind & Avoid Making
-          Mistake * Wait for one high Probability Trade Setup *
+        Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We're Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision
         </p>
         <p>
-          Sit Quiet * No Random Trades * Control your Mind & Avoid Making
-          Mistake * Wait for one high Probability Trade Setup *
+        Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We're Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision
         </p>
       </section>
     </main>
