@@ -4,9 +4,10 @@ const blockedRoutesWithoutLogin = [
   "/admin/allusers",
   "/user/ethereum",
   "/user/cosmos",
+  "/user/avalaunch",
   "/user/solona",
   "/user/injective",
-  "/user/quant",
+  "/user/sui",
   "/admin",
 ];
 export default async function middleware(req) {

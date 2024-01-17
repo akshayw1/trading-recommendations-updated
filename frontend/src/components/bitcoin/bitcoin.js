@@ -269,8 +269,7 @@ export default function Bitcoin() {
       if (session && session.user && !session.user.admin) {
         const beep = await fetchData();
       }
-    }, 5000);
-
+    }, 2000);
     return () => clearInterval(intervalId);
   }, [session, data]);
 
