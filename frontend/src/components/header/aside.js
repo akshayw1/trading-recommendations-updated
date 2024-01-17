@@ -35,7 +35,7 @@ export default function Aside() {
           hideAside ? styles.onTable : ""
         } ${styles.aside} `}
       >
-        <Link className={styles.desktop} href="/home">
+        <Link className={styles.desktop} href="/">
           <Image
             alt="logo"
             width={198}
@@ -85,7 +85,7 @@ export default function Aside() {
           }`}
         >
           <li>
-            <Link onClick={() => setMenuOpen(false)} href="/home">
+            <Link onClick={() => setMenuOpen(false)} href="/">
               Home
             </Link>
           </li>
