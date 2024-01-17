@@ -13,7 +13,7 @@ export default function Donate() {
     <main className={styles.main}>
       <section>
         <h2 className="blue">
-        Inaugural offer for first one thousand customers:  3 year's subscription for just 29 USDT. <br></br>Send on BNB(BEP20) Chain
+        Inaugural offer for first one thousand customers:  3 year&apos;s subscription for just 29 USDT. <br></br>Send on BNB(BEP20) Chain
         </h2>
         <p>&quot;Only send USDT to this address&quot;</p>
         <p>Deposit USDT</p>
@@ -54,7 +54,7 @@ export default function Donate() {
             </span>
           </p>
         </div>
-        <p>Send screenshot of payment to "support@btcusdperp.com".<br/> We will give access within 6 Hours from your email.</p>
+        <p>Send screenshot of payment to &apos;support@btcusdperp.com&apos;.<br/> We will give access within 6 Hours from your email.</p>
       </section>
     </main>
   );

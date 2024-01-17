@@ -143,10 +143,10 @@ export default function Home() {
       </section>
       <section className={styles.infiniteScroll}>
         <p>
-        Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We're Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision
+        Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We&apos;re Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision
         </p>
         <p>
-        Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We're Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision
+        Revolutionizing Crypto Analysis: Pioneering Open Interest Interpretation, We&apos;re Setting the Standard in Market Insight and Deciphering Complex Data for Clarity and Precision
         </p>
       </section>
     </main>
