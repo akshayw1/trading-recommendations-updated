@@ -404,7 +404,7 @@ export default function BitasEth() {
                     ) : null}
                     {index + 1}
                   </td>
-                  <td>
+                  {/* <td>
                     {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
@@ -417,7 +417,7 @@ export default function BitasEth() {
                     ) : (
                       item.Time
                     )}
-                  </td>
+                  </td> */}
                   <td className={styles.dropdown}>
                     <label htmlFor={`checkd${1 + 6 * index}`}>
                       <input
@@ -720,11 +720,16 @@ export default function BitasEth() {
         h-[33.5rem] bg-[#000000]"
         >
           <div className="flex flex-row w-full justify-center items-center m-2">
+            <div></div>
             <div className="h-[70%] w-12 bg-[#a33131] mr-2"></div>
             <span className="mr-8">Selling Pressure</span>
-            <div className="h-[70%] w-12 bg-green-700 mr-2"></div>Buying
+            <div className="h-[70%] w-12 bg-green-700 mr-2">
+              </div>Buying
             Pressure
           </div>
+          <div className="text-[10px] flex justify-center m-0 p-0">Time UTC+5:30 (IST)</div>
+          
+         
           <Line
             className="mb-12 lg:pl-4"
             options={options}
