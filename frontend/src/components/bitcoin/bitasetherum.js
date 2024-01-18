@@ -382,18 +382,17 @@ export default function BitasEth() {
           <table>
             <thead>
               <tr>
-                <th>N</th>
-                <th>Time</th>
                 <th>Trend</th>
                 <th>OI Interpretation</th>
-
                 <th>Entry Idea</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item, index) => (
                 <tr key={item.Time}>
-                  <td className="flex flex-row gap-2 justify-center">
+                  <td
+                    className={`${styles.dropdown} flex flex-row items-center`}
+                  >
                     {session && session.user.admin ? (
                       <div
                         onClick={() => deleteItem(index)}
@@ -402,23 +401,6 @@ export default function BitasEth() {
                         X
                       </div>
                     ) : null}
-                    {index + 1}
-                  </td>
-                  {/* <td>
-                    {session && session.user.admin ? (
-                      <input
-                        onChange={(e) =>
-                          onChange(e.target.value, "Time", index)
-                        }
-                        defaultValue={item.Time}
-                        className={styles.inputTable}
-                        type="text"
-                      />
-                    ) : (
-                      item.Time
-                    )}
-                  </td> */}
-                  <td className={styles.dropdown}>
                     <label htmlFor={`checkd${1 + 6 * index}`}>
                       <input
                         disabled={
@@ -723,13 +705,13 @@ export default function BitasEth() {
             <div></div>
             <div className="h-[70%] w-12 bg-[#a33131] mr-2"></div>
             <span className="mr-8">Selling Pressure</span>
-            <div className="h-[70%] w-12 bg-green-700 mr-2">
-              </div>Buying
+            <div className="h-[70%] w-12 bg-green-700 mr-2"></div>Buying
             Pressure
           </div>
-          <div className="text-[10px] flex justify-center m-0 p-0">Time UTC+5:30 (IST)</div>
-          
-         
+          <div className="text-[10px] flex justify-center m-0 p-0">
+            Time UTC+5:30 (IST)
+          </div>
+
           <Line
             className="mb-12 lg:pl-4"
             options={options}
