@@ -150,7 +150,7 @@ export default function Aside() {
               href="/user/avalaunch"
             >
              
-              Xei
+              Xai
             </Link>
           </li>
           <li className={styles.white}>
