@@ -157,8 +157,7 @@ export default function BitcoinTable() {
         if (beep) playSound();
         console.log("check", beep);
       }
-    }, 5000);
-
+    }, 2000);
     return () => clearInterval(intervalId);
   }, [session, data]);
 
@@ -205,13 +204,12 @@ export default function BitcoinTable() {
   return (
     <div className={styles.main}>
       <div className={styles.head1}>
-      <div className={styles.prov}>
-            <p >CALL</p>
-            </div>
-           <div className={styles.prov}>
-           <p>PUT</p>
-           </div>
-           
+        <div className={styles.prov}>
+          <p>CALL</p>
+        </div>
+        <div className={styles.prov}>
+          <p>PUT</p>
+        </div>
       </div>
       <div
         className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[25rem] bg-[#181a1b] ${styles.table}`}

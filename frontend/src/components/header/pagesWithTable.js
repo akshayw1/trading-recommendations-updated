@@ -4,9 +4,8 @@ const pagesWithTable = [
   "/user/ethereum",
   "/user/cosmos",
   "/user/avalaunch",
-  "/user/sui",
   "/user/solona",
+  "/user/sui",
   "/user/injective",
-
 ];
 export default pagesWithTable;

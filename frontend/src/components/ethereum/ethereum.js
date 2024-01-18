@@ -309,8 +309,7 @@ export default function Ethereum() {
         if (beep) playSound();
         console.log("check", beep);
       }
-    }, 5000);
-
+    }, 2000);
     return () => clearInterval(intervalId);
   }, [session, data, freeTextTable, chartData]);
 
@@ -345,6 +344,15 @@ export default function Ethereum() {
     for (let i = 1; i <= 6 * data.length; i++) {
       if (id !== `check${i}`) {
         const checkbox = document.getElementById(`check${i}`);
+        if (checkbox) {
+          checkbox.checked = false;
+        }
+      }
+    }
+    console.log(id);
+    for (let i = 1; i <= 6 * data.length; i++) {
+      if (id !== `checkd${i}`) {
+        const checkbox = document.getElementById(`checkd${i}`);
         if (checkbox) {
           checkbox.checked = false;
         }
@@ -420,14 +428,14 @@ export default function Ethereum() {
                     )}
                   </td>
                   <td className={styles.dropdown}>
-                    <label htmlFor={`check${4 + 6 * index}`}>
+                    <label htmlFor={`checkd${4 + 6 * index}`}>
                       <input
                         disabled={session && !session.user.admin ? true : false}
                         className={styles.input1}
                         type="checkbox"
-                        id={`check${4 + 6 * index}`}
+                        id={`checkd${4 + 6 * index}`}
                         onChange={() =>
-                          closeAllDropdown(`check${4 + 6 * index}`)
+                          closeAllDropdown(`checkd${4 + 6 * index}`)
                         }
                       />
                       <label className={styles.label1}>
@@ -531,14 +539,14 @@ export default function Ethereum() {
                     </label>
                   </td>
                   <td className={styles.dropdown}>
-                    <label htmlFor={`check${3 + 6 * index}`}>
+                    <label htmlFor={`checkd${3 + 6 * index}`}>
                       <input
                         disabled={session && !session.user.admin ? true : false}
                         className={styles.input1}
                         type="checkbox"
-                        id={`check${3 + 6 * index}`}
+                        id={`checkd${3 + 6 * index}`}
                         onChange={() =>
-                          closeAllDropdown(`check${3 + 6 * index}`)
+                          closeAllDropdown(`checkd${3 + 6 * index}`)
                         }
                       />
                       <label className={styles.label1}>

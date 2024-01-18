@@ -257,8 +257,12 @@ export default function Bitcoin() {
           }
           return prevState;
         });
+
         setData(dataFetch);
-        if (JSON.stringify(data) !== JSON.stringify(dataFetch)) return true;
+        console.log("getting");
+
+        if (JSON.stringify(data) !== JSON.stringify(dataFetch))
+          console.log("getted");
         return false;
       } catch (error) {
         console.error(error);
@@ -266,11 +270,10 @@ export default function Bitcoin() {
       }
     };
     const intervalId = setInterval(async () => {
-      if (session && session.user && !session.user.admin) {
+      if (!session || (session && session.user && !session.user.admin)) {
         const beep = await fetchData();
       }
-    }, 5000);
-
+    }, 2000);
     return () => clearInterval(intervalId);
   }, [session, data]);
 

@@ -4,11 +4,12 @@ const blockedRoutesWithoutLogin = [
   "/admin/allusers",
   "/user/ethereum",
   "/user/cosmos",
+  "/user/avalaunch",
   "/user/solona",
   "/user/sui",
   "/user/avalaunch",
   "/user/injective",
-  "/user/quant",
+  "/user/sui",
   "/admin",
 ];
 export default async function middleware(req) {
@@ -22,13 +23,10 @@ export default async function middleware(req) {
   auth.pathname = "/auth/login";
   const afterAuth = req.nextUrl.clone();
   const home = req.nextUrl.clone();
-  home.pathname = "/home";
-  afterAuth.pathname = "/home";
+  home.pathname = "/";
+  afterAuth.pathname = "/";
   // Store current request url in a custom header, which you can read later
 
-  if (req.nextUrl.pathname === "/") {
-    return NextResponse.redirect(home);
-  }
   if (blockedRoutesWithoutLogin.includes(req.nextUrl.pathname)) {
     //just push
     // You could also check for any property on the session object,
@@ -37,7 +35,6 @@ export default async function middleware(req) {
     if (req.nextUrl.pathname === "/admin/allusers" && session && !session.admin)
       return NextResponse.redirect(home);
 
-    if (!session) console.log("session status", session);
     if (!session) return NextResponse.redirect(auth);
     // If user is unauthenticated, continue.
   }
@@ -57,6 +54,7 @@ export default async function middleware(req) {
 }
 export const config = {
   matcher: [
+    ...blockedRoutesWithoutLogin,
     "/admin/allusers",
     "/user/ethereum",
     "/user/cosmos",
