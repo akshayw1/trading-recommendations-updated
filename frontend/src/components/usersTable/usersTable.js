@@ -81,9 +81,10 @@ export default function UsersTable() {
   return (
     <>
       <main className={styles.main}>
-        <table className={`w-full ${styles.table}`}>
+        <table className={`w-full ${styles.table} ${styles.tableAdmin}`}>
           <thead>
             <tr>
+              <th className="w-[64px]">N</th>
               <th>Email</th>
               <th>isVerifiedUser</th>
               <th>Role</th>
@@ -93,6 +94,7 @@ export default function UsersTable() {
             {Array.isArray(users) &&
               users.map((user, index) => (
                 <tr key={index}>
+                  <td>{index + 1}</td>
                   <td>{user.email}</td>
                   <td className="flex justify-center">
                     <input

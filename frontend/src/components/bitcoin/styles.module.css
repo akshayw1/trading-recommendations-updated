@@ -64,9 +64,22 @@
 .table tbody td,
 .table tr {
   max-height: 48px;
-  background-color: #181a1b;
   padding: 8px 0.25rem;
   text-align: center;
+}
+.table tr {
+  background-color: #181a1b;
+}
+.tableAdmin tr:nth-of-type(odd) {
+  background-color: #292c2e !important;
+}
+.tableAdmin tr {
+  padding: 0;
+}
+.tableAdmin td {
+  height: 37px;
+  align-items: center;
+  justify-content: center;
 }
 .table thead,
 .table tfoot {
