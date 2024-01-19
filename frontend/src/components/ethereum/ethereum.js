@@ -391,6 +391,9 @@ export default function Ethereum() {
           <table>
             <thead>
               <tr>
+                <th>N</th>
+                <th>Time</th>
+
                 <th>OI Interpretation</th>
                 <th>Trend</th>
 
@@ -411,6 +414,23 @@ export default function Ethereum() {
                         X
                       </div>
                     ) : null}
+                    {index + 1}
+                  </td>
+                  <td>
+                    {session && !session.user.admin ? (
+                      item.Time
+                    ) : (
+                      <input
+                        onChange={(e) =>
+                          onChange(e.target.value, "Time", index)
+                        }
+                        defaultValue={item.Time}
+                        className={styles.inputTable}
+                        type="text"
+                      />
+                    )}
+                  </td>
+                  <td className={styles.dropdown}>
                     <label htmlFor={`checkd${4 + 6 * index}`}>
                       <input
                         disabled={session && !session.user.admin ? true : false}
