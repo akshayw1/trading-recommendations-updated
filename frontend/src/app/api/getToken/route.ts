@@ -80,7 +80,7 @@ export async function POST(req: Request) {
       <div class="container">
         <h1>Reset Password</h1>
         <p>To reset your password, click the button below:</p>
-        <a class="button" href="${resetUrl}" target="_blank">Reset Password</a>
+        <a class="button" style="color: #fff;" href="${resetUrl}" target="_blank">Reset Password</a>
       </div>
     </body>
     
