@@ -360,9 +360,10 @@ export default function Bitcoin() {
             <table>
               <thead>
                 <tr>
-                  <th>N</th>
-                  <th>Time</th>
-                  <th>Call OI</th>
+                  {/* <th>N</th> */}
+                  {/* <th>Time</th> */}
+                  {session && session.user.admin ? (
+                  <th>Delete</th>   ):(null)  }             <th>Call OI</th>
                   <th>IV</th>
                   <th>Delta</th>
                   <th>Trend</th>
@@ -381,7 +382,7 @@ export default function Bitcoin() {
                 {data.map((item, index) => {
                   return (
                     <tr key={item.Time}>
-                      <td className="flex flex-row gap-2 justify-center">
+                      {/* <td className="flex flex-row gap-2 justify-center">
                         {session && session.user.admin ? (
                           <div
                             onClick={() => deleteItem(index)}
@@ -390,9 +391,9 @@ export default function Bitcoin() {
                             X
                           </div>
                         ) : null}
-                        {index + 1}
-                      </td>
-                      <td>
+                    { null}
+                      </td> */}
+                      {/* <td>
                         {session && session.user.admin ? (
                           <div>
                             <input
@@ -407,7 +408,23 @@ export default function Bitcoin() {
                         ) : (
                           item.Time
                         )}
-                      </td>
+                      </td> */}
+                      
+                      {session && session.user.admin ? (
+                      <td className="flex justify-center">
+                        <div
+                            onClick={() => deleteItem(index)}
+                            className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
+                          >
+                            X
+                          </div>
+
+                      </td>):(
+                        null
+                      )}
+                      
+                      
+                      
                       <td>
                         {session && session.user.admin ? (
                           <input
