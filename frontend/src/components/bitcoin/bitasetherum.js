@@ -382,17 +382,18 @@ export default function BitasEth() {
           <table>
             <thead>
               <tr>
+              <th>N</th>
+                <th>Time</th>
                 <th>Trend</th>
                 <th>OI Interpretation</th>
+
                 <th>Entry Idea</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item, index) => (
                 <tr key={item.Time}>
-                  <td
-                    className={`${styles.dropdown} flex flex-row items-center`}
-                  >
+                    <td className="flex flex-row gap-2 justify-center">
                     {session && session.user.admin ? (
                       <div
                         onClick={() => deleteItem(index)}
@@ -400,14 +401,27 @@ export default function BitasEth() {
                       >
                         X
                       </div>
-                    ) : null}
-                    <label htmlFor={`checkd${1 + 6 * index}`}>
+                                          ) : null}
+                    {index + 1}
+                  </td>
+                  <td>
+                    {session && session.user.admin ? (
                       <input
-                        disabled={
-                          !session || (session && !session.user.admin)
-                            ? true
-                            : false
+                        onChange={(e) =>
+                          onChange(e.target.value, "Time", index)
                         }
+                        defaultValue={item.Time}
+                        className={styles.inputTable}
+                        type="text"
+                      />
+                    ) : (
+                      item.Time
+                    )}
+                  </td>
+                  <td className={styles.dropdown}>
+                    <label htmlFor={`check${4 + 6 * index}`}>
+                      <input
+                        disabled={session && !session.user.admin ? true : false}
                         className={styles.input1}
                         type="checkbox"
                         id={`checkd${1 + 6 * index}`}
