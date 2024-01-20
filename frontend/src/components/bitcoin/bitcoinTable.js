@@ -217,8 +217,7 @@ export default function BitcoinTable() {
         <table>
           <thead>
             <tr>
-              <th>N</th>
-              <th>Time</th>
+             
               <th>Call OI</th>
               <th>IV</th>
               <th>Delta</th>
@@ -238,33 +237,8 @@ export default function BitcoinTable() {
             {data.map((item, index) => {
               return (
                 <tr key={item.Time}>
-                  <td className="flex flex-row gap-2 justify-center">
-                    {session && session.user.admin ? (
-                      <div
-                        onClick={() => deleteItem(index)}
-                        className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
-                      >
-                        X
-                      </div>
-                    ) : null}
-                    {index + 1}
-                  </td>
-                  <td>
-                    {session && session.user.admin ? (
-                      <div>
-                        <input
-                          onChange={(e) =>
-                            onChange(e.target.value, "Time", index)
-                          }
-                          defaultValue={item.Time}
-                          className={styles.inputTable}
-                          type="text"
-                        />
-                      </div>
-                    ) : (
-                      item.Time
-                    )}
-                  </td>
+                  
+                 
                   <td>
                     {session && session.user.admin ? (
                       <input
