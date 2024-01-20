@@ -349,6 +349,8 @@ export default function Solona() {
     }
   };
   const options = {
+    tension: 0.01,
+
     type: "line",
     maintainAspectRatio: false,
     scales: {
