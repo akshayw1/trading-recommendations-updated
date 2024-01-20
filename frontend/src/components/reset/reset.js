@@ -6,14 +6,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import LoadingToast from "../usersTable/loading";
 export default function ResetPass() {
   const router = useRouter();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const register = async (e) => {
+  const resetPass = async (e) => {
     e.preventDefault();
 
     let newErrors = [];
@@ -21,21 +20,9 @@ export default function ResetPass() {
     if (email === "") {
       newErrors.push("email required");
     }
-    if (name === "") {
-      newErrors.push("name required");
-    }
 
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       newErrors.push("email invalid");
-    }
-    if (password === "") {
-      newErrors.push("pass required");
-    }
-    if (password.length < 6) {
-      newErrors.push("password of at least 6 characters");
-    }
-    if (password.length < 4) {
-      newErrors.push("name of at least 4 characters");
     }
 
     for (let i = 0; i < newErrors.length; i++) {
@@ -45,22 +32,45 @@ export default function ResetPass() {
     if (newErrors.length > 0) {
       return;
     }
+    let toastId;
     try {
-      const res = await fetch("/api/register", {
+      toastId = toast(<LoadingToast text={"sending email..."} />, {
+        autoClose: false,
+      });
+      const res = await fetch("/api/getToken", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ email }),
       });
+
       if (res.ok) {
         const data = await res.json();
-        if (data.message !== "user created") {
-          toast.warning(data.message);
+        if (data.message !== "user no exist") {
+          toast.update(toastId, {
+            render: data.message,
+            type: "success",
+            autoClose: 5000,
+          });
         } else {
-          toast.success("Registered");
-          router.replace("/auth/login");
+          toast.update(toastId, {
+            render: data.message,
+            type: toast.TYPE.ERROR,
+            autoClose: 5000,
+          });
         }
+      } else {
+        toast.update(toastId, {
+          render: res.error,
+          type: toast.TYPE.ERROR,
+          autoClose: 5000,
+        });
       }
     } catch (error) {
+      toast.update(toastId, {
+        render: error,
+        type: toast.TYPE.ERROR,
+        autoClose: 5000,
+      });
       console.log("error");
     }
   };
@@ -84,6 +94,7 @@ export default function ResetPass() {
         </div>
 
         <Button2
+          onClick={resetPass}
           style1={{ "--blue1": "rgb(27,42,80)" }}
           style2={{
             fontWeight: 600,

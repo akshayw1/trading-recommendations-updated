@@ -1,5 +1,5 @@
-import ResetPass from "@/components/reset/reset";
+import Reset from "@/components/reset/reset";
 
 export default function Page() {
-  return <ResetPass />;
+  return <Reset />;
 }

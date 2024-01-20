@@ -352,6 +352,8 @@ export default function Avalaunch() {
   const options = {
     type: "line",
     maintainAspectRatio: false,
+    tension: 0.01,
+
     scales: {
       y: {
         max: 10000000,

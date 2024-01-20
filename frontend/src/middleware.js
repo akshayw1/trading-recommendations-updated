@@ -12,6 +12,7 @@ const blockedRoutesWithoutLogin = [
   "/user/quant",
   "/admin",
 ];
+
 export default async function middleware(req) {
   const session = await getToken({
     req,
@@ -39,10 +40,7 @@ export default async function middleware(req) {
     // If user is unauthenticated, continue.
   }
 
-  if (
-    req.nextUrl.pathname === "/auth/login" ||
-    req.nextUrl.pathname === "/auth/signup"
-  ) {
+  if (req.nextUrl.pathname.includes("auth")) {
     if (session)
       //just push
       // You could also check for any property on the session object,
@@ -63,8 +61,7 @@ export const config = {
     "/user/injective",
     "/user/quant",
     "/admin",
-    "/auth/login",
-    "/auth/signup",
+    "/auth",
     {
       source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
       missing: [

@@ -360,6 +360,8 @@ export default function Ethereum() {
     }
   };
   const options = {
+    tension: 0.01,
+
     type: "line",
     maintainAspectRatio: false,
     scales: {

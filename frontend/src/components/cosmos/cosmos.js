@@ -349,6 +349,8 @@ export default function Cosmos() {
     }
   };
   const options = {
+    tension: 0.01,
+
     type: "line",
     maintainAspectRatio: false,
     scales: {

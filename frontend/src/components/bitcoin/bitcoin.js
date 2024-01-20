@@ -300,6 +300,8 @@ export default function Bitcoin() {
     ],
   });
   const options = {
+    tension: 0.01,
+
     type: "line",
     maintainAspectRatio: false,
   };
