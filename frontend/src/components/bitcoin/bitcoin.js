@@ -259,11 +259,8 @@ export default function Bitcoin() {
         });
 
         setData(dataFetch);
-        console.log("getting");
 
-        if (JSON.stringify(data) !== JSON.stringify(dataFetch))
-          console.log("getted");
-        return false;
+        if (JSON.stringify(data) !== JSON.stringify(dataFetch)) return false;
       } catch (error) {
         console.error(error);
         return false;
@@ -364,8 +361,8 @@ export default function Bitcoin() {
                 <tr>
                   {/* <th>N</th> */}
                   {/* <th>Time</th> */}
-                  {session && session.user.admin ? (
-                  <th>Delete</th>   ):(null)  }             <th>Call OI</th>
+                  {session && session.user.admin ? <th>Delete</th> : null}{" "}
+                  <th>Call OI</th>
                   <th>IV</th>
                   <th>Delta</th>
                   <th>Trend</th>
@@ -411,22 +408,18 @@ export default function Bitcoin() {
                           item.Time
                         )}
                       </td> */}
-                      
+
                       {session && session.user.admin ? (
-                      <td className="flex justify-center">
-                        <div
+                        <td className="flex justify-center">
+                          <div
                             onClick={() => deleteItem(index)}
                             className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
                           >
                             X
                           </div>
+                        </td>
+                      ) : null}
 
-                      </td>):(
-                        null
-                      )}
-                      
-                      
-                      
                       <td>
                         {session && session.user.admin ? (
                           <input

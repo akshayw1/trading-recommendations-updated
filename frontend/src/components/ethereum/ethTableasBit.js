@@ -155,7 +155,6 @@ export default function EthTableasBits() {
       if (session && session.user && !session.user.admin) {
         const beep = await fetchData();
         if (beep) playSound();
-        console.log("check", beep);
       }
     }, 2000);
     return () => clearInterval(intervalId);
@@ -222,15 +221,14 @@ export default function EthTableasBits() {
         </div>
       </div>
       <div
-        className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[39rem] bg-[#181a1b] ${styles.table}`}
+        className={`scrollbar1 w-full flex overflow-auto justify-start flex-col h-[39rem] bg-[#181a1b] ${styles.table}`}
       >
         <table>
           <thead>
             <tr>
-            {session && session.user.admin ? (
-                  <th>Delete</th>   ):(null)  }             <th>Call OI</th>
-                  <th>IV</th>
-              
+              {session && session.user.admin ? <th>Delete</th> : null}{" "}
+              <th>Call OI</th>
+              <th>IV</th>
               <th>Delta</th>
               <th>Trend</th>
               <th>Price</th>
@@ -248,37 +246,17 @@ export default function EthTableasBits() {
             {data.map((item, index) => {
               return (
                 <tr key={item.Time}>
-                   {session && session.user.admin ? (
-                      <td className="flex justify-center">
-                        <div
-                            onClick={() => deleteItem(index)}
-                            className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
-                          >
-                            X
-                          </div>
-
-                      </td>):(
-                        null
-                      )}
-                      
-                      
-                      
-                  <td>
-                    {session && session.user.admin ? (
-                      <div>
-                        <input
-                          onChange={(e) =>
-                            onChange(e.target.value, "Time", index)
-                          }
-                          defaultValue={item.Time}
-                          className={styles.inputTable}
-                          type="text"
-                        />
+                  {session && session.user.admin ? (
+                    <td className="flex justify-center">
+                      <div
+                        onClick={() => deleteItem(index)}
+                        className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
+                      >
+                        X
                       </div>
-                    ) : (
-                      item.Time
-                    )}
-                  </td>
+                    </td>
+                  ) : null}
+
                   <td>
                     {session && session.user.admin ? (
                       <input

@@ -20,6 +20,7 @@ export async function POST(req: Request) {
         name: dataSelect,
         data: newData,
       });
+
       if (tableCreated)
         return NextResponse.json({ message: "table updated" }, { status: 201 });
     }

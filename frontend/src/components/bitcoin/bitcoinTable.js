@@ -155,7 +155,6 @@ export default function BitcoinTable() {
       if (session && session.user && !session.user.admin) {
         const beep = await fetchData();
         if (beep) playSound();
-        console.log("check", beep);
       }
     }, 2000);
     return () => clearInterval(intervalId);
@@ -217,7 +216,6 @@ export default function BitcoinTable() {
         <table>
           <thead>
             <tr>
-             
               <th>Call OI</th>
               <th>IV</th>
               <th>Delta</th>
@@ -237,8 +235,6 @@ export default function BitcoinTable() {
             {data.map((item, index) => {
               return (
                 <tr key={item.Time}>
-                  
-                 
                   <td>
                     {session && session.user.admin ? (
                       <input

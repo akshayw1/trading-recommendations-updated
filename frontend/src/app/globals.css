@@ -6,6 +6,8 @@
   --blue2: #27f5b8;
   --blue3: #92ebd0;
   --blue4: #090c31;
+  --blue5: #ffffff;
+
   --aside-offset: 234px;
 }
 body {
@@ -17,7 +19,7 @@ ul {
   margin: 0;
   padding: 0;
 }
-.customdelete{
+.customdelete {
   background-color: red;
   justify-content: center;
   align-self: center;
@@ -157,6 +159,10 @@ main {
     left: 0;
   }
 }
+.modalIsOpen {
+  display: flex !important;
+}
+
 @media only screen and (max-width: 820px) {
   .shadowMain,
   .blurCircleBox {

@@ -18,23 +18,55 @@ export const OnboardingProvider = ({
   const [menuOpen, setMenuOpen] = useState(false);
   const [hideAside, setHideAside] = useState(false);
   const [onTable, setOnTable] = useState(false);
-
+  const [listOI, setListOI] = useState([]);
+  // pageWTS pagesWithTableState
+  const [pagesWTS, setPagesWTS] = useState([...pagesWithTable]);
   const calculateHideAside = () => {
-    return pagesWithTable.includes(pathname) && !menuOpen;
+    return pagesWTS.includes(pathname) && !menuOpen;
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/tableList`, {
+          method: "GET",
+          headers: { "Content-type": "application/json" },
+        });
 
+        if (res.ok) {
+          const data = await res.json();
+          setListOI(data.data);
+
+          setPagesWTS([
+            ...data.data.map((item: string) => `/user/${item}`),
+            ...pagesWithTable,
+          ]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     const newHideAside = calculateHideAside();
-    setOnTable(pagesWithTable.includes(pathname));
+    setOnTable(pagesWTS.includes(pathname));
     if (hideAside !== newHideAside) {
       setHideAside(newHideAside);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [menuOpen, pathname]);
+  }, [menuOpen, pathname, pagesWTS]);
 
   return (
     <OnboardingContext.Provider
-      value={{ status, session, hideAside, menuOpen, setMenuOpen, onTable }}
+      value={{
+        status,
+        session,
+        hideAside,
+        menuOpen,
+        setMenuOpen,
+        onTable,
+        listOI,
+      }}
     >
       {children}
     </OnboardingContext.Provider>

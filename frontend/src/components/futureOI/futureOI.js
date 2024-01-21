@@ -24,7 +24,7 @@ ChartJS.register(
 import { useOnboardingContext } from "@/context/MyContext";
 import { Line } from "react-chartjs-2";
 import LoadingToast from "../usersTable/loading";
-export default function Avalaunch() {
+export default function FutureOI({ nameoi }) {
   const dataExample = {
     Time: "15:25-15:30",
     CallOI: 31.89,
@@ -68,11 +68,11 @@ export default function Avalaunch() {
   const [freeTextTable, setFreeTextTable] = useState([]);
   const [chartData, setChartData] = useState([]);
 
-  const updateData = async (dataSelect = "Avalaunch") => {
+  const updateData = async (dataSelect = nameoi) => {
     let newData;
-    if (dataSelect === "Avalaunch") {
+    if (dataSelect === nameoi) {
       newData = [...data];
-    } else if (dataSelect === "chartDataAvalaunch") {
+    } else if (dataSelect === "chartData" + nameoi) {
       newData = [...chartData];
     } else {
       newData = [...freeTextTable];
@@ -130,7 +130,7 @@ export default function Avalaunch() {
     if (dataSelect === "data") {
       newData = [...data];
       newDataExample = { ...dataExample };
-    } else if (dataSelect === "chartDataEth") {
+    } else if (dataSelect === "chartData" + nameoi) {
       newData = [...chartData];
       newDataExample = { ...chartDataExample };
     } else {
@@ -148,7 +148,7 @@ export default function Avalaunch() {
     newData.unshift(newDataExample);
     if (dataSelect === "data") {
       setData((prevData) => [newDataExample, ...prevData]);
-    } else if (dataSelect === "chartDataEth") {
+    } else if (dataSelect === "chartData" + nameoi) {
       setChartData((prevData) => [newDataExample, ...prevData]);
     } else {
       setFreeTextTable((prevData) => [newDataExample, ...prevData]);
@@ -178,14 +178,14 @@ export default function Avalaunch() {
 
     return `${formattedStartTime}-${formattedEndTime}`;
   };
-  const deleteItem = (index, dataSelect = "Ethereum") => {
+  const deleteItem = (index, dataSelect = nameoi) => {
     closeAllDropdown();
     let newData;
-    if (dataSelect === "Ethereum") {
+    if (dataSelect === nameoi) {
       newData = [...data];
       newData.splice(index, 1);
       setData(newData);
-    } else if (dataSelect === "chartDataEth") {
+    } else if (dataSelect === "chartData" + nameoi) {
       newData = [...chartData];
       newData.splice(index, 1);
       setChartData(newData);
@@ -195,7 +195,7 @@ export default function Avalaunch() {
       setFreeTextTable(newData);
     }
   };
-  const getData = async (dataSelect = "Avalaunch") => {
+  const getData = async (dataSelect = nameoi) => {
     try {
       const queryParams = new URLSearchParams({ dataSelect });
 
@@ -220,14 +220,14 @@ export default function Avalaunch() {
     }
   };
 
-  const onChange = (value, property, index, dataSelect = "Ethereum") => {
+  const onChange = (value, property, index, dataSelect = nameoi) => {
     closeAllDropdown();
     let newData;
-    if (dataSelect === "Ethereum") {
+    if (dataSelect === nameoi) {
       newData = [...data];
       newData[index][property] = value;
       setData(newData);
-    } else if (dataSelect === "chartDataEth") {
+    } else if (dataSelect === "chartData" + nameoi) {
       newData = [...chartData];
       newData[index][property] = value;
       setChartData(newData);
@@ -245,8 +245,8 @@ export default function Avalaunch() {
     const fetchData = async () => {
       try {
         const dataFetch = await getData();
-        const dataFetch2 = await getData("freeTextAvalaunch");
-        const dataFetch3 = await getData("chartDataAvalaunch");
+        const dataFetch2 = await getData("freeText" + nameoi);
+        const dataFetch3 = await getData("chartData" + nameoi);
 
         let beep = false;
         setData((prevState) => {
@@ -275,14 +275,15 @@ export default function Avalaunch() {
       }
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const dataFetch = await getData();
-        const dataFetch2 = await getData("freeTextAvalaunch");
-        const dataFetch3 = await getData("chartDataAvalaunch");
+        const dataFetch2 = await getData("freeText" + nameoi);
+        const dataFetch3 = await getData("chartData" + nameoi);
 
         setData(dataFetch);
         setFreeTextTable(dataFetch2);
@@ -309,6 +310,7 @@ export default function Avalaunch() {
     }, 2000);
 
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, data, freeTextTable, chartData]);
 
   useEffect(() => {
@@ -349,10 +351,10 @@ export default function Avalaunch() {
     }
   };
   const options = {
-    type: "line",
-    maintainAspectRatio: false,
     tension: 0.01,
 
+    type: "line",
+    maintainAspectRatio: false,
     scales: {
       y: {
         max: 10000000,
@@ -736,7 +738,7 @@ export default function Avalaunch() {
                   <td className="flex flex-row gap-2 justify-center">
                     {session && session.user.admin ? (
                       <div
-                        onClick={() => deleteItem(index, "freeTableEth")}
+                        onClick={() => deleteItem(index, "freeTable" + nameoi)}
                         className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
                       >
                         X
@@ -750,7 +752,12 @@ export default function Avalaunch() {
                     ) : (
                       <input
                         onChange={(e) =>
-                          onChange(e.target.value, "Time", index, "freeTextEth")
+                          onChange(
+                            e.target.value,
+                            "Time",
+                            index,
+                            "freeText" + nameoi
+                          )
                         }
                         defaultValue={item.Time}
                         className={styles.inputTable}
@@ -768,7 +775,7 @@ export default function Avalaunch() {
                             e.target.value,
                             "FreeText",
                             index,
-                            "freeTextEth"
+                            "freeText" + nameoi
                           )
                         }
                         defaultValue={item.FreeText}
@@ -784,13 +791,13 @@ export default function Avalaunch() {
                   <td colSpan="5">
                     <div className="flex flex-start">
                       <button
-                        onClick={() => addItem("freeTextEth")}
+                        onClick={() => addItem("freeText" + nameoi)}
                         className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
                       >
                         +
                       </button>
                       <button
-                        onClick={() => updateData("freeTextAvalaunch")}
+                        onClick={() => updateData("freeText" + nameoi)}
                         className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                       >
                         Update
@@ -825,7 +832,7 @@ export default function Avalaunch() {
                   <tr key={item.Time}>
                     <td className="flex flex-row gap-2 justify-center">
                       <div
-                        onClick={() => deleteItem(index, "chartDataEth")}
+                        onClick={() => deleteItem(index, "chartData" + nameoi)}
                         className="cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600"
                       >
                         X
@@ -839,7 +846,7 @@ export default function Avalaunch() {
                             e.target.value,
                             "Time",
                             index,
-                            "chartDataEth"
+                            "chartData" + nameoi
                           )
                         }
                         defaultValue={item.Time}
@@ -854,7 +861,7 @@ export default function Avalaunch() {
                             e.target.value,
                             "Value1",
                             index,
-                            "chartDataEth"
+                            "chartData" + nameoi
                           )
                         }
                         defaultValue={item.Value1}
@@ -869,7 +876,7 @@ export default function Avalaunch() {
                             e.target.value,
                             "Value2",
                             index,
-                            "chartDataEth"
+                            "chartData" + nameoi
                           )
                         }
                         defaultValue={item.Value2}
@@ -883,13 +890,13 @@ export default function Avalaunch() {
                   <td colSpan="5">
                     <div className="flex flex-start">
                       <button
-                        onClick={() => addItem("chartDataEth")}
+                        onClick={() => addItem("chartData" + nameoi)}
                         className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
                       >
                         +
                       </button>
                       <button
-                        onClick={() => updateData("chartDataAvalaunch")}
+                        onClick={() => updateData("chartData" + nameoi)}
                         className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
                       >
                         Update

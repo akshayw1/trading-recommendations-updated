@@ -12,7 +12,6 @@ const blockedRoutesWithoutLogin = [
   "/user/quant",
   "/admin",
 ];
-
 export default async function middleware(req) {
   const session = await getToken({
     req,
@@ -28,7 +27,10 @@ export default async function middleware(req) {
   afterAuth.pathname = "/";
   // Store current request url in a custom header, which you can read later
 
-  if (blockedRoutesWithoutLogin.includes(req.nextUrl.pathname)) {
+  if (
+    req.nextUrl.pathname.startsWith("/user") ||
+    req.nextUrl.pathname.startsWith("/admin")
+  ) {
     //just push
     // You could also check for any property on the session object,
     // like role === "admin" or name === "Angelo", etc.
@@ -36,7 +38,8 @@ export default async function middleware(req) {
     if (req.nextUrl.pathname === "/admin/allusers" && session && !session.admin)
       return NextResponse.redirect(home);
 
-    if (!session) return NextResponse.redirect(auth);
+    if (!session && req.nextUrl.pathname !== "/user/bitcoin")
+      return NextResponse.redirect(auth);
     // If user is unauthenticated, continue.
   }
 
