@@ -385,8 +385,9 @@ export default function BitasEth() {
               <tr>
                 <th>N</th>
                 <th>Time</th>
-                <th>Trend</th>
+               
                 <th>OI Interpretation</th>
+                <th>Trend</th>
 
                 <th>Entry Idea</th>
               </tr>
@@ -425,9 +426,9 @@ export default function BitasEth() {
                         disabled={session && !session.user.admin ? true : false}
                         className={styles.input1}
                         type="checkbox"
-                        id={`checkd${1 + 6 * index}`}
+                        id={`checkd${4 + 6 * index}`}
                         onChange={() =>
-                          closeAllDropdown(`checkd${1 + 6 * index}`)
+                          closeAllDropdown(`checkd${4 + 6 * index}`)
                         }
                       />
                       <label className={styles.label1}>
