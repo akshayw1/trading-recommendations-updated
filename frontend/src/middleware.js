@@ -52,16 +52,9 @@ export default async function middleware(req) {
 }
 export const config = {
   matcher: [
-    "/admin/allusers",
-    "/user/ethereum",
-    "/user/cosmos",
-    "/user/solona",
-    "/user/sui",
-    "/user/avalaunch",
-    "/user/injective",
-    "/user/quant",
-    "/admin",
-    "/auth",
+    "/user/:path*",
+    "/admin/:path*",
+    "/auth/:path*",
     {
       source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
       missing: [
