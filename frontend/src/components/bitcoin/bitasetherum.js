@@ -383,9 +383,9 @@ export default function BitasEth() {
           <table>
             <thead>
               <tr>
-              <th>N</th>
+                <th>N</th>
                 <th>Time</th>
-               
+
                 <th>OI Interpretation</th>
                 <th>Trend</th>
 
@@ -395,7 +395,7 @@ export default function BitasEth() {
             <tbody>
               {data.map((item, index) => (
                 <tr key={item.Time}>
-                    <td className="flex flex-row gap-2 justify-center">
+                  <td className="flex flex-row gap-2 justify-center">
                     {session && session.user.admin ? (
                       <div
                         onClick={() => deleteItem(index)}
@@ -403,7 +403,7 @@ export default function BitasEth() {
                       >
                         X
                       </div>
-                                          ) : null}
+                    ) : null}
                     {index + 1}
                   </td>
                   <td>
@@ -421,14 +421,14 @@ export default function BitasEth() {
                     )}
                   </td>
                   <td className={styles.dropdown}>
-                    <label htmlFor={`check${4 + 6 * index}`}>
+                    <label htmlFor={`checkd${1 + 6 * index}`}>
                       <input
                         disabled={session && !session.user.admin ? true : false}
                         className={styles.input1}
                         type="checkbox"
-                        id={`checkd${4 + 6 * index}`}
+                        id={`checkd${1 + 6 * index}`}
                         onChange={() =>
-                          closeAllDropdown(`checkd${4 + 6 * index}`)
+                          closeAllDropdown(`checkd${1 + 6 * index}`)
                         }
                       />
                       <label className={styles.label1}>
