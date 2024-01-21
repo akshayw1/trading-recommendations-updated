@@ -307,7 +307,6 @@ export default function Ethereum() {
       if (session && session.user && !session.user.admin) {
         const beep = await fetchData();
         if (beep) playSound();
-        console.log("check", beep);
       }
     }, 2000);
     return () => clearInterval(intervalId);
