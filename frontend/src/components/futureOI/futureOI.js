@@ -378,8 +378,9 @@ export default function FutureOI({ nameoi }) {
               <tr>
                 <th>N</th>
                 <th>Time</th>
-                <th>Trend</th>
                 <th>OI Interpretation</th>
+                <th>Trend</th>
+                
 
                 <th>Entry Idea</th>
               </tr>
