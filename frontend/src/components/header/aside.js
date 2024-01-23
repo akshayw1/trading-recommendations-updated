@@ -15,7 +15,9 @@ export default function Aside() {
     useOnboardingContext();
   const [menuOption, setMenuOption] = useState(false);
   const [createOIModalIsOpen, setCreateOIModalIsOpen] = useState(false);
+  const [typeOfOI, setTypeOfOI] = useState(0);
   const [oiName, setOiName] = useState("");
+
   const addNewOI = async () => {
     let toastId = toast(<LoadingToast text="Adding new OI..." />, {
       autoClose: false,
@@ -24,7 +26,8 @@ export default function Aside() {
     if (
       oiName === "Bitcoin" ||
       oiName === "Ethereum" ||
-      listOI.includes(oiName)
+      listOI.includes(oiName) ||
+      listOI.includes("EMC" + oiName)
     ) {
       toast.update(toastId, {
         render: "OI Exist",
@@ -33,11 +36,13 @@ export default function Aside() {
       });
       return null;
     }
+    const dataSelect = typeOfOI === 0 ? oiName : "EMC" + oiName;
+
     try {
       const res = await fetch("/api/tableList", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ dataSelect: oiName }),
+        body: JSON.stringify({ dataSelect }),
       });
 
       if (res.ok) {
@@ -244,7 +249,7 @@ export default function Aside() {
           </li>
         </ul>
         <ul
-          className={`overflow-auto scrollbar1 h-[504px] ${
+          className={`fixed overflow-auto scrollbar1 h-[504px] ${
             !menuOption ? styles.menuSelected : ""
           }`}
         >
@@ -318,26 +323,28 @@ export default function Aside() {
             </Link>
           </li>
           <li className={styles.blue}>Futures OI</li>
-          {listOI.map((name) => (
-            <li className={styles.white} key={name}>
-              <Link
-                onClick={() => setMenuOpen(false)}
-                className={styles.white}
-                href={`/user/${name}`}
-              >
-                {name}
-              </Link>
-              {session && session.user.admin ? (
-                <div
-                  onClick={() => deleteOI(name)}
-                  className={`cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600 
-                  ${styles.no} ${styles.deleteIcon} hover:bg-red-400`}
+          {listOI
+            .filter((word) => !word.startsWith("EMC"))
+            .map((name) => (
+              <li className={styles.white} key={name}>
+                <Link
+                  onClick={() => setMenuOpen(false)}
+                  className={styles.white}
+                  href={`/user/${name}`}
                 >
-                  X
-                </div>
-              ) : null}
-            </li>
-          ))}
+                  {name}
+                </Link>
+                {session && session.user.admin ? (
+                  <div
+                    onClick={() => deleteOI(name)}
+                    className={`cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600 
+                  ${styles.no} ${styles.deleteIcon} hover:bg-red-400`}
+                  >
+                    X
+                  </div>
+                ) : null}
+              </li>
+            ))}
           {session && session.user.admin ? (
             <>
               <li>
@@ -373,13 +380,58 @@ export default function Aside() {
               <li
                 className={`${styles.no} w-full flex flex-row justify-center`}
               >
-                <Button1 onClick={() => setCreateOIModalIsOpen(true)}>
+                <Button1
+                  onClick={() => {
+                    setCreateOIModalIsOpen(true);
+                    setTypeOfOI(0);
+                  }}
+                >
+                  Add new OI
+                </Button1>
+              </li>
+            </>
+          ) : null}
+          <li className={styles.blue}>Meme Coin</li>
+          {listOI
+            .filter((word) => word.startsWith("EMC"))
+            .map((name) => (
+              <li className={styles.white} key={name}>
+                <Link
+                  onClick={() => setMenuOpen(false)}
+                  className={styles.white}
+                  href={`/user/${name}`}
+                >
+                  {name.replace("EMC", "")}
+                </Link>
+                {session && session.user.admin ? (
+                  <div
+                    onClick={() => deleteOI(name)}
+                    className={`cursor-pointer w-6 flex justify-center items-center rounded h-6 bg-red-600 
+                  ${styles.no} ${styles.deleteIcon} hover:bg-red-400`}
+                  >
+                    X
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          {session && session.user.admin ? (
+            <>
+              <li
+                className={`${styles.no} w-full flex flex-row justify-center`}
+              >
+                <Button1
+                  onClick={() => {
+                    setCreateOIModalIsOpen(true);
+                    setTypeOfOI(1);
+                  }}
+                >
                   Add new OI
                 </Button1>
               </li>
             </>
           ) : null}
         </ul>
+
         {session ? null : (
           <div className={`${styles.authBox} ${styles.mobile}`}>
             <Link onClick={() => setMenuOpen(false)} href="/auth/login">
