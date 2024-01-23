@@ -712,6 +712,9 @@ export default function FutureOI({ nameoi }) {
             <div className="h-[70%] w-12 bg-green-700 mr-2"></div>Buying
             Pressure
           </div>
+          <div className="text-[10px] flex justify-center m-0 p-0">
+            Time UTC+5:30 (IST)
+          </div>
           <Line
             className="mb-12 lg:pl-4"
             options={options}
