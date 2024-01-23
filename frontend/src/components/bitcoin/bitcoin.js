@@ -9,6 +9,7 @@ import LoadingToast from "../usersTable/loading";
 import isEqual from "lodash/isEqual";
 import livelogo from "../../../public/images/Logo.png";
 import BitasEth from "./bitasetherum";
+import zoomPlugin from "chartjs-plugin-zoom";
 
 import {
   Chart as ChartJS,
@@ -19,6 +20,7 @@ import {
   LineElement,
 } from "chart.js";
 ChartJS.register(
+  zoomPlugin,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -301,7 +303,22 @@ export default function Bitcoin() {
 
     type: "line",
     maintainAspectRatio: false,
+    plugins: {
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true,
+          },
+          mode: "x",
+          drag: { enabled: true },
+        },
+      },
+    },
   };
+
   useEffect(() => {
     const reversedData = [...chartData].reverse();
 

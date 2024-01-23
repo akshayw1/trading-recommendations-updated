@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
 import EthTableasBits from "./ethTableasBit";
+import zoomPlugin from "chartjs-plugin-zoom";
 
 import {
   Chart as ChartJS,
@@ -16,6 +17,7 @@ import {
   LineElement,
 } from "chart.js";
 ChartJS.register(
+  zoomPlugin,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -367,6 +369,20 @@ export default function Ethereum() {
       y: {
         max: 10000000,
         min: 0,
+      },
+    },
+    plugins: {
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true,
+          },
+          mode: "x",
+          drag: { enabled: true },
+        },
       },
     },
   };
