@@ -1,5 +1,10 @@
-import Ethereum from "@/components/ethereum/ethereum";
+import dynamic from "next/dynamic";
+
+const DynamicComponentWithNoSSR = dynamic(
+  () => import("@/components/ethereum/ethereum"),
+  { ssr: false }
+);
 
 export default function Page() {
-  return <Ethereum />;
+  return <DynamicComponentWithNoSSR />;
 }

@@ -1,5 +1,10 @@
-import Solona from "../../../components/solona/solona";
+import dynamic from "next/dynamic";
 
-export default function Home() {
-  return <Solona/> ;
+const DynamicComponentWithNoSSR = dynamic(
+  () => import("@/components/solona/solona"),
+  { ssr: false }
+);
+
+export default function Page() {
+  return <DynamicComponentWithNoSSR />;
 }

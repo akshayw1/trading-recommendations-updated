@@ -23,6 +23,7 @@ ChartJS.register(
   LineElement,
   Tooltip
 );
+
 import { useOnboardingContext } from "@/context/MyContext";
 import { Line } from "react-chartjs-2";
 import LoadingToast from "../usersTable/loading";

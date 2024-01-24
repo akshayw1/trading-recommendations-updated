@@ -1,6 +1,10 @@
+import dynamic from "next/dynamic";
 
-import Avalaunch from "../../../components/avalaunch/avalaunch";
+const DynamicComponentWithNoSSR = dynamic(
+  () => import("@/components/avalaunch/avalaunch"),
+  { ssr: false }
+);
 
 export default function Page() {
-  return <Avalaunch />;
+  return <DynamicComponentWithNoSSR />;
 }
