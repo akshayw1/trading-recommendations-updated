@@ -1,5 +1,10 @@
-import Injective from "../../../components/injective/injective";
+import dynamic from "next/dynamic";
 
-export default function Home() {
-  return <Injective/>;
+const DynamicComponentWithNoSSR = dynamic(
+  () => import("@/components/injective/injective"),
+  { ssr: false }
+);
+
+export default function Page() {
+  return <DynamicComponentWithNoSSR />;
 }

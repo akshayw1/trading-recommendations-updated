@@ -1,5 +1,10 @@
-import Sui from "../../../components/sui/sui";
+import dynamic from "next/dynamic";
 
-export default function Home() {
-  return <Sui/>;
+const DynamicComponentWithNoSSR = dynamic(
+  () => import("@/components/sui/sui"),
+  { ssr: false }
+);
+
+export default function Page() {
+  return <DynamicComponentWithNoSSR />;
 }
