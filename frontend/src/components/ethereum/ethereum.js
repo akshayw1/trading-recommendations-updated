@@ -6,26 +6,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
 import EthTableasBits from "./ethTableasBit";
-import zoomPlugin from "chartjs-plugin-zoom";
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  PointElement,
-  LineElement,
-} from "chart.js";
-ChartJS.register(
-  zoomPlugin,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip
-);
+import { MemoChart } from "@/components/charts/chart";
+
 import { useOnboardingContext } from "@/context/MyContext";
-import { Line } from "react-chartjs-2";
 import LoadingToast from "../usersTable/loading";
 import BitcoinTable from "../bitcoin/bitcoinTable";
 export default function Ethereum() {
@@ -383,6 +367,26 @@ export default function Ethereum() {
           mode: "x",
           drag: { enabled: true },
         },
+      },
+      annotation: {
+        annotations: [
+          {
+            type: "line",
+            mode: "horizontal",
+            scaleID: "y",
+            value: 5000000, // Ajusta este valor según tus necesidades
+            borderColor: "grey",
+            borderWidth: 2,
+            borderDash: [2, 2],
+
+            capBezierPoints: "capBezierPoints",
+            label: {
+              enabled: true,
+              content: "Línea Central",
+              position: "right",
+            },
+          },
+        ],
       },
     },
   };
@@ -746,12 +750,7 @@ export default function Ethereum() {
             <div className="h-[70%] w-12 bg-green-700 mr-2"></div>Buying
             Pressure
           </div>
-          <Line
-            className="mb-12 lg:pl-4"
-            options={options}
-            datasetIdKey="id"
-            data={tableData}
-          />
+          <MemoChart tableData={tableData} />
         </div>
       </div>
       {/* <div className="flex-col flex bg-black p-4 pt-2 pl-4 w-full">

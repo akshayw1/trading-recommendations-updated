@@ -11,24 +11,6 @@ import livelogo from "../../../public/images/Logo.png";
 import BitasEth from "./bitasetherum";
 import zoomPlugin from "chartjs-plugin-zoom";
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  PointElement,
-  LineElement,
-} from "chart.js";
-ChartJS.register(
-  zoomPlugin,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip
-);
-import { Line } from "react-chartjs-2";
-
 export default function Bitcoin() {
   const dataExample = {
     Time: "15:25-15:30",

@@ -1,30 +1,15 @@
 "use client";
+import annotationPlugin from "chartjs-plugin-annotation";
+
 import { useState, useEffect, useRef } from "react";
 import styles from "../bitcoin/styles.module.css";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
-import zoomPlugin from "chartjs-plugin-zoom";
+import { MemoChart } from "@/components/charts/chart";
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  PointElement,
-  LineElement,
-} from "chart.js";
-ChartJS.register(
-  zoomPlugin,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip
-);
 import { useOnboardingContext } from "@/context/MyContext";
-import { Line } from "react-chartjs-2";
 import LoadingToast from "../usersTable/loading";
 export default function BitasEth() {
   const dataExample = {
@@ -288,13 +273,15 @@ export default function BitasEth() {
 
         setData(dataFetch);
         setFreeTextTable(dataFetch2);
+        if (JSON.stringify(chartData) !== JSON.stringify(dataFetch3)) {
+          setChartData((prevState) => {
+            if (!isEqual(prevState, dataFetch3)) {
+              return dataFetch3;
+            }
+            return prevState;
+          });
+        }
 
-        setChartData((prevState) => {
-          if (!isEqual(prevState, dataFetch3)) {
-            return dataFetch3;
-          }
-          return prevState;
-        });
         if (JSON.stringify(freeTextTable) !== JSON.stringify(dataFetch2))
           return true;
         return false;
@@ -315,7 +302,6 @@ export default function BitasEth() {
 
   useEffect(() => {
     const reversedData = [...chartData].reverse();
-
     setTableData({
       labels: reversedData.map((item) => item.Time),
       datasets: [
@@ -359,31 +345,7 @@ export default function BitasEth() {
       }
     }
   };
-  const options = {
-    type: "line",
-    maintainAspectRatio: false,
-    tension: 0.01,
-    scales: {
-      y: {
-        max: 10000000,
-        min: 0,
-      },
-    },
-    plugins: {
-      zoom: {
-        zoom: {
-          wheel: {
-            enabled: true,
-          },
-          pinch: {
-            enabled: true,
-          },
-          mode: "x",
-          drag: { enabled: true },
-        },
-      },
-    },
-  };
+
   return (
     <main className={`${styles.main} mt-6`}>
       <h1 className={styles.zigZagText}>
@@ -742,13 +704,7 @@ export default function BitasEth() {
           <div className="text-[10px] flex justify-center m-0 p-0">
             Time UTC+5:30 (IST)
           </div>
-
-          <Line
-            className="mb-12 lg:pl-4"
-            options={options}
-            datasetIdKey="id"
-            data={tableData}
-          />
+          <MemoChart tableData={tableData} />
         </div>
       </div>
 

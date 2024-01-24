@@ -244,8 +244,8 @@
   justify-content: center;
 }
 .deleteIcon {
-  height: 2rem;
-  width: 3rem;
+  min-height: 2rem;
+  min-width: 2rem;
   color: white;
 }
 .asideUl {
@@ -288,8 +288,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  flex-grow: 1;
   overflow: hidden;
+  max-height: 35%;
 }
 .asideUl > div:first-of-type {
   overflow: visible;

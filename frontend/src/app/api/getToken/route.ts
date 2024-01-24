@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     },
   });
   const mailOptions = {
-    from: "nodemailerangelo@gmail.com",
+    from: `${process.env.RESET_EMAIL}`,
     to: email,
     subject: "password recovery",
     html: `<!DOCTYPE html>

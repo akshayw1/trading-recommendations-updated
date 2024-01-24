@@ -5,24 +5,9 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
-import zoomPlugin from "chartjs-plugin-zoom";
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  PointElement,
-  LineElement,
-} from "chart.js";
-ChartJS.register(
-  zoomPlugin,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip
-);
+import { MemoChart } from "@/components/charts/chart";
+
 import { useOnboardingContext } from "@/context/MyContext";
 import { Line } from "react-chartjs-2";
 import LoadingToast from "../usersTable/loading";
@@ -352,32 +337,7 @@ export default function FutureOI({ nameoi }) {
       }
     }
   };
-  const options = {
-    tension: 0.01,
 
-    type: "line",
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        max: 10000000,
-        min: 0,
-      },
-    },
-    plugins: {
-      zoom: {
-        zoom: {
-          wheel: {
-            enabled: true,
-          },
-          pinch: {
-            enabled: true,
-          },
-          mode: "x",
-          drag: { enabled: true },
-        },
-      },
-    },
-  };
   return (
     <main className={`${styles.main}`}>
       <h1 className={styles.zigZagText}>
@@ -396,7 +356,6 @@ export default function FutureOI({ nameoi }) {
                 <th>Time</th>
                 <th>OI Interpretation</th>
                 <th>Trend</th>
-                
 
                 <th>Entry Idea</th>
               </tr>
@@ -731,12 +690,7 @@ export default function FutureOI({ nameoi }) {
           <div className="text-[10px] flex justify-center m-0 p-0">
             Time UTC+5:30 (IST)
           </div>
-          <Line
-            className="mb-12 lg:pl-4"
-            options={options}
-            datasetIdKey="id"
-            data={tableData}
-          />
+          <MemoChart tableData={tableData} />
         </div>
       </div>
 
