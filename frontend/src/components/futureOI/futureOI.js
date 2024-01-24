@@ -394,8 +394,9 @@ export default function FutureOI({ nameoi }) {
               <tr>
                 <th>N</th>
                 <th>Time</th>
-                <th>Trend</th>
                 <th>OI Interpretation</th>
+                <th>Trend</th>
+                
 
                 <th>Entry Idea</th>
               </tr>
@@ -726,6 +727,9 @@ export default function FutureOI({ nameoi }) {
             <span className="mr-8">Selling Pressure</span>
             <div className="h-[70%] w-12 bg-green-700 mr-2"></div>Buying
             Pressure
+          </div>
+          <div className="text-[10px] flex justify-center m-0 p-0">
+            Time UTC+5:30 (IST)
           </div>
           <Line
             className="mb-12 lg:pl-4"
