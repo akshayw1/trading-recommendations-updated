@@ -26,10 +26,10 @@ export default function Aside() {
     });
     console.log(listOI);
     if (
-      oiName === "Bitcoin" ||
-      oiName === "Ethereum" ||
-      listOI.includes(oiName) ||
-      listOI.includes("EMC" + oiName)
+      oiName.toLowerCase() === "bitcoin" ||
+      oiName.toLowerCase() === "ethereum" ||
+      listOI.includes(oiName.toLowerCase()) ||
+      listOI.includes("emc" + oiName.toLowerCase())
     ) {
       toast.update(toastId, {
         render: "OI Exist",
@@ -149,12 +149,7 @@ export default function Aside() {
           <div className="input1">
             <input
               value={oiName}
-              onChange={(e) =>
-                setOiName(
-                  e.target.value.charAt(0).toUpperCase() +
-                    e.target.value.slice(1).toLowerCase()
-                )
-              }
+              onChange={(e) => setOiName(e.target.value)}
               type="text"
               required
             ></input>
