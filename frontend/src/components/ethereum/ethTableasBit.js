@@ -243,6 +243,24 @@ export default function EthTableasBits() {
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td colSpan="5">
+                <div className="flex flex-start">
+                  <button
+                    onClick={addItem}
+                    className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={updateData}
+                    className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                  >
+                    Update
+                  </button>
+                </div>
+              </td>
+            </tr>
             {data.map((item, index) => {
               return (
                 <tr key={item.Time}>
@@ -860,18 +878,6 @@ export default function EthTableasBits() {
               <tr>
                 <td colSpan="15">
                   <div className="flex flex-start pb-28 ">
-                    <button
-                      onClick={addItem}
-                      className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                    >
-                      +
-                    </button>
-                    <button
-                      onClick={updateData}
-                      className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                    >
-                      Update
-                    </button>
                     <button
                       onClick={() => setData([])}
                       className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"

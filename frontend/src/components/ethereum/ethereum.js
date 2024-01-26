@@ -422,6 +422,24 @@ export default function Ethereum() {
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td colSpan="5">
+                  <div className="flex flex-start">
+                    <button
+                      onClick={() => addItem()}
+                      className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                    >
+                      +
+                    </button>
+                    <button
+                      onClick={() => updateData()}
+                      className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                    >
+                      Update
+                    </button>
+                  </div>
+                </td>
+              </tr>
               {data.map((item, index) => (
                 <tr key={item.Time}>
                   <td
@@ -716,18 +734,6 @@ export default function Ethereum() {
                   <td colSpan="5">
                     <div className="flex flex-start pb-36">
                       <button
-                        onClick={() => addItem()}
-                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => updateData()}
-                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                      >
-                        Update
-                      </button>
-                      <button
                         onClick={() => setData([])}
                         className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
                       >
@@ -817,6 +823,24 @@ export default function Ethereum() {
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td colSpan="5">
+                  <div className="flex flex-start">
+                    <button
+                      onClick={() => addItem("freeTextEth")}
+                      className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                    >
+                      +
+                    </button>
+                    <button
+                      onClick={() => updateData("freeTextEth")}
+                      className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                    >
+                      Update
+                    </button>
+                  </div>
+                </td>
+              </tr>
               {freeTextTable.map((item, index) => (
                 <tr key={item.Time}>
                   <td className="flex flex-row gap-2 justify-center">
@@ -870,18 +894,6 @@ export default function Ethereum() {
                   <td colSpan="5">
                     <div className="flex flex-start">
                       <button
-                        onClick={() => addItem("freeTextEth")}
-                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => updateData("freeTextEth")}
-                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                      >
-                        Update
-                      </button>
-                      <button
                         onClick={() => setFreeTextTable([])}
                         className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
                       >
@@ -907,6 +919,24 @@ export default function Ethereum() {
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td colSpan="5">
+                    <div className="flex flex-start">
+                      <button
+                        onClick={() => addItem("chartDataEth")}
+                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() => updateData("chartDataEth")}
+                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </td>
+                </tr>
                 {chartData.map((item, index) => (
                   <tr key={item.Time}>
                     <td className="flex flex-row gap-2 justify-center">
@@ -968,18 +998,6 @@ export default function Ethereum() {
                 <tr>
                   <td colSpan="5">
                     <div className="flex flex-start">
-                      <button
-                        onClick={() => addItem("chartDataEth")}
-                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => updateData("chartDataEth")}
-                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                      >
-                        Update
-                      </button>
                       <button
                         onClick={() => setChartData([])}
                         className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
