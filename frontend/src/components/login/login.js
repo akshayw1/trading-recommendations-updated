@@ -56,9 +56,14 @@ export default function Login() {
   return (
     <>
       <main className={styles.main}>
-        <h2 className={styles.h2}>
-          Sign in to <span className="blue">BTCUSDPERP</span>
-        </h2>
+        <div className="flex flex-col items-center">
+          <h2 className={styles.h2}>
+            Sign in to <span className="blue">BTCUSDPERP</span>
+          </h2>
+          <p className="text-[1.2rem] font-[600]">
+            (Service available only for paid subscribers)
+          </p>
+        </div>
         <div className="input1">
           <input
             onBlur={() => setErrors([])}
