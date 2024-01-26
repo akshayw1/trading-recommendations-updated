@@ -69,7 +69,7 @@ const Chart = ({ tableData }) => {
   };
   return (
     <Line
-      className="mb-12 lg:pl-4"
+      className="mb-12 mr-24 lg:pl-4"
       options={options}
       datasetIdKey="id"
       data={tableData}
