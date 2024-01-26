@@ -355,7 +355,7 @@ export default function BitasEth() {
       </h1>
       <div className="w-full flex lg:flex-row flex-col justify-between overflow-hidden">
         <div
-          className={`scrollbar1 overflow-scroll  lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}
+          className={`scrollbar1 overflow-auto  lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}
         >
           <table>
             <thead>
@@ -710,7 +710,7 @@ export default function BitasEth() {
 
       <div className="flex flex-row w-full mt-6">
         <div
-          className={`scrollbar1 overflow-x-scroll w-full h-[20rem] bg-[#181a1b] ${styles.table}`}
+          className={`scrollbar1 overflow-auto w-full h-[20rem] bg-[#181a1b] ${styles.table}`}
         >
           <table>
             <thead>
@@ -800,7 +800,7 @@ export default function BitasEth() {
         </div>
         {session && session.user.admin ? (
           <div
-            className={`bg-[#181a1b] scrollbar1 overflow-x-scroll w-full h-[20rem] ${styles.table}`}
+            className={`bg-[#181a1b] scrollbar1 overflow-auto w-full h-[20rem] ${styles.table}`}
           >
             <table>
               <thead>

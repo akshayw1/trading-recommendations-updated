@@ -211,7 +211,7 @@ export default function BitcoinTable() {
         </div>
       </div>
       <div
-        className={`scrollbar1 w-full flex overflow-scroll justify-start flex-col h-[25rem] bg-[#181a1b] ${styles.table}`}
+        className={`scrollbar1 w-full flex overflow-auto justify-start flex-col h-[25rem] bg-[#181a1b] ${styles.table}`}
       >
         <table>
           <thead>
