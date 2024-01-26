@@ -231,3 +231,6 @@ main {
 .scrollbar1::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.scrollbar1::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0);
+}

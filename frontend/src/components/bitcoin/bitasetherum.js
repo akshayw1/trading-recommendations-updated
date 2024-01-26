@@ -355,7 +355,7 @@ export default function BitasEth() {
       </h1>
       <div className="w-full flex lg:flex-row flex-col justify-between overflow-hidden">
         <div
-          className={`scrollbar1 overflow-scroll  lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}
+          className={`scrollbar1 overflow-auto  lg:w-[40vw] w-full  h-[33.5rem] ${styles.table}`}
         >
           <table>
             <thead>
@@ -370,6 +370,26 @@ export default function BitasEth() {
               </tr>
             </thead>
             <tbody>
+              {session && session.user.admin ? (
+                <tr>
+                  <td colSpan="5">
+                    <div className="flex flex-start">
+                      <button
+                        onClick={() => addItem()}
+                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() => updateData()}
+                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ) : null}
               {data.map((item, index) => (
                 <tr key={item.Time}>
                   <td className="flex flex-row gap-2 justify-center">
@@ -666,18 +686,6 @@ export default function BitasEth() {
                   <td colSpan="5">
                     <div className="flex flex-start pb-36">
                       <button
-                        onClick={() => addItem()}
-                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => updateData()}
-                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                      >
-                        Update
-                      </button>
-                      <button
                         onClick={() => setData([])}
                         className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
                       >
@@ -710,7 +718,7 @@ export default function BitasEth() {
 
       <div className="flex flex-row w-full mt-6">
         <div
-          className={`scrollbar1 overflow-x-scroll w-full h-[20rem] bg-[#181a1b] ${styles.table}`}
+          className={`scrollbar1 overflow-auto w-full h-[20rem] bg-[#181a1b] ${styles.table}`}
         >
           <table>
             <thead>
@@ -721,6 +729,27 @@ export default function BitasEth() {
               </tr>
             </thead>
             <tbody>
+              {session && session.user.admin ? (
+                <tr>
+                  <td colSpan="5">
+                    <div className="flex flex-start">
+                      {" "}
+                      <button
+                        onClick={() => addItem("freeTextEth")}
+                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() => updateData("freeTextBitasEth")}
+                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ) : null}
               {freeTextTable.map((item, index) => (
                 <tr key={item.Time}>
                   <td className="flex flex-row gap-2 justify-center">
@@ -774,18 +803,6 @@ export default function BitasEth() {
                   <td colSpan="5">
                     <div className="flex flex-start">
                       <button
-                        onClick={() => addItem("freeTextEth")}
-                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => updateData("freeTextBitasEth")}
-                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                      >
-                        Update
-                      </button>
-                      <button
                         onClick={() => setFreeTextTable([])}
                         className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
                       >
@@ -800,7 +817,7 @@ export default function BitasEth() {
         </div>
         {session && session.user.admin ? (
           <div
-            className={`bg-[#181a1b] scrollbar1 overflow-x-scroll w-full h-[20rem] ${styles.table}`}
+            className={`bg-[#181a1b] scrollbar1 overflow-auto w-full h-[20rem] ${styles.table}`}
           >
             <table>
               <thead>
@@ -811,6 +828,27 @@ export default function BitasEth() {
                 </tr>
               </thead>
               <tbody>
+                {session && session.user.admin ? (
+                  <tr>
+                    <td colSpan="5">
+                      <div className="flex flex-start">
+                        {" "}
+                        <button
+                          onClick={() => addItem("chartDataEth")}
+                          className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                        >
+                          +
+                        </button>
+                        <button
+                          onClick={() => updateData("chartDataBitasEth")}
+                          className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                        >
+                          Update
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ) : null}
                 {chartData.map((item, index) => (
                   <tr key={item.Time}>
                     <td className="flex flex-row gap-2 justify-center">
@@ -872,18 +910,6 @@ export default function BitasEth() {
                 <tr>
                   <td colSpan="5">
                     <div className="flex flex-start">
-                      <button
-                        onClick={() => addItem("chartDataEth")}
-                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => updateData("chartDataBitasEth")}
-                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                      >
-                        Update
-                      </button>
                       <button
                         onClick={() => setChartData([])}
                         className="w-48 text-center bg-red-700 h-12 hover:bg-red-600"
