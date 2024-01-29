@@ -44,10 +44,11 @@ export default function Login() {
     const res = await signIn("credentials", {
       password,
       email,
+      redirect: false,
     });
     if (res.ok) {
       toast.success("Logged");
-      router.reload();
+      window.location.reload();
     } else {
       toast.warning(res.error);
     }
