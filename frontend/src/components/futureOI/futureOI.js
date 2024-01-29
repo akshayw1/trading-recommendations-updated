@@ -361,24 +361,27 @@ export default function FutureOI({ nameoi }) {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td colSpan="5">
-                  <div className="flex flex-start">
-                    <button
-                      onClick={() => addItem()}
-                      className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                    >
-                      +
-                    </button>
-                    <button
-                      onClick={() => updateData()}
-                      className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                    >
-                      Update
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              {session && session.user.admin ? (
+                <tr>
+                  <td colSpan="5">
+                    <div className="flex flex-start">
+                      <button
+                        onClick={() => addItem()}
+                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() => updateData()}
+                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ) : null}
+
               {data.map((item, index) => (
                 <tr key={item.Time}>
                   <td className="flex flex-row gap-2 justify-center">
@@ -713,24 +716,27 @@ export default function FutureOI({ nameoi }) {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td colSpan="5">
-                  <div className="flex flex-start">
-                    <button
-                      onClick={() => addItem("freeText" + nameoi)}
-                      className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                    >
-                      +
-                    </button>
-                    <button
-                      onClick={() => updateData("freeText" + nameoi)}
-                      className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                    >
-                      Update
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              {session && session.user.admin ? (
+                <tr>
+                  <td colSpan="5">
+                    <div className="flex flex-start">
+                      <button
+                        onClick={() => addItem("freeText" + nameoi)}
+                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() => updateData("freeText" + nameoi)}
+                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ) : null}
+
               {freeTextTable.map((item, index) => (
                 <tr key={item.Time}>
                   <td className="flex flex-row gap-2 justify-center">
@@ -814,24 +820,27 @@ export default function FutureOI({ nameoi }) {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td colSpan="5">
-                    <div className="flex flex-start">
-                      <button
-                        onClick={() => addItem("chartData" + nameoi)}
-                        className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => updateData("chartData" + nameoi)}
-                        className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                      >
-                        Update
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                {session && session.user.admin ? (
+                  <tr>
+                    <td colSpan="5">
+                      <div className="flex flex-start">
+                        <button
+                          onClick={() => addItem("chartData" + nameoi)}
+                          className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                        >
+                          +
+                        </button>
+                        <button
+                          onClick={() => updateData("chartData" + nameoi)}
+                          className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                        >
+                          Update
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ) : null}
+
                 {chartData.map((item, index) => (
                   <tr key={item.Time}>
                     <td className="flex flex-row gap-2 justify-center">

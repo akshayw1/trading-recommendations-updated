@@ -832,7 +832,6 @@ export default function BitasEth() {
                   <tr>
                     <td colSpan="5">
                       <div className="flex flex-start">
-                        {" "}
                         <button
                           onClick={() => addItem("chartDataEth")}
                           className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
