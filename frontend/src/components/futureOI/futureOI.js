@@ -696,7 +696,7 @@ export default function FutureOI({ nameoi }) {
           <div className="text-[10px] flex justify-center m-0 p-0">
             Time UTC+5:30 (IST)
           </div>
-          <MemoChart tableData={tableData} />
+          <MemoChart tableData={tableData} /> 
         </div>
       </div>
 

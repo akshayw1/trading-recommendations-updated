@@ -45,26 +45,7 @@ const Chart = ({ tableData }) => {
           drag: { enabled: true },
         },
       },
-      annotation: {
-        annotations: [
-          {
-            type: "line",
-            mode: "horizontal",
-            scaleID: "y",
-            value: 5000000, // Ajusta este valor según tus necesidades
-            borderColor: "grey",
-            borderWidth: 2,
-            borderDash: [2, 2],
-
-            capBezierPoints: "capBezierPoints",
-            label: {
-              enabled: true,
-              content: "Línea Central",
-              position: "right",
-            },
-          },
-        ],
-      },
+      
     },
   };
   return (
