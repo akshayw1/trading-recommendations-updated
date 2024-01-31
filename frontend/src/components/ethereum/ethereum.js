@@ -759,6 +759,9 @@ export default function Ethereum() {
             <div className="h-[70%] w-12 bg-green-700 mr-2"></div>Buying
             Pressure
           </div>
+          <div className="text-[10px] flex justify-center m-0 p-0">
+            Time UTC+5:30 (IST)
+          </div>
           <MemoChart tableData={tableData} />
         </div>
       </div>

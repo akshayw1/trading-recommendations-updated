@@ -232,24 +232,26 @@ export default function BitcoinTable() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td colSpan="5">
-                <div className="flex flex-start">
-                  <button
-                    onClick={addItem}
-                    className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                  >
-                    +
-                  </button>
-                  <button
-                    onClick={updateData}
-                    className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                  >
-                    Update
-                  </button>
-                </div>
-              </td>
-            </tr>
+          {session && session.user.admin ? (
+                  <tr>
+                    <td colSpan="5">
+                      <div className="flex flex-start">
+                        <button
+                          onClick={() => addItem()}
+                          className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                        >
+                          +
+                        </button>
+                        <button
+                          onClick={() => updateData()}
+                          className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                        >
+                          Update
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ) : null}
             {data.map((item, index) => {
               return (
                 <tr key={item.Time}>
