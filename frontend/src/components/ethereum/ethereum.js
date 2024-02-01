@@ -870,7 +870,7 @@ Live
                     ) : null}
                     {index + 1}
                   </td>
-                  <td>
+                  <td className="">
                     {session && !session.user.admin ? (
                       item.Time
                     ) : (
@@ -884,7 +884,7 @@ Live
                       />
                     )}
                   </td>
-                  <td className="flex items-center justify-center">
+                  <td className="flex ">
                     {session && !session.user.admin ? (
                       item.FreeText
                     ) : (

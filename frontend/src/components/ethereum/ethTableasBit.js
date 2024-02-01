@@ -234,7 +234,7 @@ export default function EthTableasBits() {
               <th>Price</th>
               <th>Call OI Interpretation</th>
               <th>Strike</th>
-              <th>Put Oi Interpretation</th>
+              <th>Put OI Interpretation</th>
               <th>Price</th>
               <th>Trend</th>
               <th>Delta</th>

@@ -777,7 +777,7 @@ Live
                       />
                     )}
                   </td>
-                  <td className="flex items-center justify-center">
+                  <td className="flex">
                     {session && !session.user.admin ? (
                       item.FreeText
                     ) : (
