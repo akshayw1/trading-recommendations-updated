@@ -5,6 +5,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
+import { FaCircle } from 'react-icons/fa';
 
 import { MemoChart } from "@/components/charts/chart";
 
@@ -340,8 +341,15 @@ export default function FutureOI({ nameoi }) {
 
   return (
     <main className={`${styles.main}`}>
+      
       <h1 className={styles.zigZagText}>
-        {freeTextTable.length === 0
+      <div className={styles.liveIndicatorBlock}>
+  <span className={styles.liveIndicator}>
+  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
+
+Live
+          </span>
+</div>  {freeTextTable.length === 0
           ? "Zig Zag Moves - STAY AWAY"
           : freeTextTable[0].FreeText}
       </h1>

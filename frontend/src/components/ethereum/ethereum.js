@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
 import EthTableasBits from "./ethTableasBit";
+import { FaCircle } from 'react-icons/fa';
 
 import { MemoChart } from "@/components/charts/chart";
 
@@ -393,7 +394,13 @@ export default function Ethereum() {
   return (
     <main className={`${styles.main}`}>
       <h1 className={styles.zigZagText}>
-        <Image width={90} height={90} alt="Live Feed" src="/images/gipy.gif" />
+      <div className={styles.liveIndicatorBlock}>
+  <span className={styles.liveIndicator}>
+  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
+
+Live
+          </span>
+</div>  
         &quot; Ethereum Option Chain: Open Interest Interpretation&quot;
       </h1>
 

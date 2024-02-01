@@ -77,7 +77,7 @@ export default function ContactUs() {
   };
   return (
     <main className={styles.main}>
-      <h2 className="blue">Email us at : support@btcusdperp.com</h2>
+      <h2 className="blue">Email us at : <a href="mailto: support@btcusdperp.com">support@btcusdperp.com</a></h2>
       <div>
         <div className="input1">
           <input

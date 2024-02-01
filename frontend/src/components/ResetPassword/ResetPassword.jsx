@@ -1,4 +1,6 @@
 import React from 'react';
+import styles from "./styles.module.css";
+
 
 const ResetPassword = ({ resetUrl }) => {
   return (
@@ -10,7 +12,8 @@ const ResetPassword = ({ resetUrl }) => {
           <div className="container">
             <h1>Reset Password</h1>
             <p>To reset your password, click the button below:</p>
-            <a className="button blue"style={{ color: '#fff' }} href={resetUrl} target="_blank" rel="noopener noreferrer">
+            <br/>
+            <a className={styles.button} href={resetUrl} target="_blank" rel="noopener noreferrer">
               Reset Password
             </a>
           </div>
