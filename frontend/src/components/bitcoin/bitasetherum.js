@@ -20,7 +20,7 @@ export default function BitasEth() {
     OIInter1: 0,
     Price1: 0,
     CallOIInterpretation: 0,
-    Strike: 47700,
+    Strike: null,
     PutOiInterpretation: 0,
     Price2: 0,
     OIInter2: 0,

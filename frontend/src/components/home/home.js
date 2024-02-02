@@ -1,6 +1,7 @@
 "use client";
 import styles from "./styles.module.css";
 import Image from "next/image";
+import { FaCircle } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 import BitcoinTable from "@/components/bitcoin/bitcoinTable";
 export default function Home() {
@@ -87,7 +88,18 @@ export default function Home() {
         </p>
       </section>
       <section className={styles.zigZagBox}>
-        <h1 className={styles.zigZagText}>  Bitcoin Option Chain: Open Interest Interpretation</h1>
+      
+        <h1 className={styles.zigZagText}> 
+        
+        <div className={styles.liveIndicatorBlock}>
+  <span className={styles.liveIndicator}>
+  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
+
+Live
+          </span>
+</div>  
+
+Bitcoin Option Chain: Open Interest Interpretation</h1>
         <div>
           <BitcoinTable />
         </div>
