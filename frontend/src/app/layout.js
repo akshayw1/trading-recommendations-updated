@@ -8,7 +8,8 @@ import { NextAuthProvider } from "../providers/Providers";
 import { OnboardingProvider } from "../context/MyContext";
 const font = Commissioner({ subsets: ["latin"] });
 import { ToastContainer } from "react-toastify";
-import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 
 import Head from "next/head";
 
@@ -20,25 +21,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+
       <body className={font.className}>
         <NextAuthProvider>
           <OnboardingProvider>
             <ToastContainer />
             <Aside />
             <Nav />
-            <Script id="google-tag" strategy="lazyOnload">
-        {`
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-XMSENTDEMW"></script>
-          <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-          
-            gtag('config', 'G-XMSENTDEMW');
-          </script>
-        `}
-      </Script>
             
+                  <GoogleAnalytics gaId="G-XMSENTDEMW" />
+
             <MainContainerShadow>{children}</MainContainerShadow>
             <Footer />
           </OnboardingProvider>
