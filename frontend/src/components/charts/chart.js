@@ -32,6 +32,7 @@ const Chart = ({ tableData }) => {
     tension: 0.01,
     scales: {
       x: {
+        offset: true,
         max: tableData.labels.length - 1,
         min: tableData.labels.length - 24,
       },
