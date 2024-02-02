@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
             <ToastContainer />
             <Aside />
             <Nav />
-            <Script strategy="lazyOnload">
+            <Script id="google-tag" strategy="lazyOnload">
         {`
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-XMSENTDEMW"></script>
           <script>
