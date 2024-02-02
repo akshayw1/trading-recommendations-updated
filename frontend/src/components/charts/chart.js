@@ -55,7 +55,6 @@ const Chart = ({ tableData }) => {
       },
     },
   };
-  useEffect(() => {}, []);
 
   return (
     <Line
