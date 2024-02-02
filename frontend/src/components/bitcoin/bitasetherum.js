@@ -349,6 +349,13 @@ export default function BitasEth() {
   return (
     <main className={`${styles.main} mt-6`}>
       <h1 className={styles.zigZagText}>
+      <div className={styles.liveIndicatorBlock}>
+  <span className={styles.liveIndicator}>
+  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
+
+Live
+          </span>
+</div> 
         {freeTextTable.length === 0
           ? "Zig Zag Moves - STAY AWAY"
           : freeTextTable[0].FreeText}

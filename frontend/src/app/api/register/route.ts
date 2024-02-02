@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 
 export async function POST(req: Request) {
   let { name, email, password } = await req.json();
-  const admin = email === "admin@admin.com" ? true : false;
+  const admin = email === "btcusdperp.oi@gmail.com" ? true : false;
   email = email.toUpperCase();
   let hashedPassword = "";
   await connectMongoDB();
