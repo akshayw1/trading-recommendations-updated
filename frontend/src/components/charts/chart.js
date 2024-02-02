@@ -1,4 +1,8 @@
 import { memo } from "react";
+
+import { Line } from "react-chartjs-2";
+
+import { useRef, useEffect } from "react";
 import zoomPlugin from "chartjs-plugin-zoom";
 import annotationPlugin from "chartjs-plugin-annotation";
 
@@ -10,6 +14,7 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
+
 ChartJS.register(
   annotationPlugin,
   zoomPlugin,
@@ -19,7 +24,6 @@ ChartJS.register(
   LineElement,
   Tooltip
 );
-import { Line } from "react-chartjs-2";
 
 const Chart = ({ tableData }) => {
   const options = {
@@ -27,6 +31,10 @@ const Chart = ({ tableData }) => {
     maintainAspectRatio: false,
     tension: 0.01,
     scales: {
+      x: {
+        max: tableData.labels.length - 1,
+        min: tableData.labels.length - 24,
+      },
       y: {
         max: 10000000,
         min: 0,
@@ -45,9 +53,9 @@ const Chart = ({ tableData }) => {
           drag: { enabled: true },
         },
       },
-      
     },
   };
+
   return (
     <Line
       className="mb-12 mr-24 lg:pl-4"
