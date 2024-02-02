@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
 import { MemoChart } from "@/components/charts/chart";
-
+import { FaCircle } from "react-icons/fa";
 import { useOnboardingContext } from "@/context/MyContext";
 import LoadingToast from "../usersTable/loading";
 export default function BitasEth() {
