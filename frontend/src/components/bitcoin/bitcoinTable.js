@@ -223,7 +223,7 @@ export default function BitcoinTable() {
               <th>Price</th>
               <th>Call OI Interpretation</th>
               <th>Strike</th>
-              <th>Put Oi Interpretation</th>
+              <th>Put OI Interpretation</th>
               <th>Price</th>
               <th>Trend</th>
               <th>Delta</th>
@@ -232,24 +232,26 @@ export default function BitcoinTable() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td colSpan="5">
-                <div className="flex flex-start">
-                  <button
-                    onClick={addItem}
-                    className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
-                  >
-                    +
-                  </button>
-                  <button
-                    onClick={updateData}
-                    className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
-                  >
-                    Update
-                  </button>
-                </div>
-              </td>
-            </tr>
+          {session && session.user.admin ? (
+                  <tr>
+                    <td colSpan="5">
+                      <div className="flex flex-start">
+                        <button
+                          onClick={() => addItem()}
+                          className="w-48 text-center bg-green-800 h-12 hover:bg-green-700"
+                        >
+                          +
+                        </button>
+                        <button
+                          onClick={() => updateData()}
+                          className="w-48 text-center bg-blue-700 h-12 hover:bg-blue-600"
+                        >
+                          Update
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ) : null}
             {data.map((item, index) => {
               return (
                 <tr key={item.Time}>

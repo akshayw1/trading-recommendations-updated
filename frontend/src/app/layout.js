@@ -8,6 +8,7 @@ import { NextAuthProvider } from "../providers/Providers";
 import { OnboardingProvider } from "../context/MyContext";
 const font = Commissioner({ subsets: ["latin"] });
 import { ToastContainer } from "react-toastify";
+import Head from "next/head";
 
 export const metadata = {
   title: "Bitcoin Options",
@@ -23,6 +24,20 @@ export default function RootLayout({ children }) {
             <ToastContainer />
             <Aside />
             <Nav />
+            <Head>
+        {/* Google Analytics Tracking Code */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XMSENTDEMW"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XMSENTDEMW');
+            `,
+          }}
+        />
+      </Head>
             <MainContainerShadow>{children}</MainContainerShadow>
             <Footer />
           </OnboardingProvider>

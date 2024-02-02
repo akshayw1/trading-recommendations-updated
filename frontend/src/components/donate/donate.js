@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
+import ResetPassword from "../ResetPassword/ResetPassword";
 
 export default function Donate() {
   const [copied, setCopied] = useState(false);
@@ -54,7 +55,8 @@ export default function Donate() {
             </span>
           </p>
         </div>
-        <p>Send screenshot of payment to &apos;support@btcusdperp.com&apos;.<br/> We will give access within 6 Hours from your email.</p>
+
+        <p>Send screenshot of payment to &apos;<a href="mailto: support@btcusdperp.com">support@btcusdperp.com&apos; </a>.<br/> We will give access within 6 Hours from your email.</p>
       </section>
     </main>
   );

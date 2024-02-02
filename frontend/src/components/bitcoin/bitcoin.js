@@ -10,6 +10,8 @@ import isEqual from "lodash/isEqual";
 import livelogo from "../../../public/images/Logo.png";
 import BitasEth from "./bitasetherum";
 import zoomPlugin from "chartjs-plugin-zoom";
+import { FaCircle } from 'react-icons/fa';
+
 
 export default function Bitcoin() {
   const dataExample = {
@@ -339,7 +341,14 @@ export default function Bitcoin() {
   return (
     <main className={styles.main}>
       <h1 className={styles.zigZagText}>
-        <Image width={90} height={90} alt="Live Feed" src="/images/gipy.gif" />
+       
+        <div className={styles.liveIndicatorBlock}>
+  <span className={styles.liveIndicator}>
+  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
+
+Live
+          </span>
+</div>  
         Bitcoin Option Chain: Open Interest Interpretation
       </h1>
       <div className="flex flex-col w-full lg:flex-row justify-between overflow-hidden">

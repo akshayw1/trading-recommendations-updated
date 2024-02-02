@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
 import EthTableasBits from "./ethTableasBit";
+import { FaCircle } from 'react-icons/fa';
 
 import { MemoChart } from "@/components/charts/chart";
 
@@ -393,7 +394,13 @@ export default function Ethereum() {
   return (
     <main className={`${styles.main}`}>
       <h1 className={styles.zigZagText}>
-        <Image width={90} height={90} alt="Live Feed" src="/images/gipy.gif" />
+      <div className={styles.liveIndicatorBlock}>
+  <span className={styles.liveIndicator}>
+  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
+
+Live
+          </span>
+</div>  
         &quot; Ethereum Option Chain: Open Interest Interpretation&quot;
       </h1>
 
@@ -759,6 +766,9 @@ export default function Ethereum() {
             <div className="h-[70%] w-12 bg-green-700 mr-2"></div>Buying
             Pressure
           </div>
+          <div className="text-[10px] flex justify-center m-0 p-0">
+            Time UTC+5:30 (IST)
+          </div>
           <MemoChart tableData={tableData} />
         </div>
       </div>
@@ -860,7 +870,7 @@ export default function Ethereum() {
                     ) : null}
                     {index + 1}
                   </td>
-                  <td>
+                  <td className="">
                     {session && !session.user.admin ? (
                       item.Time
                     ) : (
@@ -874,7 +884,7 @@ export default function Ethereum() {
                       />
                     )}
                   </td>
-                  <td className="flex items-center justify-center">
+                  <td className="flex ">
                     {session && !session.user.admin ? (
                       item.FreeText
                     ) : (
