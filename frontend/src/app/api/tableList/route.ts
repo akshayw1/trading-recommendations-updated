@@ -11,7 +11,6 @@ export async function GET(req: Request) {
 
     if (alloiListDocuments.length > 0) {
       const dataArray = alloiListDocuments.map((doc) => doc.name);
-
       return NextResponse.json(
         { message: "All oiLists retrieved", data: dataArray },
         { status: 200 }

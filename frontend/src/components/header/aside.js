@@ -263,6 +263,11 @@ export default function Aside() {
               Donate
             </Link>
           </li>
+          {session && session.user.admin ? (
+            <li>
+              <Link href="/admin/pagesblocks">Block Panel</Link>
+            </li>
+          ) : null}
         </ul>
         <ul
           className={`${styles.asideUl} ${
@@ -336,6 +341,7 @@ export default function Aside() {
             <div className={styles.blue}>Futures OI</div>
             <div className={`${styles.asideOiBox} scrollbar1`}>
               {listOI
+                .filter((word) => word !== "Bitcoin" && word !== "Ethereum")
                 .filter((word) => !word.startsWith("EMC"))
                 .map((name) => (
                   <div className={styles.white} key={name}>
@@ -376,6 +382,7 @@ export default function Aside() {
             <div className={styles.blue}>Meme Coin</div>
             <div className={`${styles.asideOiBox} scrollbar1`}>
               {listOI
+                .filter((word) => word !== "Bitcoin" && word !== "Ethereum")
                 .filter((word) => word.startsWith("EMC"))
                 .map((name) => (
                   <div className={styles.white} key={name}>

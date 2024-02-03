@@ -35,7 +35,7 @@ export const OnboardingProvider = ({
         if (res.ok) {
           const data = await res.json();
           setListOI(data.data);
-
+          // WTS= with tables
           setPagesWTS([
             ...data.data.map((item: string) => `/user/${item}`),
             ...pagesWithTable,

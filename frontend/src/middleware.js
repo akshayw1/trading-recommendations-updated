@@ -26,21 +26,28 @@ export default async function middleware(req) {
   home.pathname = "/";
   afterAuth.pathname = "/";
   // Store current request url in a custom header, which you can read later
+  if (req.nextUrl.pathname.startsWith("/user")) {
+    const res = await fetch(
+      process.env.NEXTAUTH_URL +
+        "/api/OiBlock/" +
+        req.nextUrl.pathname.replace("/user/", ""),
+      {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+      }
+    );
+    const data = await res.json();
 
-  if (
-    req.nextUrl.pathname.startsWith("/user") ||
-    req.nextUrl.pathname.startsWith("/admin")
-  ) {
+    if (data.blocked) {
+      if (!session) return NextResponse.redirect(auth);
+    }
+    // If user is unauthenticated, continue.
+  }
+  if (req.nextUrl.pathname.startsWith("/admin") && session && !session.admin) {
     //just push
     // You could also check for any property on the session object,
     // like role === "admin" or name === "Angelo", etc.
-
-    if (req.nextUrl.pathname === "/admin/allusers" && session && !session.admin)
-      return NextResponse.redirect(home);
-
-    if (!session && req.nextUrl.pathname !== "/user/bitcoin")
-      return NextResponse.redirect(auth);
-    // If user is unauthenticated, continue.
+    return NextResponse.redirect(home);
   }
 
   if (req.nextUrl.pathname.includes("auth")) {
