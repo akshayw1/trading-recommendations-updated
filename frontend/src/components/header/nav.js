@@ -52,6 +52,11 @@ export default function Nav() {
         <li>
           <Link href="/donate">Donate</Link>
         </li>
+        {session && session.user.admin ? (
+          <li>
+            <Link href="/admin/pagesblocks">Block Panel</Link>
+          </li>
+        ) : null}
         {status === "authenticated" ? (
           <li className={styles.authBox}>
             <Image

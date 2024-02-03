@@ -7,5 +7,6 @@ const pagesWithTable = [
   "/user/solona",
   "/user/sui",
   "/user/injective",
+  "/admin/pagesblocks",
 ];
 export default pagesWithTable;
