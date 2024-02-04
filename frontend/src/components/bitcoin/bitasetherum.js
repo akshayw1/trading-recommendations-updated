@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
 import { MemoChart } from "@/components/charts/chart";
-
+import { FaCircle } from "react-icons/fa";
 import { useOnboardingContext } from "@/context/MyContext";
 import LoadingToast from "../usersTable/loading";
 export default function BitasEth() {
@@ -20,7 +20,7 @@ export default function BitasEth() {
     OIInter1: 0,
     Price1: 0,
     CallOIInterpretation: 0,
-    Strike: 47700,
+    Strike: null,
     PutOiInterpretation: 0,
     Price2: 0,
     OIInter2: 0,
@@ -349,6 +349,13 @@ export default function BitasEth() {
   return (
     <main className={`${styles.main} mt-6`}>
       <h1 className={styles.zigZagText}>
+      <div className={styles.liveIndicatorBlock}>
+  <span className={styles.liveIndicator}>
+  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
+
+Live
+          </span>
+</div> 
         {freeTextTable.length === 0
           ? "Zig Zag Moves - STAY AWAY"
           : freeTextTable[0].FreeText}

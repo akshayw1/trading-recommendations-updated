@@ -8,6 +8,9 @@ import { NextAuthProvider } from "../providers/Providers";
 import { OnboardingProvider } from "../context/MyContext";
 const font = Commissioner({ subsets: ["latin"] });
 import { ToastContainer } from "react-toastify";
+import { GoogleAnalytics } from '@next/third-parties/google'
+
+
 import Head from "next/head";
 
 export const metadata = {
@@ -18,26 +21,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+
       <body className={font.className}>
         <NextAuthProvider>
           <OnboardingProvider>
             <ToastContainer />
             <Aside />
             <Nav />
-            <Head>
-        {/* Google Analytics Tracking Code */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XMSENTDEMW"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XMSENTDEMW');
-            `,
-          }}
-        />
-      </Head>
+            
+                  <GoogleAnalytics gaId="G-XMSENTDEMW" />
+
             <MainContainerShadow>{children}</MainContainerShadow>
             <Footer />
           </OnboardingProvider>

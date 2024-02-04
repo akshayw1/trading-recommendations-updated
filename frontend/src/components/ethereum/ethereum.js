@@ -22,7 +22,7 @@ export default function Ethereum() {
     OIInter1: 0,
     Price1: 0,
     CallOIInterpretation: 0,
-    Strike: 47700,
+    Strike: null,
     PutOiInterpretation: 0,
     Price2: 0,
     OIInter2: 0,
@@ -402,13 +402,26 @@ export default function Ethereum() {
             />
             Live
           </span>
+<<<<<<< HEAD
         </div>
         &quot; Ethereum Option Chain: Open Interest Interpretation&quot;
+=======
+</div>  
+        Ethereum Option Chain: Open Interest Interpretation;
+>>>>>>> 96b610ae05cb5f1115d597f5c331a319723e39e2
       </h1>
 
       <EthTableasBits />
-
+ 
       <h1 className={styles.zigZagText}>
+
+      <div className={styles.liveIndicatorBlock}>
+  <span className={styles.liveIndicator}>
+  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
+
+Live
+          </span>
+</div> 
         {freeTextTable.length === 0
           ? "Ethereum Option Chain: Open Interest Interpretation"
           : freeTextTable[0].FreeText}
