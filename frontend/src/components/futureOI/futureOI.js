@@ -5,7 +5,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
-import { FaCircle } from 'react-icons/fa';
+import { FaCircle } from "react-icons/fa";
 
 import { MemoChart } from "@/components/charts/chart";
 
@@ -341,15 +341,17 @@ export default function FutureOI({ nameoi }) {
 
   return (
     <main className={`${styles.main}`}>
-      
       <h1 className={styles.zigZagText}>
-      <div className={styles.liveIndicatorBlock}>
-  <span className={styles.liveIndicator}>
-  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
-
-Live
+        <div className={styles.liveIndicatorBlock}>
+          <span className={styles.liveIndicator}>
+            <FaCircle
+              className={`${styles.blink} ${styles.customIconStyle}`}
+              aria-hidden="true"
+            />
+            Live
           </span>
-</div>  {freeTextTable.length === 0
+        </div>{" "}
+        {freeTextTable.length === 0
           ? "Zig Zag Moves - STAY AWAY"
           : freeTextTable[0].FreeText}
       </h1>
@@ -404,9 +406,7 @@ Live
                     {index + 1}
                   </td>
                   <td>
-                    {session && !session.user.admin ? (
-                      item.Time
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(e.target.value, "Time", index)
@@ -415,12 +415,14 @@ Live
                         className={styles.inputTable}
                         type="text"
                       />
+                    ) : (
+                      item.Time
                     )}
                   </td>
                   <td className={styles.dropdown}>
                     <label htmlFor={`check${4 + 6 * index}`}>
                       <input
-                        disabled={session && !session.user.admin ? true : false}
+                        disabled={session && session.user.admin ? false : true}
                         className={styles.input1}
                         type="checkbox"
                         id={`check${4 + 6 * index}`}
@@ -531,7 +533,7 @@ Live
                   <td className={styles.dropdown}>
                     <label htmlFor={`check${3 + 6 * index}`}>
                       <input
-                        disabled={session && !session.user.admin ? true : false}
+                        disabled={session && session.user.admin ? false : true}
                         className={styles.input1}
                         type="checkbox"
                         id={`check${3 + 6 * index}`}
@@ -662,9 +664,7 @@ Live
                     </label>
                   </td>
                   <td>
-                    {session && !session.user.admin ? (
-                      item.Strike
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(e.target.value, "Strike", index)
@@ -673,6 +673,8 @@ Live
                         className={styles.inputTable}
                         type="text"
                       />
+                    ) : (
+                      item.Strike
                     )}
                   </td>
                 </tr>
@@ -707,7 +709,7 @@ Live
           <div className="text-[10px] flex justify-center m-0 p-0">
             Time UTC+5:30 (IST)
           </div>
-          <MemoChart tableData={tableData} /> 
+          <MemoChart tableData={tableData} />
         </div>
       </div>
 
@@ -759,9 +761,7 @@ Live
                     {index + 1}
                   </td>
                   <td>
-                    {session && !session.user.admin ? (
-                      item.Time
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(
@@ -775,12 +775,12 @@ Live
                         className={styles.inputTable}
                         type="text"
                       />
+                    ) : (
+                      item.Time
                     )}
                   </td>
                   <td className="flex">
-                    {session && !session.user.admin ? (
-                      item.FreeText
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(
@@ -794,6 +794,8 @@ Live
                         className={`${styles.inputTable} grow`}
                         type="text"
                       />
+                    ) : (
+                      item.FreeText
                     )}
                   </td>
                 </tr>

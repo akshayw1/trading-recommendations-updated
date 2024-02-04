@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import isEqual from "lodash/isEqual";
 import EthTableasBits from "./ethTableasBit";
-import { FaCircle } from 'react-icons/fa';
+import { FaCircle } from "react-icons/fa";
 
 import { MemoChart } from "@/components/charts/chart";
 
@@ -394,14 +394,21 @@ export default function Ethereum() {
   return (
     <main className={`${styles.main}`}>
       <h1 className={styles.zigZagText}>
-      <div className={styles.liveIndicatorBlock}>
-  <span className={styles.liveIndicator}>
-  <FaCircle className={`${styles.blink} ${styles.customIconStyle}`} aria-hidden="true" />
-
-Live
+        <div className={styles.liveIndicatorBlock}>
+          <span className={styles.liveIndicator}>
+            <FaCircle
+              className={`${styles.blink} ${styles.customIconStyle}`}
+              aria-hidden="true"
+            />
+            Live
           </span>
+<<<<<<< HEAD
+        </div>
+        &quot; Ethereum Option Chain: Open Interest Interpretation&quot;
+=======
 </div>  
         Ethereum Option Chain: Open Interest Interpretation;
+>>>>>>> 96b610ae05cb5f1115d597f5c331a319723e39e2
       </h1>
 
       <EthTableasBits />
@@ -474,9 +481,7 @@ Live
                     {index + 1}
                   </td>
                   <td>
-                    {session && !session.user.admin ? (
-                      item.Time
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(e.target.value, "Time", index)
@@ -485,12 +490,14 @@ Live
                         className={styles.inputTable}
                         type="text"
                       />
+                    ) : (
+                      item.Time
                     )}
                   </td>
                   <td className={styles.dropdown}>
                     <label htmlFor={`checkd${4 + 6 * index}`}>
                       <input
-                        disabled={session && !session.user.admin ? true : false}
+                        disabled={session && session.user.admin ? false : true}
                         className={styles.input1}
                         type="checkbox"
                         id={`checkd${4 + 6 * index}`}
@@ -601,7 +608,7 @@ Live
                   <td className={styles.dropdown}>
                     <label htmlFor={`checkd${3 + 6 * index}`}>
                       <input
-                        disabled={session && !session.user.admin ? true : false}
+                        disabled={session && session.user.admin ? false : true}
                         className={styles.input1}
                         type="checkbox"
                         id={`checkd${3 + 6 * index}`}
@@ -732,9 +739,7 @@ Live
                     </label>
                   </td>
                   <td>
-                    {session && !session.user.admin ? (
-                      item.Strike
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(e.target.value, "Strike", index)
@@ -743,6 +748,8 @@ Live
                         className={styles.inputTable}
                         type="text"
                       />
+                    ) : (
+                      item.Strike
                     )}
                   </td>
                 </tr>
@@ -864,7 +871,6 @@ Live
                   </td>
                 </tr>
               ) : null}
-
               {freeTextTable.map((item, index) => (
                 <tr key={item.Time}>
                   <td className="flex flex-row gap-2 justify-center">
@@ -879,9 +885,7 @@ Live
                     {index + 1}
                   </td>
                   <td className="">
-                    {session && !session.user.admin ? (
-                      item.Time
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(e.target.value, "Time", index, "freeTextEth")
@@ -890,12 +894,12 @@ Live
                         className={styles.inputTable}
                         type="text"
                       />
+                    ) : (
+                      item.Time
                     )}
                   </td>
                   <td className="flex ">
-                    {session && !session.user.admin ? (
-                      item.FreeText
-                    ) : (
+                    {session && session.user.admin ? (
                       <input
                         onChange={(e) =>
                           onChange(
@@ -909,6 +913,8 @@ Live
                         className={`${styles.inputTable} grow`}
                         type="text"
                       />
+                    ) : (
+                      item.FreeText
                     )}
                   </td>
                 </tr>

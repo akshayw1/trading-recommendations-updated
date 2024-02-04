@@ -427,7 +427,7 @@ Live
                   <td className={styles.dropdown}>
                     <label htmlFor={`checkd${1 + 6 * index}`}>
                       <input
-                        disabled={session && !session.user.admin ? true : false}
+                        disabled={session && session.user.admin ? false : true}
                         className={styles.input1}
                         type="checkbox"
                         id={`checkd${1 + 6 * index}`}
