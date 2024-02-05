@@ -27,18 +27,29 @@ export default async function middleware(req) {
   afterAuth.pathname = "/";
   // Store current request url in a custom header, which you can read later
   if (req.nextUrl.pathname.startsWith("/user")) {
-    const res = await fetch(
+    let blocked = true;
+    const apiUrl =
       process.env.NEXTAUTH_URL +
-        "/api/OiBlock/" +
-        req.nextUrl.pathname.replace("/user/", ""),
-      {
-        method: "GET",
-        headers: { "Content-type": "application/json" },
-      }
-    );
-    const data = await res.json();
+      "/api/OiBlock/" +
+      req.nextUrl.pathname.replace("/user/", "");
 
-    if (data.blocked) {
+    try {
+      const res = await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        blocked = data.blocked;
+      }
+    } catch (error) {
+      // Handle any errors that occurred during the fetch
+      console.error("Error fetching data:", error);
+    }
+
+    if (blocked) {
       if (!session) return NextResponse.redirect(auth);
     }
     // If user is unauthenticated, continue.
