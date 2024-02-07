@@ -54,11 +54,13 @@ export default async function middleware(req) {
     }
     // If user is unauthenticated, continue.
   }
-  if (req.nextUrl.pathname.startsWith("/admin") && session && !session.admin) {
+  if (req.nextUrl.pathname.startsWith("/admin")) {
+    if ((session && !session.admin) || !session) {
+      return NextResponse.redirect(home);
+    }
     //just push
     // You could also check for any property on the session object,
     // like role === "admin" or name === "Angelo", etc.
-    return NextResponse.redirect(home);
   }
 
   if (req.nextUrl.pathname.includes("auth")) {
