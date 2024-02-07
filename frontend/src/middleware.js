@@ -33,24 +33,24 @@ export default async function middleware(req) {
       "/api/OiBlock/" +
       req.nextUrl.pathname.replace("/user/", "");
 
-    try {
-      const res = await fetch(apiUrl, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        blocked = data.blocked;
+    if (!session) {
+      try {
+        const res = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          blocked = data.blocked;
+        }
+      } catch (error) {
+        // Handle any errors that occurred during the fetch
+        console.log("Error fetching data:", error);
       }
-    } catch (error) {
-      // Handle any errors that occurred during the fetch
-      console.error("Error fetching data:", error);
-    }
-
-    if (blocked) {
-      if (!session) return NextResponse.redirect(auth);
+      console.log({ OI: req.nextUrl.pathname.replace("/user/", ""), blocked });
+      if (blocked) return NextResponse.redirect(auth);
     }
     // If user is unauthenticated, continue.
   }
