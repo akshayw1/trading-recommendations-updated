@@ -282,7 +282,8 @@ export default function FutureOI({ nameoi }) {
           }
           return prevState;
         });
-        if (JSON.stringify(freeTextTable) !== JSON.stringify(dataFetch2))
+
+        if (JSON.stringify(chartData) !== JSON.stringify(dataFetch3))
           return true;
         return false;
       } catch (error) {
@@ -293,6 +294,7 @@ export default function FutureOI({ nameoi }) {
     const intervalId = setInterval(async () => {
       if (session && session.user && !session.user.admin) {
         const beep = await fetchData();
+        console.log(beep);
         if (beep) playSound();
       }
     }, 2000);
