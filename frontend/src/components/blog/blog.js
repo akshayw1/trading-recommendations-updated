@@ -176,64 +176,162 @@ export default function Blog() {
             </div>
           </div>
         </div>
+        <div className={styles.entryGrid}>
+          <div className={styles.entry}>
+            <Image
+              width={1390}
+              height={486}
+              alt="blog hero"
+              src="/images/blog/entry.png"
+            />
+            <div className={styles.categoryLabelBox}>
+              <div className={styles.categoryLabel}>Technology</div>
+            </div>
+            <p className={styles.entryTitle}>
+              The Impact of Technology on the Workplace: How Technology is
+              Changing
+            </p>
+            <div className={styles.entryInfo}>
+              <p className={styles.entryAuthor}>By Tracey Wilson</p>
+              <p className={styles.entryDate}>August 20, 2022</p>
+            </div>
+          </div>
+          <div className={styles.entry}>
+            <Image
+              width={1390}
+              height={486}
+              alt="blog hero"
+              src="/images/blog/entry.png"
+            />
+            <div className={styles.categoryLabelBox}>
+              <div className={styles.categoryLabel}>Technology</div>
+            </div>
+            <p className={styles.entryTitle}>
+              The Impact of Technology on the Workplace: How Technology is
+              Changing
+            </p>
+            <div className={styles.entryInfo}>
+              <p className={styles.entryAuthor}>By Tracey Wilson</p>
+              <p className={styles.entryDate}>August 20, 2022</p>
+            </div>
+          </div>
+          <div className={styles.entry}>
+            <Image
+              width={1390}
+              height={486}
+              alt="blog hero"
+              src="/images/blog/entry.png"
+            />
+            <div className={styles.categoryLabelBox}>
+              <div className={styles.categoryLabel}>Technology</div>
+            </div>
+            <p className={styles.entryTitle}>
+              The Impact of Technology on the Workplace: How Technology is
+              Changing
+            </p>
+            <div className={styles.entryInfo}>
+              <p className={styles.entryAuthor}>By Tracey Wilson</p>
+              <p className={styles.entryDate}>August 20, 2022</p>
+            </div>
+          </div>
+          <div className={styles.entry}>
+            <Image
+              width={1390}
+              height={486}
+              alt="blog hero"
+              src="/images/blog/entry.png"
+            />
+            <div className={styles.categoryLabelBox}>
+              <div className={styles.categoryLabel}>Technology</div>
+            </div>
+            <p className={styles.entryTitle}>
+              The Impact of Technology on the Workplace: How Technology is
+              Changing
+            </p>
+            <div className={styles.entryInfo}>
+              <p className={styles.entryAuthor}>By Tracey Wilson</p>
+              <p className={styles.entryDate}>August 20, 2022</p>
+            </div>
+          </div>
+          <div className={styles.entry}>
+            <Image
+              width={1390}
+              height={486}
+              alt="blog hero"
+              src="/images/blog/entry.png"
+            />
+            <div className={styles.categoryLabelBox}>
+              <div className={styles.categoryLabel}>Technology</div>
+            </div>
+            <p className={styles.entryTitle}>
+              The Impact of Technology on the Workplace: How Technology is
+              Changing
+            </p>
+            <div className={styles.entryInfo}>
+              <p className={styles.entryAuthor}>By Tracey Wilson</p>
+              <p className={styles.entryDate}>August 20, 2022</p>
+            </div>
+          </div>
+          <div className={styles.entry}>
+            <Image
+              width={1390}
+              height={486}
+              alt="blog hero"
+              src="/images/blog/entry.png"
+            />
+            <div className={styles.categoryLabelBox}>
+              <div className={styles.categoryLabel}>Technology</div>
+            </div>
+            <p className={styles.entryTitle}>
+              The Impact of Technology on the Workplace: How Technology is
+              Changing
+            </p>
+            <div className={styles.entryInfo}>
+              <p className={styles.entryAuthor}>By Tracey Wilson</p>
+              <p className={styles.entryDate}>August 20, 2022</p>
+            </div>
+          </div>
+          <div className={styles.entry}>
+            <Image
+              width={1390}
+              height={486}
+              alt="blog hero"
+              src="/images/blog/entry.png"
+            />
+            <div className={styles.categoryLabelBox}>
+              <div className={styles.categoryLabel}>Technology</div>
+            </div>
+            <p className={styles.entryTitle}>
+              The Impact of Technology on the Workplace: How Technology is
+              Changing
+            </p>
+            <div className={styles.entryInfo}>
+              <p className={styles.entryAuthor}>By Tracey Wilson</p>
+              <p className={styles.entryDate}>August 20, 2022</p>
+            </div>
+          </div>
+          <div className={styles.entry}>
+            <Image
+              width={1390}
+              height={486}
+              alt="blog hero"
+              src="/images/blog/entry.png"
+            />
+            <div className={styles.categoryLabelBox}>
+              <div className={styles.categoryLabel}>Technology</div>
+            </div>
+            <p className={styles.entryTitle}>
+              The Impact of Technology on the Workplace: How Technology is
+              Changing
+            </p>
+            <div className={styles.entryInfo}>
+              <p className={styles.entryAuthor}>By Tracey Wilson</p>
+              <p className={styles.entryDate}>August 20, 2022</p>
+            </div>
+          </div>
+        </div>
       </section>
       <aside></aside>
-      <div className={styles.entryGrid}>
-        <div className={styles.entry}>
-          <Image
-            width={1390}
-            height={486}
-            alt="blog hero"
-            src="/images/blog/entry.png"
-          />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-        </div>{" "}
-        <div className={styles.entry}>
-          <Image
-            width={1390}
-            height={486}
-            alt="blog hero"
-            src="/images/blog/entry.png"
-          />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-        </div>{" "}
-        <div className={styles.entry}>
-          <Image
-            width={1390}
-            height={486}
-            alt="blog hero"
-            src="/images/blog/entry.png"
-          />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-        </div>{" "}
-        <div className={styles.entry}>
-          <Image
-            width={1390}
-            height={486}
-            alt="blog hero"
-            src="/images/blog/entry.png"
-          />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-        </div>{" "}
-        <div className={styles.entry}>
-          <Image
-            width={1390}
-            height={486}
-            alt="blog hero"
-            src="/images/blog/entry.png"
-          />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-        </div>{" "}
-        <div className={styles.entry}>
-          <Image
-            width={1390}
-            height={486}
-            alt="blog hero"
-            src="/images/blog/entry.png"
-          />
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-        </div>
-      </div>
     </main>
   );
 }

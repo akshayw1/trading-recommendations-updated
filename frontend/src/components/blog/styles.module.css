@@ -8,24 +8,42 @@
 }
 
 .entry {
-  margin-top: 2rem;
   width: 100%;
   background: white;
   border-radius: 19px;
   padding: 14px;
+  border: 1px solid #242535;
+  display: flex;
+  flex-direction: column;
+  height: 25em;
+  justify-content: space-between;
+  width: 100%;
+}
+.categoryLabelBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+.categoryLabel {
+  font-size: 0.875em;
+  color: black;
+  background-color: #feecfa;
+  font-weight: 600;
+  border-radius: 16px;
+  padding: 4px 16px;
+}
+.entry img {
+  height: 50%;
 }
 .entry p {
-  font-weight: 600;
-  padding: 0.75rem 0;
-  padding-bottom: 0.65rem;
   color: black;
-  text-align: left;
-  font-size: 1.1rem;
 }
 .entryGrid {
-  column-gap: 2rem;
+  padding: 10px;
+  background-color: #f4f9ff;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  border-radius: 19px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
 }
 .recentPosts {
   padding: 0.625em;
@@ -33,7 +51,7 @@
   border-radius: 1em;
   background-color: #feecfa;
   padding-bottom: 1.5em;
-  width: 35%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -50,10 +68,13 @@
   border-radius: 1em;
   background-color: #feecfa;
   padding-bottom: 1.5em;
-  width: 65%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .entryHero h3 {
-  margin-top: 1em;
+  margin-top: 0.5em;
   font-weight: 800;
   color: black;
   font-size: 1.5em;
@@ -68,7 +89,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 0.75em;
 }
 .entryHeroInfo p {
   color: #797979;
@@ -79,7 +99,7 @@
 .top {
   display: flex;
   flex-direction: row;
-  gap: 32px;
+  gap: 1em;
   max-height: 28em;
 }
 .gridRecentPosts {
@@ -103,7 +123,7 @@
   justify-content: space-between;
 }
 .recentPostEntry img {
-  width: 35%;
+  width: 30%;
   height: auto;
   object-fit: cover;
   border-radius: 6px;
@@ -127,57 +147,39 @@
   color: black;
   font-weight: 500;
 }
-@media only screen and (max-width: 1100px) {
+.mainSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.entryTitle {
+  font-size: 1.2em;
+  font-weight: 700;
+  height: 86.391px;
+}
+.entryInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.entryAuthor {
+  font-weight: 600;
+}
+.entryDate {
+  font-weight: 400;
+}
+@media only screen and (max-width: 1340px) {
   .entryGrid {
-    column-gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
   }
-  .entry {
-    margin-top: 1rem;
-  }
-  .entry p {
-    font-size: 0.85rem;
+}
+@media only screen and (max-width: 960px) {
+  .entryGrid {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
 @media only screen and (max-width: 820px) {
-  .entryGrid {
-    column-gap: 1rem;
-  }
-  .entry {
-    padding: 10px;
-    border-radius: 14px;
-    margin-top: 1rem;
-  }
-  .main p {
-    font-size: 1.5rem;
-  }
-  .entry p {
-    padding: 0.5rem 0;
-    font-size: 0.85rem;
-    text-align: center;
-  }
-  .main h2 {
-    font-size: 2.75rem;
-  }
 }
 @media only screen and (max-width: 620px) {
-  .main h2 {
-    font-size: 2.25rem;
-  }
-  .main p {
-    font-size: 1.1rem;
-  }
-  .entryGrid {
-    column-gap: 0.75rem;
-  }
-  .entry {
-    margin-top: 0.75rem;
-    padding: 6px;
-    border-radius: 10px;
-  }
-
-  .entry p {
-    font-size: 0.65rem;
-    padding: 0.25rem 0;
-  }
 }
