@@ -219,6 +219,7 @@ main {
 /* Track */
 .scrollbar1::-webkit-scrollbar-track {
   background: #181a1b;
+  border-radius: 10px;
 }
 
 /* Handle */
