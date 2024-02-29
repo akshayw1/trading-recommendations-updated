@@ -329,6 +329,7 @@ export default function Blog() {
               <p className={styles.entryDate}>August 20, 2022</p>
             </div>
           </div>
+          <div className={styles.entryGridShowMore}>Load More</div>
         </div>
       </section>
       <aside></aside>

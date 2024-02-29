@@ -18,6 +18,10 @@
   height: 25em;
   justify-content: space-between;
   width: 100%;
+  cursor: pointer;
+}
+.entry:hover .categoryLabel {
+  background-color: white;
 }
 .categoryLabelBox {
   display: flex;
@@ -41,9 +45,11 @@
   padding: 10px;
   background-color: #f4f9ff;
   display: grid;
-  border-radius: 19px;
+  border-radius: 12px;
   grid-template-columns: repeat(3, 1fr);
   gap: 1em;
+  position: relative;
+  padding-bottom: 7em;
 }
 .recentPosts {
   padding: 0.625em;
@@ -72,12 +78,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1em;
 }
 .entryHero h3 {
-  margin-top: 0.5em;
+  cursor: pointer;
+
   font-weight: 800;
   color: black;
   font-size: 1.5em;
+}
+.entryHero h3:hover {
+  color: #333;
 }
 .entryHero > p {
   font-size: 0.938em;
@@ -106,7 +117,7 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
-  gap: 1.5em;
+  gap: 1em;
   padding-right: 0.625em;
 }
 .recentPostEntry {
@@ -114,7 +125,14 @@
   display: flex;
   flex-direction: row;
   gap: 0.5em;
+  cursor: pointer;
+  padding: 0 0.5em 0 0;
+  border-radius: 8px;
 }
+.recentPostEntry:hover {
+  background-color: white;
+}
+
 .recentPostText {
   display: flex;
   flex-direction: column;
@@ -134,6 +152,7 @@
   text-align: left;
   font-weight: 700;
 }
+
 .recentPostAuthor {
   font-weight: 600;
   color: black;
@@ -157,6 +176,7 @@
   font-weight: 700;
   height: 86.391px;
 }
+
 .entryInfo {
   display: flex;
   flex-direction: row;
@@ -168,18 +188,54 @@
 .entryDate {
   font-weight: 400;
 }
+.entryGridShowMore {
+  color: black;
+  border: 1px solid black;
+  position: absolute;
+  border-radius: 6px;
+  bottom: 1.5em;
+  background-color: white;
+  font-size: 1.1em;
+  font-weight: 700;
+  padding: 0.75em 1.35em;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+.entryGridShowMore:hover {
+  background-color: #feecfa;
+}
+.entry:hover {
+  background-color: #feecfa;
+}
 @media only screen and (max-width: 1340px) {
   .entryGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+@media only screen and (max-width: 1150px) {
+  .top {
+    flex-direction: column;
+    max-height: none;
+  }
+  .entryHero {
+    width: 100%;
+  }
+  .recentPosts {
+    width: 100%;
+  }
+  .gridRecentPosts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    max-height: 20em;
+  }
+}
 @media only screen and (max-width: 960px) {
+  .gridRecentPosts {
+    grid-template-columns: repeat(1, 1fr);
+  }
   .entryGrid {
     grid-template-columns: repeat(1, 1fr);
   }
-}
-
-@media only screen and (max-width: 820px) {
-}
-@media only screen and (max-width: 620px) {
 }
