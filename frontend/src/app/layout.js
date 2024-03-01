@@ -8,10 +8,7 @@ import { NextAuthProvider } from "../providers/Providers";
 import { OnboardingProvider } from "../context/MyContext";
 const font = Commissioner({ subsets: ["latin"] });
 import { ToastContainer } from "react-toastify";
-import { GoogleAnalytics } from '@next/third-parties/google'
-
-
-import Head from "next/head";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata = {
   title: "Bitcoin Options",
@@ -21,15 +18,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-
       <body className={font.className}>
         <NextAuthProvider>
           <OnboardingProvider>
             <ToastContainer />
             <Aside />
             <Nav />
-            
-                  <GoogleAnalytics gaId="G-XMSENTDEMW" />
+
+            <GoogleAnalytics gaId="G-XMSENTDEMW" />
 
             <MainContainerShadow>{children}</MainContainerShadow>
             <Footer />

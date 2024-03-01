@@ -1,5 +1,7 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
+import HotStoriesSection from "@/components/blog/hotStoriesSection/hotStoriesSection";
+import RecentPostsSection from "@/components/blog/recentPostsSection/recentPostsSection";
 export default function Blog() {
   return (
     <main className={styles.main}>
@@ -26,155 +28,7 @@ export default function Blog() {
               <p>August 20, 2022</p>
             </div>
           </div>
-          <div className={styles.recentPosts}>
-            <h3>Recent Posts</h3>
-            <div className={`${styles.gridRecentPosts} scrollbar1`}>
-              <div className={styles.recentPostEntry}>
-                <Image
-                  width={500}
-                  height={500}
-                  src="/images/blog/entry.png"
-                  alt="entry"
-                ></Image>
-                <div className={styles.recentPostText}>
-                  <p className={styles.recentPostTitle}>
-                    Lorem Ipsum Dolor Sit Amet, Ipsum Adipiscing Elit, Sed Do,
-                    Ipsum Dolor Sit Amet Lorem Lipsum.
-                  </p>
-                  <div className={styles.recentPostEntryInfo}>
-                    <p className={styles.recentPostAuthor}>By Tracey Wilson</p>
-                    <p className={styles.recentPostDate}>August 20, 2022</p>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.recentPostEntry}>
-                <Image
-                  width={500}
-                  height={500}
-                  src="/images/blog/entry.png"
-                  alt="entry"
-                ></Image>
-                <div className={styles.recentPostText}>
-                  <p className={styles.recentPostTitle}>
-                    Lorem Ipsum Dolor Sit Amet, Ipsum Adipiscing Elit, Sed Do,
-                    Ipsum Dolor Sit Amet Lorem Lipsum.
-                  </p>
-                  <div className={styles.recentPostEntryInfo}>
-                    <p className={styles.recentPostAuthor}>By Tracey Wilson</p>
-                    <p className={styles.recentPostDate}>August 20, 2022</p>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.recentPostEntry}>
-                <Image
-                  width={500}
-                  height={500}
-                  src="/images/blog/entry.png"
-                  alt="entry"
-                ></Image>
-                <div className={styles.recentPostText}>
-                  <p className={styles.recentPostTitle}>
-                    Lorem Ipsum Dolor Sit Amet, Ipsum Adipiscing Elit, Sed Do,
-                    Ipsum Dolor Sit Amet Lorem Lipsum.
-                  </p>
-                  <div className={styles.recentPostEntryInfo}>
-                    <p className={styles.recentPostAuthor}>By Tracey Wilson</p>
-                    <p className={styles.recentPostDate}>August 20, 2022</p>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.recentPostEntry}>
-                <Image
-                  width={500}
-                  height={500}
-                  src="/images/blog/entry.png"
-                  alt="entry"
-                ></Image>
-                <div className={styles.recentPostText}>
-                  <p className={styles.recentPostTitle}>
-                    Lorem Ipsum Dolor Sit Amet, Ipsum Adipiscing Elit, Sed Do,
-                    Ipsum Dolor Sit Amet Lorem Lipsum.
-                  </p>
-                  <div className={styles.recentPostEntryInfo}>
-                    <p className={styles.recentPostAuthor}>By Tracey Wilson</p>
-                    <p className={styles.recentPostDate}>August 20, 2022</p>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.recentPostEntry}>
-                <Image
-                  width={500}
-                  height={500}
-                  src="/images/blog/entry.png"
-                  alt="entry"
-                ></Image>
-                <div className={styles.recentPostText}>
-                  <p className={styles.recentPostTitle}>
-                    Lorem Ipsum Dolor Sit Amet, Ipsum Adipiscing Elit, Sed Do,
-                    Ipsum Dolor Sit Amet Lorem Lipsum.
-                  </p>
-                  <div className={styles.recentPostEntryInfo}>
-                    <p className={styles.recentPostAuthor}>By Tracey Wilson</p>
-                    <p className={styles.recentPostDate}>August 20, 2022</p>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.recentPostEntry}>
-                <Image
-                  width={500}
-                  height={500}
-                  src="/images/blog/entry.png"
-                  alt="entry"
-                ></Image>
-                <div className={styles.recentPostText}>
-                  <p className={styles.recentPostTitle}>
-                    Lorem Ipsum Dolor Sit Amet, Ipsum Adipiscing Elit, Sed Do,
-                    Ipsum Dolor Sit Amet Lorem Lipsum.
-                  </p>
-                  <div className={styles.recentPostEntryInfo}>
-                    <p className={styles.recentPostAuthor}>By Tracey Wilson</p>
-                    <p className={styles.recentPostDate}>August 20, 2022</p>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.recentPostEntry}>
-                <Image
-                  width={500}
-                  height={500}
-                  src="/images/blog/entry.png"
-                  alt="entry"
-                ></Image>
-                <div className={styles.recentPostText}>
-                  <p className={styles.recentPostTitle}>
-                    Lorem Ipsum Dolor Sit Amet, Ipsum Adipiscing Elit, Sed Do,
-                    Ipsum Dolor Sit Amet Lorem Lipsum.
-                  </p>
-                  <div className={styles.recentPostEntryInfo}>
-                    <p className={styles.recentPostAuthor}>By Tracey Wilson</p>
-                    <p className={styles.recentPostDate}>August 20, 2022</p>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.recentPostEntry}>
-                <Image
-                  width={500}
-                  height={500}
-                  src="/images/blog/entry.png"
-                  alt="entry"
-                ></Image>
-                <div className={styles.recentPostText}>
-                  <p className={styles.recentPostTitle}>
-                    Lorem Ipsum Dolor Sit Amet, Ipsum Adipiscing Elit, Sed Do,
-                    Ipsum Dolor Sit Amet Lorem Lipsum.
-                  </p>
-                  <div className={styles.recentPostEntryInfo}>
-                    <p className={styles.recentPostAuthor}>By Tracey Wilson</p>
-                    <p className={styles.recentPostDate}>August 20, 2022</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <RecentPostsSection />
         </div>
         <div className={styles.entryGrid}>
           <div className={styles.entry}>
@@ -332,32 +186,7 @@ export default function Blog() {
           <div className={styles.entryGridShowMore}>Load More</div>
         </div>
       </section>
-      <aside className={styles.hotStory}>
-        <h3>Hot Stories</h3>
-        <div className={styles.hotStoryGrid}>
-          <div className={styles.hotStoryLabel}>#Bitcoin</div>
-          <div className={styles.hotStoryLabel}>#Stock-Market</div>
-          <div className={styles.hotStoryLabel}>#Trading</div>
-          <div className={styles.hotStoryLabel}>#ETF</div>
-          <div className={styles.hotStoryLabel}>#Ethereum</div>
-          <div className={styles.hotStoryLabel}>#Lorem</div>
-          <div className={styles.hotStoryLabel}>#Ipsum</div>
-          <div className={styles.hotStoryLabel}>#Bitcoin</div>
-          <div className={styles.hotStoryLabel}>#Stock-Market</div>
-          <div className={styles.hotStoryLabel}>#Trading</div>
-          <div className={styles.hotStoryLabel}>#ETF</div>
-          <div className={styles.hotStoryLabel}>#Ethereum</div>
-          <div className={styles.hotStoryLabel}>#Lorem</div>
-          <div className={styles.hotStoryLabel}>#Ipsum</div>{" "}
-          <div className={styles.hotStoryLabel}>#Bitcoin</div>
-          <div className={styles.hotStoryLabel}>#Stock-Market</div>
-          <div className={styles.hotStoryLabel}>#Trading</div>
-          <div className={styles.hotStoryLabel}>#ETF</div>
-          <div className={styles.hotStoryLabel}>#Ethereum</div>
-          <div className={styles.hotStoryLabel}>#Lorem</div>
-          <div className={styles.hotStoryLabel}>#Ipsum</div>
-        </div>
-      </aside>
+      <HotStoriesSection />
     </main>
   );
 }

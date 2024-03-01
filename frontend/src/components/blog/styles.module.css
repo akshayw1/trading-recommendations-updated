@@ -3,13 +3,13 @@
   font-weight: 600;
 }
 .main {
-  width: 90%;
+  width: 95%;
   margin: auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  font-size: 12px;
+  font-size: 13px;
   gap: 1em;
 }
 
@@ -21,7 +21,7 @@
   border: 1px solid #242535;
   display: flex;
   flex-direction: column;
-  height: 28em;
+  height: 26em;
   justify-content: space-between;
   width: 100%;
   cursor: pointer;
@@ -42,6 +42,8 @@
   padding: 4px 16px;
 }
 .entry img {
+  border-radius: 16px;
+  object-fit: cover;
   height: 50%;
 }
 .entry p {
@@ -176,7 +178,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5em;
-  width: 85%;
+  width: 80%;
 }
 .entryTitle {
   font-size: 1.2em;
@@ -238,7 +240,7 @@
 }
 .hotStoryLabel {
   font-weight: 600;
-  font-size: 1.25em;
+  font-size: 1.15em;
   border-radius: 4px;
   background-color: #e3e3e3;
   color: black;
