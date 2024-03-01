@@ -1,0 +1,121 @@
+.main .aside {
+  width: 47%;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  font-size: 11px;
+}
+.mainSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 53%;
+}
+.aside > div:first-of-type {
+  width: 50%;
+  height: 30em;
+}
+.aside > aside:first-of-type {
+  width: 50%;
+  height: min-content;
+}
+.main {
+  margin: auto;
+  width: 96%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1em;
+}
+.mainSection h2 {
+  font-weight: 700;
+  font-size: 1.1em;
+}
+.postInfoBox {
+  font-weight: 500;
+  margin-top: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  color: #e2e2e2;
+  font-size: 0.95em;
+}
+.postDate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+.postTopImgInfoBox {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: #f4f9ff;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1em;
+  overflow: hidden;
+}
+.postHeroImg {
+  width: 100%;
+}
+.postTopText {
+  display: flex;
+  flex-direction: row;
+  color: black;
+  font-weight: 400;
+  padding: 0.25em 0.5em;
+}
+.postTopText span {
+  margin-right: 0.2em;
+  font-weight: 600;
+}
+.postTopImgLeft {
+  width: 45%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.postTopImgRight {
+  width: 45%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.audioBox {
+  padding: 0.25em 0.75em;
+  background-color: #161616;
+  display: flex;
+  flex-direction: row;
+  width: 6.5em;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.audioBox svg {
+  margin-top: 0.1em;
+}
+.audioBox:hover {
+  background-color: #333333;
+}
+.mainTextBox {
+  display: flex;
+  flex-direction: row;
+
+  margin-top: 2em;
+}
+.socialLinkBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 0.75em;
+  min-width: 3em;
+}
+.socialLinkBox img {
+  border-radius: 4px;
+  background-color: white;
+}

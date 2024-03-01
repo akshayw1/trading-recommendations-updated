@@ -82,7 +82,7 @@
   border-radius: 1em;
   background-color: #feecfa;
   padding-bottom: 1.5em;
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -147,6 +147,7 @@
   font-size: 0.75em;
   color: black;
   justify-content: space-between;
+  width: 100%;
 }
 .recentPostEntry img {
   width: 30%;
@@ -169,6 +170,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
 }
 .recentPostDate {
   color: black;
