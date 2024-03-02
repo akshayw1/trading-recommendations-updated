@@ -1,0 +1,34 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 95%;
+  margin: auto;
+}
+.main > [class~="p-editor-container"] {
+  width: 100%;
+}
+.main [class~="p-editor-toolbar"] {
+  background-color: white;
+}
+.main [class~="p-editor-toolbar"] {
+  background-color: white;
+}
+.main [class~="p-editor-content"] {
+  font-size: 1.1em;
+}
+.topBox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.topBox > div:first-of-type {
+  width: 65%;
+}
+.topBox > div:nth-of-type(2) {
+  width: 30%;
+}
+.topBox > div > input {
+  width: 100%;
+}

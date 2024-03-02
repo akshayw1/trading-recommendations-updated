@@ -1,8 +1,13 @@
+"use client";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import HotStoriesSection from "@/components/blog/hotStoriesSection/hotStoriesSection";
 import RecentPostsSection from "@/components/blog/recentPostsSection/recentPostsSection";
+import { useOnboardingContext } from "@/context/MyContext";
+import Link from "next/link";
 export default function Blog() {
+  const { session, status } = useOnboardingContext();
+
   return (
     <main className={styles.main}>
       <section className={styles.mainSection}>
@@ -30,6 +35,11 @@ export default function Blog() {
           </div>
           <RecentPostsSection />
         </div>
+        {session ? (
+          <Link href={"/blog/create-post "}>
+            <div className={styles.createBlogButton}>Create New Post</div>
+          </Link>
+        ) : null}
         <div className={styles.entryGrid}>
           <div className={styles.entry}>
             <Image

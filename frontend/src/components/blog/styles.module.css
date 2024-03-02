@@ -252,6 +252,22 @@
 .hotStoryLabel:hover {
   background-color: #c2c1c1;
 }
+.createBlogButton {
+  width: 100%;
+  color: black;
+  border: 1px solid black;
+  border-radius: 6px;
+  bottom: 1.5em;
+  background-color: white;
+  font-size: 1.3em;
+  font-weight: 700;
+  padding: 0.75em 1.35em;
+  cursor: pointer;
+  text-align: center;
+}
+.createBlogButton:hover {
+  background-color: #feecfa;
+}
 @media only screen and (max-width: 1340px) {
   .entryGrid {
     grid-template-columns: repeat(2, 1fr);

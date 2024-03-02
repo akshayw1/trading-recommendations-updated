@@ -139,7 +139,6 @@ export default function BlogPost() {
         </div>
       </section>
       <aside className={styles.aside}>
-        <RecentPostsSection />
         <HotStoriesSection />
       </aside>
     </main>
