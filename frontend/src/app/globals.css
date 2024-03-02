@@ -138,7 +138,7 @@ main {
   color: var(--blue2);
 }
 .input1 input ~ label {
-  backdrop-filter: blur(1000px);
+  backdrop-filter: blur(100px);
   border-radius: 100%;
 }
 .input1 input:valid ~ label,
