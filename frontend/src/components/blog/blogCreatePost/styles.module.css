@@ -11,11 +11,12 @@
 .main [class~="p-editor-toolbar"] {
   background-color: white;
 }
-.main [class~="p-editor-toolbar"] {
-  background-color: white;
-}
+
 .main [class~="p-editor-content"] {
   font-size: 1.1em;
+}
+.main [class~="ql-editor"] {
+  min-height: 420px;
 }
 .topBox {
   width: 100%;

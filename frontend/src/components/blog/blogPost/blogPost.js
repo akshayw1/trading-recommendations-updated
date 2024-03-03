@@ -1,16 +1,51 @@
+"use client";
 import HotStoriesSection from "@/components/blog/hotStoriesSection/hotStoriesSection";
 import styles from "./styles.module.css";
 import RecentPostsSection from "@/components/blog/recentPostsSection/recentPostsSection";
 import Image from "next/image";
-export default function BlogPost() {
+import { useEffect, useState } from "react";
+
+import { useRouter } from "next/navigation";
+
+export default function BlogPost({ id }) {
+  const router = useRouter();
+  const [postData, setPostData] = useState({
+    title: "feb",
+    author: "feb",
+    datePost: "feb",
+    text: "feb",
+    imageUrl: "",
+    totalViews: 1,
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchUrl = `/api/blog/${id}`;
+        const res = await fetch(fetchUrl, {
+          method: "GET",
+          headers: { "Content-type": "application/json" },
+        });
+        if (res.ok) {
+          const resData = await res.json();
+          console.log(resData.post);
+          setPostData(resData.post);
+        } else {
+          console.log("redirect");
+          //router.push(`/blog`);
+        }
+      } catch (error) {
+        //router.push(`/blog`);
+      }
+    };
+    fetchData();
+  }, [id]); // Se agrega el id como dependencia
   return (
     <main className={styles.main}>
       <section className={styles.mainSection}>
-        <h2>
-          Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do.
-        </h2>
+        <h2>{postData.title} </h2>
         <div className={styles.postInfoBox}>
-          <p>By The Author</p>
+          <p>{postData.author}</p>
           <div className={styles.postDate}>
             <svg
               width="13"
@@ -26,19 +61,21 @@ export default function BlogPost() {
                 fill="white"
               />
             </svg>
-            <p>Feb 22,2024 at 11:10 PM.</p>
+            <p>{postData.datePost}</p>
           </div>
         </div>
         <div className={styles.postTopImgInfoBox}>
           <div className={styles.postTopImgLeft}>
             <div className={styles.postTopText}>
-              <span>524</span>
+              <span>{postData.totalViews}</span>
               Total Views
             </div>
-            <div className={styles.postTopText}>
-              <span>1</span>
-              Total Share
-            </div>
+            {/*
+                <div className={styles.postTopText}>
+                  <span>1</span>
+                  Total Share
+                </div>
+      */}
           </div>
           <div className={styles.postTopImgRight}>
             <div className={styles.postTopText}>Listen to Article</div>
@@ -61,7 +98,7 @@ export default function BlogPost() {
           alt="hero"
           width={500}
           height={500}
-          src="/images/blog/blog hero.png"
+          src={postData.imageUrl}
         />
         <div className={styles.mainTextBox}>
           <div className={styles.socialLinkBox}>
@@ -102,40 +139,7 @@ export default function BlogPost() {
               src={"/images/blog/Telegram.png"}
             />
           </div>
-          <p>
-            By visiting our site https://www.btcusdperp.com you ("you" refers to
-            the user or viewer of the Website) are agreeing to be bound by the
-            following terms and conditions and the Privacy Policy on the
-            Website. We may change these terms and conditions at any time. You
-            agree to abide by all terms and conditions mentioned herein and
-            accept any new or modified terms and conditions that we come up with
-            by using this website or any utility on this website, directly or
-            indirectly. If you do not agree to any of the terms mentioned
-            herein, you should exit the site immediately and inform us to remove
-            your account,these terms and conditions at any time. You agree to
-            abide by all terms and conditions mentioned herein and accept any
-            new or modified terms and conditions that we come up with by using
-            this website or any utility on this website, directly or indirectly.
-            By visiting our site https://www.btcusdperp.com you ("you" refers to
-            the user or viewer of the Website) are agreeing to be bound by the
-            following terms and conditions and the Privacy Policy on the
-            Website. We may change these terms and conditions at any time. You
-            agree to abide by all terms and conditions mentioned herein and
-            accept any new or modified terms and conditions that we come up with
-            by using this website or any utility on this website, directly or
-            indirectly. If you do not agree to any of the terms mentioned
-            herein, you should exit the site immediately and inform us to remove
-            your account. By visiting our site https://www.btcusdperp.com you
-            ("you" refers to the user or viewer of the Website) are agreeing to
-            be bound by the following terms and conditions and the Privacy
-            Policy on the Website. We may change these terms and conditions at
-            any time. You agree to abide by all terms and conditions mentioned
-            herein and accept any new or modified terms and conditions that we
-            come up with by using this website or any utility on this website,
-            directly or indirectly. If you do not agree to any of the terms
-            mentioned herein, you should exit the site immediately and inform us
-            to remove your account.
-          </p>
+          <p>{postData.text}</p>
         </div>
       </section>
       <aside className={styles.aside}>
@@ -143,4 +147,5 @@ export default function BlogPost() {
       </aside>
     </main>
   );
+  // return <main className={styles.main}></main>;
 }
