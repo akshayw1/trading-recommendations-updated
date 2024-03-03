@@ -17,7 +17,7 @@ const postSchema = new Schema(
       type: String,
       default: "",
     },
-    tags: [String],
+    tags: { type: [String], default: [] },
     totalViews: { type: Number, default: 0 },
     totalShare: { type: Number, default: 0 },
     datePost: { type: String, required: true },

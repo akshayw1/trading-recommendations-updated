@@ -5,8 +5,11 @@ import { Editor } from "primereact/editor";
 import NextImage from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 export default function BlogCreatorPost() {
+  const router = useRouter();
+
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -111,7 +114,6 @@ export default function BlogCreatorPost() {
     }
 
     if (Object.values(errorsNow).length === 0) {
-      console.log("yo");
       try {
         const data = new FormData();
         data.set("image", eventImg);
@@ -127,17 +129,21 @@ export default function BlogCreatorPost() {
           body: data,
         });
         if (res.ok) {
-          return true;
+          const resData = await res.json();
+          router.push(`/blog/post/${resData.postID}`);
         } else {
-          const data = await res.json();
-          return (errorsNow.form = [...(errorsNow.form || []), data.error]);
+          toast.warning("Something go wrong, try again");
+          errorsNow.form = [
+            ...(errorsNow.form || []),
+            "Something go wrong, try again",
+          ];
         }
       } catch (error) {
         toast.warning("Something go wrong, try again");
-        return (errorsNow.form = [
+        errorsNow.form = [
           ...(errorsNow.form || []),
           "Something go wrong, try again",
-        ]);
+        ];
       }
     } else {
       toast.warning(Object.values(errorsNow)[0][0]);
