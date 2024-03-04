@@ -9,10 +9,15 @@ export async function GET(req: Request, { params }: any) {
   const postFound = await Post.findById(id);
 
   if (postFound) {
+    postFound.totalViews += 1;
+
+    await postFound.save();
+
     return NextResponse.json(
-      { message: "OI Found", post: postFound },
+      { message: "Post found", post: postFound },
       { status: 201 }
     );
-  } else
+  } else {
     return NextResponse.json({ message: "Post not found" }, { status: 404 });
+  }
 }
