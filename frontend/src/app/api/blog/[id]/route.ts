@@ -3,9 +3,7 @@ import { connectMongoDB } from "@/lib/mongodb";
 import Post from "@/models/post";
 
 export async function GET(req: Request, { params }: any) {
-  console.log("yo");
   const id = params.id;
-  console.log(id);
 
   await connectMongoDB();
   const postFound = await Post.findById(id);

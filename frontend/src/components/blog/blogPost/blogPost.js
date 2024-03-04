@@ -139,7 +139,7 @@ export default function BlogPost({ id }) {
               src={"/images/blog/Telegram.png"}
             />
           </div>
-          <p>{postData.text}</p>
+          <div dangerouslySetInnerHTML={{ __html: postData.text }} />
         </div>
       </section>
       <aside className={styles.aside}>
