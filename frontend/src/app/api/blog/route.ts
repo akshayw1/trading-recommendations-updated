@@ -82,7 +82,6 @@ export async function GET(req: Request) {
       : 1;
 
     const startIndex = (page - 1) * postsPerPage;
-    console.log("page", page);
     const postsFound = await Post.aggregate([
       { $skip: startIndex },
       { $limit: postsPerPage },
