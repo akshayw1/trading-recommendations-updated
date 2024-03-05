@@ -18,13 +18,7 @@ export default function BlogPost({ id }) {
       setVoice(voices[2]);
     }
   }, [speak, voices]);
-  const [postData, setPostData] = useState({
-    title: "feb",
-    author: "feb",
-    datePost: "feb",
-    text: "feb",
-    totalViews: 1,
-  });
+  const [postData, setPostData] = useState(null);
 
   useEffect(() => {
     if (speaking) {
@@ -46,11 +40,10 @@ export default function BlogPost({ id }) {
           const resData = await res.json();
           setPostData(resData.post);
         } else {
-          console.log("redirect");
-          //router.push(`/blog`);
+          router.push(`/blog`);
         }
       } catch (error) {
-        //router.push(`/blog`);
+        router.push(`/blog`);
       }
     };
 
@@ -67,6 +60,7 @@ export default function BlogPost({ id }) {
     const formattedSeconds = String(seconds).padStart(2, "0");
     return `${formattedMinutes}:${formattedSeconds}`;
   };
+  if(postData)
   return (
     <main className={styles.main}>
       <section className={styles.mainSection}>
@@ -223,5 +217,5 @@ export default function BlogPost({ id }) {
       </aside>
     </main>
   );
-  // return <main className={styles.main}></main>;
+  return <main className={styles.main}></main>;
 }

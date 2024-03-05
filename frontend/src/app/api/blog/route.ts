@@ -11,6 +11,7 @@ export async function POST(req: Request) {
   const title: string = data.get("title") as unknown as string;
   const text: string = data.get("text") as unknown as string;
   const author: string = data.get("author") as unknown as string;
+  const tag: string = data.get("tag") as unknown as string;
   const tags: string[] = data.getAll("tags") as string[];
   if (!file) {
     return NextResponse.json({ success: false, error: "file no supported" });
@@ -49,7 +50,7 @@ export async function POST(req: Request) {
     text,
     author,
     imageUrl,
-    tags,
+    tag,
     datePost: new Date(),
   });
   if (postCreated)

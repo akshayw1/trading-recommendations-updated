@@ -109,8 +109,8 @@ export default function BlogCreatorPost() {
         "Please upload event image",
       ];
     }
-    if (tagsArray.length === 0) {
-      errorsNow.tags = [...(errorsNow.tags || []), "Post needs at least 1 tag"];
+    if (inputTag === "") {
+      errorsNow.tags = [...(errorsNow.tags || []), "Tag can't be empty"];
     }
 
     if (Object.values(errorsNow).length === 0) {
@@ -120,9 +120,7 @@ export default function BlogCreatorPost() {
         data.set("title", title);
         data.set("text", text);
         data.set("author", author);
-        tagsArray.forEach((tag) => {
-          data.append("tags", tag);
-        });
+        data.set("tag", inputTag);
 
         const res = await fetch("/api/blog", {
           method: "POST",
@@ -247,12 +245,6 @@ export default function BlogCreatorPost() {
       <div className={styles.tagsBox}>
         <div className="input1">
           <input
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && inputTag !== "") {
-                setTagsArray((prev) => [...prev, inputTag]);
-                setInputTag("");
-              }
-            }}
             onChange={(e) => setInputTag(e.target.value)}
             value={inputTag}
             type="text"
@@ -260,31 +252,6 @@ export default function BlogCreatorPost() {
           ></input>
           <label>Tag</label>
         </div>
-        <div
-          onClick={(e) => {
-            if (inputTag !== "") {
-              setTagsArray((prev) => [...prev, inputTag]);
-              setInputTag("");
-            }
-          }}
-          className={styles.createBlogButton}
-        >
-          Add Tag
-        </div>
-        <p className="">Tags:</p>
-        {tagsArray.map((tag, tagIndex) => (
-          <div
-            key={tag}
-            onClick={() =>
-              setTagsArray((prevItems) =>
-                prevItems.filter((item, index) => index !== tagIndex)
-              )
-            }
-            className={styles.categoryLabel}
-          >
-            {tag}
-          </div>
-        ))}
       </div>
       <Editor
         headerTemplate={header}
