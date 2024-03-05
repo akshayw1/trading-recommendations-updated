@@ -16,29 +16,27 @@ export default function Blog() {
   const { session, status } = useOnboardingContext();
   const [recentPostsList, setRecentPostsList] = useState([]);
   const [mainPostsList, setMainPostsList] = useState([]);
-  const [postSortSeed, setPostSortSeed] = useState();
   const [mainPostsPage, setMainPostsPage] = useState(1);
   const [mainTotalPostsPage, setMainTotalPostsPage] = useState(0);
-  const fetchMainPostsList = useCallback(
-    async (seed = postSortSeed) => {
-      try {
-        const fetchUrl = `/api/blog?seed=${seed}&page=${mainPostsPage}`;
-        setMainPostsPage((prev) => prev + 1);
-        const res = await fetch(fetchUrl, {
-          method: "GET",
-          headers: { "Content-type": "application/json" },
-        });
-        if (res.ok) {
-          const resData = await res.json();
-          console.log(resData);
-          setMainTotalPostsPage(resData.totalPages);
-          setMainPostsList((prev) => [...prev, ...resData.posts]);
-        } else {
-        }
-      } catch (error) {}
-    },
-    [mainPostsPage, postSortSeed]
-  );
+  const fetchMainPostsList = async () => {
+    try {
+      const fetchUrl = `/api/blog?&page=${mainPostsPage}`;
+      setMainPostsPage((prev) => prev + 1);
+      const res = await fetch(fetchUrl, {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+      });
+      if (res.ok) {
+        const resData = await res.json();
+        setMainTotalPostsPage(resData.totalPages);
+        setMainPostsList((prev) => [...prev, ...resData.posts]);
+      } else {
+        // Handle error
+      }
+    } catch (error) {
+      // Handle error
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,19 +50,21 @@ export default function Blog() {
           const resData = await res.json();
           setRecentPostsList(resData.posts);
         } else {
+          // Handle error
         }
-      } catch (error) {}
+      } catch (error) {
+        // Handle error
+      }
     };
 
     if (didMountRef.current) {
       fetchData();
-      const randomSeed = Math.floor(Math.random() * 1000);
-      setPostSortSeed(randomSeed);
-      fetchMainPostsList(randomSeed);
+      fetchMainPostsList();
     } else {
       didMountRef.current = true;
     }
-  }, [fetchMainPostsList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className={styles.main}>

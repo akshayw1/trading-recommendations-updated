@@ -285,6 +285,9 @@
   }
 }
 @media only screen and (max-width: 1250px) {
+  .main {
+    font-size: 16px;
+  }
   .top {
     flex-direction: column;
     max-height: none;
