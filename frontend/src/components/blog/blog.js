@@ -93,11 +93,9 @@ export default function Blog() {
           </div>
           <RecentPostsSection recentPostsList={recentPostsList} />
         </div>
-        {session ? (
-          <Link href={"/blog/create-post "}>
-            <div className={styles.createBlogButton}>Create New Post</div>
-          </Link>
-        ) : null}
+        <Link href={"/blog/create-post "}>
+          <div className={styles.createBlogButton}>Create New Post</div>
+        </Link>
         <div className={styles.mainEntryBox}>
           <div className={styles.entryGrid}>
             {mainPostsList.map((entry) => (

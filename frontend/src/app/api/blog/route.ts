@@ -35,7 +35,6 @@ export async function POST(req: Request) {
       async () => {
         try {
           const url = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log("uploaded to firebase boss");
           resolve(url);
         } catch (error) {
           reject(error);

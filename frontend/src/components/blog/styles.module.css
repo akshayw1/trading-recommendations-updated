@@ -50,6 +50,7 @@
   color: black;
 }
 .mainEntryBox {
+  min-height: 1140px;
   padding: 10px;
   background-color: #f4f9ff;
   border-radius: 12px;

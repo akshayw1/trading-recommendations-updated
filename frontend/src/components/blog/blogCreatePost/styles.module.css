@@ -125,6 +125,10 @@
 .createBlogButton:hover {
   background-color: #feecfa;
 }
+.createBlogButton.disable {
+  cursor: default;
+  background-color: rgb(201, 201, 201);
+}
 .tagsBox .createBlogButton {
   margin-right: 1rem;
   width: max-content;

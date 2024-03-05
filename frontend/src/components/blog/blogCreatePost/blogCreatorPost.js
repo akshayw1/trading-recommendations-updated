@@ -6,6 +6,7 @@ import NextImage from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import LoadingToast from "@/components/usersTable/loading";
 
 export default function BlogCreatorPost() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function BlogCreatorPost() {
   const [tagsArray, setTagsArray] = useState([]);
   const [eventImg, setEventImg] = useState(null);
   const [errors, setErrors] = useState({});
-
+  const [uploadingPost, setUploadingPost] = useState(false);
   const uploadImage = async (e) => {
     const errorsNow = {};
     const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
@@ -114,30 +115,49 @@ export default function BlogCreatorPost() {
     }
 
     if (Object.values(errorsNow).length === 0) {
+      let toastId;
+
       try {
+        toastId = toast(<LoadingToast text="Uploading..." />, {
+          autoClose: false,
+        });
         const data = new FormData();
         data.set("image", eventImg);
         data.set("title", title);
         data.set("text", text);
         data.set("author", author);
         data.set("tag", inputTag);
+        setUploadingPost(true);
 
         const res = await fetch("/api/blog", {
           method: "POST",
           body: data,
         });
         if (res.ok) {
+          toast.update(toastId, {
+            render: "Post created successfully",
+            type: "success",
+            autoClose: 5000,
+          });
           const resData = await res.json();
           router.push(`/blog/post/${resData.postID}`);
         } else {
-          toast.warning("Something go wrong, try again");
+          toast.update(toastId, {
+            render: "Something go wrong, try again",
+            type: toast.TYPE.ERROR,
+            autoClose: 5000,
+          });
           errorsNow.form = [
             ...(errorsNow.form || []),
             "Something go wrong, try again",
           ];
         }
       } catch (error) {
-        toast.warning("Something go wrong, try again");
+        toast.update(toastId, {
+          render: error,
+          type: toast.TYPE.ERROR,
+          autoClose: 5000,
+        });
         errorsNow.form = [
           ...(errorsNow.form || []),
           "Something go wrong, try again",
@@ -261,7 +281,16 @@ export default function BlogCreatorPost() {
           minHeight: "420px",
         }}
       />
-      <div onClick={submitEvent} className={styles.createBlogButton}>
+      <div
+        onClick={() => {
+          if (!uploadingPost) {
+            submitEvent();
+          }
+        }}
+        className={`${styles.createBlogButton} ${
+          uploadingPost ? styles.disable : ""
+        }`}
+      >
         Create New Post
       </div>
     </main>
