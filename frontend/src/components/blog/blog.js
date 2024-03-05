@@ -5,7 +5,7 @@ import HotStoriesSection from "@/components/blog/hotStoriesSection/hotStoriesSec
 import RecentPostsSection from "@/components/blog/recentPostsSection/recentPostsSection";
 import { useOnboardingContext } from "@/context/MyContext";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 export default function Blog() {
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -19,23 +19,27 @@ export default function Blog() {
   const [postSortSeed, setPostSortSeed] = useState();
   const [mainPostsPage, setMainPostsPage] = useState(1);
   const [mainTotalPostsPage, setMainTotalPostsPage] = useState(0);
-  const fetchMainPostsList = async (seed = postSortSeed) => {
-    try {
-      const fetchUrl = `/api/blog?seed=${seed}&page=${mainPostsPage}`;
-      setMainPostsPage((prev) => prev + 1);
-      const res = await fetch(fetchUrl, {
-        method: "GET",
-        headers: { "Content-type": "application/json" },
-      });
-      if (res.ok) {
-        const resData = await res.json();
-        console.log(resData);
-        setMainTotalPostsPage(resData.totalPages);
-        setMainPostsList((prev) => [...prev, ...resData.posts]);
-      } else {
-      }
-    } catch (error) {}
-  };
+  const fetchMainPostsList = useCallback(
+    async (seed = postSortSeed) => {
+      try {
+        const fetchUrl = `/api/blog?seed=${seed}&page=${mainPostsPage}`;
+        setMainPostsPage((prev) => prev + 1);
+        const res = await fetch(fetchUrl, {
+          method: "GET",
+          headers: { "Content-type": "application/json" },
+        });
+        if (res.ok) {
+          const resData = await res.json();
+          console.log(resData);
+          setMainTotalPostsPage(resData.totalPages);
+          setMainPostsList((prev) => [...prev, ...resData.posts]);
+        } else {
+        }
+      } catch (error) {}
+    },
+    [mainPostsPage, postSortSeed]
+  );
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,7 +64,7 @@ export default function Blog() {
     } else {
       didMountRef.current = true;
     }
-  }, []);
+  }, [fetchMainPostsList]);
 
   return (
     <main className={styles.main}>
