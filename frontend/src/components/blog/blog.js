@@ -15,6 +15,27 @@ export default function Blog() {
   const didMountRef = useRef(false);
   const { session, status } = useOnboardingContext();
   const [recentPostsList, setRecentPostsList] = useState([]);
+  const [mainPostsList, setMainPostsList] = useState([]);
+  const [postSortSeed, setPostSortSeed] = useState();
+  const [mainPostsPage, setMainPostsPage] = useState(1);
+  const [mainTotalPostsPage, setMainTotalPostsPage] = useState(0);
+  const fetchMainPostsList = async (seed = postSortSeed) => {
+    try {
+      const fetchUrl = `/api/blog?seed=${seed}&page=${mainPostsPage}`;
+      setMainPostsPage((prev) => prev + 1);
+      const res = await fetch(fetchUrl, {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+      });
+      if (res.ok) {
+        const resData = await res.json();
+        console.log(resData);
+        setMainTotalPostsPage(resData.totalPages);
+        setMainPostsList((prev) => [...prev, ...resData.posts]);
+      } else {
+      }
+    } catch (error) {}
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,6 +54,9 @@ export default function Blog() {
 
     if (didMountRef.current) {
       fetchData();
+      const randomSeed = Math.floor(Math.random() * 1000);
+      setPostSortSeed(randomSeed);
+      fetchMainPostsList(randomSeed);
     } else {
       didMountRef.current = true;
     }
@@ -70,27 +94,41 @@ export default function Blog() {
             <div className={styles.createBlogButton}>Create New Post</div>
           </Link>
         ) : null}
-        <div className={styles.entryGrid}>
-          {recentPostsList.map((entry) => (
-            <div key={entry._id} className={styles.entry}>
-              <Image
-                width={1390}
-                height={486}
-                alt="post"
-                src={entry.imageUrl}
-              />
-              <div className={styles.categoryLabelBox}>
-                <div className={styles.categoryLabel}>{entry.tag}</div>
-              </div>
-              <p className={styles.entryTitle}>{entry.title}</p>
-              <div className={styles.entryInfo}>
-                <p className={styles.entryAuthor}>By {entry.author}</p>
-                <p className={styles.entryDate}>{formatDate(entry.datePost)}</p>
-              </div>
+        <div className={styles.mainEntryBox}>
+          <div className={styles.entryGrid}>
+            {mainPostsList.map((entry) => (
+              <Link key={entry._id} href={`/blog/post/${entry._id}`}>
+                <div className={styles.entry}>
+                  <Image
+                    width={1390}
+                    height={486}
+                    alt="post"
+                    src={entry.imageUrl}
+                  />
+                  <div className={styles.categoryLabelBox}>
+                    <div className={styles.categoryLabel}>{entry.tag}</div>
+                  </div>
+                  <p className={styles.entryTitle}>{entry.title}</p>
+                  <div className={styles.entryInfo}>
+                    <p className={styles.entryAuthor}>By {entry.author}</p>
+                    <p className={styles.entryDate}>
+                      {formatDate(entry.datePost)}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+          {mainPostsPage !== -1 &&
+          mainTotalPostsPage !== 0 &&
+          mainPostsPage - 1 < mainTotalPostsPage ? (
+            <div
+              onClick={fetchMainPostsList}
+              className={styles.entryGridShowMore}
+            >
+              Load More
             </div>
-          ))}
-
-          <div className={styles.entryGridShowMore}>Load More</div>
+          ) : null}
         </div>
       </section>
       <HotStoriesSection />

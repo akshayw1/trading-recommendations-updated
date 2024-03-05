@@ -64,3 +64,47 @@ export async function POST(req: Request) {
       { status: 400 }
     );
 }
+
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+
+  await connectMongoDB();
+
+  try {
+    const totalPosts = await Post.countDocuments();
+
+    const postsPerPage = 9;
+
+    const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+    const page = searchParams.get("page")!
+      ? parseInt(searchParams.get("page")! as string)
+      : 1;
+
+    const startIndex = (page - 1) * postsPerPage;
+    console.log("page", page);
+    const postsFound = await Post.aggregate([
+      { $skip: startIndex },
+      { $limit: postsPerPage },
+    ]);
+    if (postsFound.length > 0) {
+      return NextResponse.json(
+        {
+          message: `Page ${page} of ${totalPages}`,
+          posts: postsFound,
+          totalPages: totalPages,
+          currentPage: page,
+        },
+        { status: 200 }
+      );
+    } else {
+      return NextResponse.json({ message: "No posts found" }, { status: 404 });
+    }
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { message: "An error occurred", error: error },
+      { status: 500 }
+    );
+  }
+}

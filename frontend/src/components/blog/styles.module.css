@@ -49,15 +49,16 @@
 .entry p {
   color: black;
 }
-.entryGrid {
+.mainEntryBox {
   padding: 10px;
   background-color: #f4f9ff;
-  display: grid;
   border-radius: 12px;
+}
+.entryGrid {
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1em;
   position: relative;
-  padding-bottom: 7em;
 }
 .recentPosts {
   padding: 0.625em;
@@ -212,16 +213,16 @@
 .entryGridShowMore {
   color: black;
   border: 1px solid black;
-  position: absolute;
   border-radius: 6px;
   bottom: 1.5em;
   background-color: white;
   font-size: 1.1em;
   font-weight: 700;
   padding: 0.75em 1.35em;
-  left: 50%;
-  transform: translateX(-50%);
   cursor: pointer;
+  width: max-content;
+  margin: 2em auto;
+  margin-bottom: 1.5em;
 }
 .entryGridShowMore:hover {
   background-color: #feecfa;
