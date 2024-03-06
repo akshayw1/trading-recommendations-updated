@@ -71,30 +71,33 @@ export default function Blog() {
         <section className={styles.mainSection}>
           <div className={styles.top}>
             <div className={styles.entryHero}>
-              <div className={styles.heroPostImg}>
-                <Image
-                  width={1390}
-                  height={486}
-                  alt="blog hero"
-                  src="/images/blog/blog hero.png"
-                />
-              </div>
-              <div className={styles.heroPostBottom}>
-                <h3>
-                  Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed
-                  Do.
-                </h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore. Lorem Ut
-                  enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-                <div className={styles.entryHeroInfo}>
-                  <p>By The Author</p>
-                  <p>August 20, 2022</p>
-                </div>
-              </div>
+              {recentPostsList.length > 0 ? (
+                <>
+                  <div className={styles.heroPostImg}>
+                    <Image
+                      width={1390}
+                      height={486}
+                      alt="blog hero"
+                      src={recentPostsList[0].imageUrl}
+                    />
+                  </div>
+                  <div className={styles.heroPostBottom}>
+                    <h3>{recentPostsList[0].title}</h3>
+                    <p
+                      className={styles.heroPostText}
+                      dangerouslySetInnerHTML={{
+                        __html: recentPostsList[0].text,
+                      }}
+                    ></p>
+                    <div className={styles.entryHeroInfo}>
+                      <p>By {recentPostsList[0].author}</p>
+                      <p>{formatDate(recentPostsList[0].datePost)}</p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                ""
+              )}
             </div>
             <RecentPostsSection recentPostsList={recentPostsList} />
           </div>
