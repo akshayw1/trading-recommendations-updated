@@ -90,10 +90,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1em;
 }
 .heroPostBottom {
-  height: 50%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -105,9 +104,12 @@
   text-align: left;
 }
 .heroPostImg {
-  max-height: 50%;
-  min-height: 50%;
+  height: 55%;
   width: 100%;
+}
+.heroPostText {
+  height: 4.7em;
+  overflow: hidden;
 }
 .heroPostImg img {
   object-fit: cover;
@@ -300,10 +302,7 @@
 .createBlogButton:hover {
   background-color: #feecfa;
 }
-.heroPostText {
-  height: 40%;
-  overflow: hidden;
-}
+
 @media only screen and (max-width: 1340px) {
   .entryGrid {
     grid-template-columns: repeat(2, 1fr);
@@ -318,6 +317,7 @@
     max-height: none;
   }
   .entryHero {
+    height: 30em;
     width: 100%;
   }
   .recentPosts {
