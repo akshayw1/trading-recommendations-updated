@@ -22,9 +22,11 @@ export default async function middleware(req) {
   const auth = req.nextUrl.clone();
   auth.pathname = "/auth/login";
   const afterAuth = req.nextUrl.clone();
+  afterAuth.pathname = "/";
   const home = req.nextUrl.clone();
   home.pathname = "/";
-  afterAuth.pathname = "/";
+  const blog = req.nextUrl.clone();
+  blog.pathname = "/blog";
   // Store current request url in a custom header, which you can read later
   if (req.nextUrl.pathname.startsWith("/user")) {
     let blocked = true;
@@ -54,6 +56,15 @@ export default async function middleware(req) {
     }
     // If user is unauthenticated, continue.
   }
+  if (req.nextUrl.pathname.startsWith("/blog/create-post")) {
+    if ((session && !session.admin) || !session) {
+      return NextResponse.redirect(blog);
+    }
+    //just push
+    // You could also check for any property on the session object,
+    // like role === "admin" or name === "Angelo", etc.
+  }
+
   if (req.nextUrl.pathname.startsWith("/admin")) {
     if ((session && !session.admin) || !session) {
       return NextResponse.redirect(home);
@@ -78,6 +89,7 @@ export const config = {
     "/user/:path*",
     "/admin/:path*",
     "/auth/:path*",
+    "/blog/:path*",
     {
       source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
       missing: [

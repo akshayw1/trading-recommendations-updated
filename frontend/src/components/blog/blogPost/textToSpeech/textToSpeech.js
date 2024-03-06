@@ -69,6 +69,7 @@ const TextToSpeech = ({ text }) => {
     handleVoicesChanged();
 
     return () => {
+      handleStop();
       window.speechSynthesis.removeEventListener(
         "voiceschanged",
         handleVoicesChanged
@@ -94,11 +95,11 @@ const TextToSpeech = ({ text }) => {
       onClick={() => {
         if (!isPaused) {
           handleStop();
-        } else {
+        } else if (voice) {
           handlePlay();
         }
       }}
-      className={styles.audioBox}
+      className={`${styles.audioBox} ${!voice ? styles.disable : ""}`}
     >
       {!isPaused ? (
         <svg

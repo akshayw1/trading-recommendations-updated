@@ -65,75 +65,85 @@ export default function Blog() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
-    <main className={styles.main}>
-      <section className={styles.mainSection}>
-        <div className={styles.top}>
-          <div className={styles.entryHero}>
-            <Image
-              width={1390}
-              height={486}
-              alt="blog hero"
-              src="/images/blog/blog hero.png"
-            />
-            <h3>
-              Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do.
-            </h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore. Lorem Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.
-            </p>
-            <div className={styles.entryHeroInfo}>
-              <p>By The Author</p>
-              <p>August 20, 2022</p>
-            </div>
-          </div>
-          <RecentPostsSection recentPostsList={recentPostsList} />
-        </div>
-        <Link href={"/blog/create-post "}>
-          <div className={styles.createBlogButton}>Create New Post</div>
-        </Link>
-        <div className={styles.mainEntryBox}>
-          <div className={styles.entryGrid}>
-            {mainPostsList.map((entry) => (
-              <Link key={entry._id} href={`/blog/post/${entry._id}`}>
-                <div className={styles.entry}>
-                  <Image
-                    width={1390}
-                    height={486}
-                    alt="post"
-                    src={entry.imageUrl}
-                  />
-                  <div className={styles.categoryLabelBox}>
-                    <div className={styles.categoryLabel}>{entry.tag}</div>
-                  </div>
-                  <p className={styles.entryTitle}>{entry.title}</p>
-                  <div className={styles.entryInfo}>
-                    <p className={styles.entryAuthor}>By {entry.author}</p>
-                    <p className={styles.entryDate}>
-                      {formatDate(entry.datePost)}
-                    </p>
-                  </div>
+    <div className={styles.bgWhite}>
+      <main className={styles.main}>
+        <section className={styles.mainSection}>
+          <div className={styles.top}>
+            <div className={styles.entryHero}>
+              <div className={styles.heroPostImg}>
+                <Image
+                  width={1390}
+                  height={486}
+                  alt="blog hero"
+                  src="/images/blog/blog hero.png"
+                />
+              </div>
+              <div className={styles.heroPostBottom}>
+                <h3>
+                  Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed
+                  Do.
+                </h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore. Lorem Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <div className={styles.entryHeroInfo}>
+                  <p>By The Author</p>
+                  <p>August 20, 2022</p>
                 </div>
-              </Link>
-            ))}
-          </div>
-          {mainPostsPage !== -1 &&
-          mainTotalPostsPage !== 0 &&
-          mainPostsPage - 1 < mainTotalPostsPage ? (
-            <div
-              onClick={fetchMainPostsList}
-              className={styles.entryGridShowMore}
-            >
-              Load More
+              </div>
             </div>
-          ) : null}
-        </div>
-      </section>
-      <HotStoriesSection />
-    </main>
+            <RecentPostsSection recentPostsList={recentPostsList} />
+          </div>
+          {session && session.user.admin ? (
+            <Link href={"/blog/create-post "}>
+              <div className={styles.createBlogButton}>Create New Post</div>
+            </Link>
+          ) : (
+            ""
+          )}
+          <div className={styles.mainEntryBox}>
+            <div className={styles.entryGrid}>
+              {mainPostsList.map((entry) => (
+                <Link key={entry._id} href={`/blog/post/${entry._id}`}>
+                  <div className={styles.entry}>
+                    <Image
+                      width={1390}
+                      height={486}
+                      alt="post"
+                      src={entry.imageUrl}
+                    />
+                    <div className={styles.categoryLabelBox}>
+                      <div className={styles.categoryLabel}>{entry.tag}</div>
+                    </div>
+                    <p className={styles.entryTitle}>{entry.title}</p>
+                    <div className={styles.entryInfo}>
+                      <p className={styles.entryAuthor}>By {entry.author}</p>
+                      <p className={styles.entryDate}>
+                        {formatDate(entry.datePost)}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            {mainPostsPage !== -1 &&
+            mainTotalPostsPage !== 0 &&
+            mainPostsPage - 1 < mainTotalPostsPage ? (
+              <div
+                onClick={fetchMainPostsList}
+                className={styles.entryGridShowMore}
+              >
+                Load More
+              </div>
+            ) : null}
+          </div>
+        </section>
+        <HotStoriesSection />
+      </main>
+    </div>
   );
 }
