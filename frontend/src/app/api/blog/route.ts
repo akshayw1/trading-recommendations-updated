@@ -70,7 +70,13 @@ export async function GET(req: Request) {
   await connectMongoDB();
 
   try {
-    const totalPosts = await Post.countDocuments();
+    let postsQuery = {};
+    const tag = searchParams.get("tag");
+    if (tag && tag !== "") {
+      postsQuery = { tag: tag };
+    }
+
+    const totalPosts = await Post.countDocuments(postsQuery);
 
     const postsPerPage = 9;
 
@@ -81,10 +87,13 @@ export async function GET(req: Request) {
       : 1;
 
     const startIndex = (page - 1) * postsPerPage;
+
     const postsFound = await Post.aggregate([
+      { $match: postsQuery },
       { $skip: startIndex },
       { $limit: postsPerPage },
     ]);
+
     if (postsFound.length > 0) {
       return NextResponse.json(
         {

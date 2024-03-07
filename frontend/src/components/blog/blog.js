@@ -5,7 +5,8 @@ import HotStoriesSection from "@/components/blog/hotStoriesSection/hotStoriesSec
 import RecentPostsSection from "@/components/blog/recentPostsSection/recentPostsSection";
 import { useOnboardingContext } from "@/context/MyContext";
 import Link from "next/link";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
+import PostsMainGrid from "@/components/blog/postsMainGrid/postsMainGrid";
 export default function Blog() {
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -15,28 +16,6 @@ export default function Blog() {
   const didMountRef = useRef(false);
   const { session, status } = useOnboardingContext();
   const [recentPostsList, setRecentPostsList] = useState([]);
-  const [mainPostsList, setMainPostsList] = useState([]);
-  const [mainPostsPage, setMainPostsPage] = useState(1);
-  const [mainTotalPostsPage, setMainTotalPostsPage] = useState(0);
-  const fetchMainPostsList = async () => {
-    try {
-      const fetchUrl = `/api/blog?&page=${mainPostsPage}`;
-      setMainPostsPage((prev) => prev + 1);
-      const res = await fetch(fetchUrl, {
-        method: "GET",
-        headers: { "Content-type": "application/json" },
-      });
-      if (res.ok) {
-        const resData = await res.json();
-        setMainTotalPostsPage(resData.totalPages);
-        setMainPostsList((prev) => [...prev, ...resData.posts]);
-      } else {
-        // Handle error
-      }
-    } catch (error) {
-      // Handle error
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +38,6 @@ export default function Blog() {
 
     if (didMountRef.current) {
       fetchData();
-      fetchMainPostsList();
     } else {
       didMountRef.current = true;
     }
@@ -82,7 +60,9 @@ export default function Blog() {
                     />
                   </div>
                   <div className={styles.heroPostBottom}>
-                    <h3>{recentPostsList[0].title}</h3>
+                    <Link href={`/blog/post/${recentPostsList[0]._id}`}>
+                      <h3>{recentPostsList[0].title}</h3>
+                    </Link>
                     <p
                       className={styles.heroPostText}
                       dangerouslySetInnerHTML={{
@@ -102,48 +82,13 @@ export default function Blog() {
             <RecentPostsSection recentPostsList={recentPostsList} />
           </div>
           {session && session.user.admin ? (
-            <Link href={"/blog/create-post "}>
+            <Link href={"/blog/create-post"}>
               <div className={styles.createBlogButton}>Create New Post</div>
             </Link>
           ) : (
             ""
           )}
-          <div className={styles.mainEntryBox}>
-            <div className={styles.entryGrid}>
-              {mainPostsList.map((entry) => (
-                <Link key={entry._id} href={`/blog/post/${entry._id}`}>
-                  <div className={styles.entry}>
-                    <Image
-                      width={1390}
-                      height={486}
-                      alt="post"
-                      src={entry.imageUrl}
-                    />
-                    <div className={styles.categoryLabelBox}>
-                      <div className={styles.categoryLabel}>{entry.tag}</div>
-                    </div>
-                    <p className={styles.entryTitle}>{entry.title}</p>
-                    <div className={styles.entryInfo}>
-                      <p className={styles.entryAuthor}>By {entry.author}</p>
-                      <p className={styles.entryDate}>
-                        {formatDate(entry.datePost)}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            {mainPostsPage !== -1 &&
-            mainTotalPostsPage !== 0 &&
-            mainPostsPage - 1 < mainTotalPostsPage ? (
-              <div
-                onClick={fetchMainPostsList}
-                className={styles.entryGridShowMore}
-              >
-                Load More
-              </div>
-            ) : null}
-          </div>
+          <PostsMainGrid />
         </section>
         <HotStoriesSection />
       </main>

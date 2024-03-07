@@ -1,30 +1,46 @@
+"use client";
+import { useState, useRef, useEffect } from "react";
 import styles from "../styles.module.css";
+import Link from "next/link";
 export default function HotStoriesSection() {
+  const [recentTagsList, setRecentTagsList] = useState([]);
+  const didMountRef = useRef(false);
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const fetchUrl = `/api/blog/recent-tags`;
+        const res = await fetch(fetchUrl, {
+          method: "GET",
+          headers: { "Content-type": "application/json" },
+        });
+        if (res.ok) {
+          const resData = await res.json();
+          console.log(resData);
+          setRecentTagsList(resData.tags);
+        } else {
+          // Handle error
+        }
+      } catch (error) {
+        // Handle error
+      }
+    };
+    if (didMountRef.current) {
+      fetchTags();
+    } else {
+      didMountRef.current = true;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <aside className={styles.hotStory}>
       <h3>Hot Stories</h3>
       <div className={styles.hotStoryGrid}>
-        <div className={styles.hotStoryLabel}>#Bitcoin</div>
-        <div className={styles.hotStoryLabel}>#Stock-Market</div>
-        <div className={styles.hotStoryLabel}>#Trading</div>
-        <div className={styles.hotStoryLabel}>#ETF</div>
-        <div className={styles.hotStoryLabel}>#Ethereum</div>
-        <div className={styles.hotStoryLabel}>#Lorem</div>
-        <div className={styles.hotStoryLabel}>#Ipsum</div>
-        <div className={styles.hotStoryLabel}>#Bitcoin</div>
-        <div className={styles.hotStoryLabel}>#Stock-Market</div>
-        <div className={styles.hotStoryLabel}>#Trading</div>
-        <div className={styles.hotStoryLabel}>#ETF</div>
-        <div className={styles.hotStoryLabel}>#Ethereum</div>
-        <div className={styles.hotStoryLabel}>#Lorem</div>
-        <div className={styles.hotStoryLabel}>#Ipsum</div>
-        <div className={styles.hotStoryLabel}>#Bitcoin</div>
-        <div className={styles.hotStoryLabel}>#Stock-Market</div>
-        <div className={styles.hotStoryLabel}>#Trading</div>
-        <div className={styles.hotStoryLabel}>#ETF</div>
-        <div className={styles.hotStoryLabel}>#Ethereum</div>
-        <div className={styles.hotStoryLabel}>#Lorem</div>
-        <div className={styles.hotStoryLabel}>#Ipsum</div>
+        {recentTagsList.map((tag, i) => (
+          <Link key={i} href={`/blog/hot-story/${tag}`}>
+            <div className={styles.hotStoryLabel}>#{tag}</div>
+          </Link>
+        ))}
       </div>
     </aside>
   );

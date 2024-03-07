@@ -282,6 +282,7 @@
   color: black;
   padding: 0.2em 0.5em;
   cursor: pointer;
+  overflow: hidden;
 }
 .hotStoryLabel:hover {
   background-color: #c2c1c1;
@@ -302,7 +303,31 @@
 .createBlogButton:hover {
   background-color: #feecfa;
 }
+.hotH2 {
+  text-align: left;
+  color: black;
+  font-size: 1.8em;
+  font-weight: 600;
+  width: 100%;
+}
+.mainHot {
+  width: 95%;
+  margin: auto;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
 
+.mainHotSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0;
+  width: 100%;
+  gap: 1em;
+  font-size: 13px;
+}
 @media only screen and (max-width: 1340px) {
   .entryGrid {
     grid-template-columns: repeat(2, 1fr);
@@ -340,6 +365,17 @@
   }
   .hotStoryGrid {
     justify-content: center;
+  }
+  .mainSection {
+    width: 100%;
+  }
+  .entryGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .entryGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media only screen and (max-width: 960px) {
