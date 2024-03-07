@@ -35,12 +35,13 @@ export default function Blog() {
         // Handle error
       }
     };
+    let ignore = false;
 
-    if (didMountRef.current) {
-      fetchData();
-    } else {
-      didMountRef.current = true;
-    }
+    if (!ignore) fetchData();
+    return () => {
+      ignore = true;
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

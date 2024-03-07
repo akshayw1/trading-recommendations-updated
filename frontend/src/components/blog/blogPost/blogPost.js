@@ -30,11 +30,13 @@ export default function BlogPost({ id }) {
       }
     };
 
-    if (didMountRef.current) {
-      fetchData();
-    } else {
-      didMountRef.current = true;
-    }
+    let ignore = false;
+
+    if (!ignore) fetchData();
+
+    return () => {
+      ignore = true;
+    };
   }, [id, router]);
 
   if (postData)

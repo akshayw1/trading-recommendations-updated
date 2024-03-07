@@ -25,11 +25,14 @@ export default function HotStoriesSection() {
         // Handle error
       }
     };
-    if (didMountRef.current) {
-      fetchTags();
-    } else {
-      didMountRef.current = true;
-    }
+    let ignore = false;
+
+    if (!ignore) fetchTags();
+
+    return () => {
+      ignore = true;
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

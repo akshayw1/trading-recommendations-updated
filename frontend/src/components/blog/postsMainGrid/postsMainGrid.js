@@ -14,11 +14,14 @@ export default function PostsMainGrid({ tag = "" }) {
     return date.toLocaleDateString("en-US", options);
   }
   useEffect(() => {
-    if (didMountRef.current) {
-      fetchMainPostsList();
-    } else {
-      didMountRef.current = true;
-    }
+    let ignore = false;
+
+    if (!ignore) fetchMainPostsList();
+
+    return () => {
+      ignore = true;
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const fetchMainPostsList = async () => {
