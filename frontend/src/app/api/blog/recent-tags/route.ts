@@ -17,6 +17,8 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: "No posts found" }, { status: 404 });
     }
   } catch (error) {
+    console.log(error);
+
     return NextResponse.json(
       { message: "An error occurred", error: error },
       { status: 500 }
