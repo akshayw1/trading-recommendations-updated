@@ -16,7 +16,6 @@ export async function POST(req: Request) {
   const resetUrl = `${process.env.NEXTAUTH_URL}/auth/resetpass/${token}`;
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-
   // const transporter = nodemailer.createTransport({
   //   service: "gmail",
   //   auth: {
@@ -24,7 +23,6 @@ export async function POST(req: Request) {
   //     pass: `${process.env.RESET_APP_PASS}`,
   //   },
   // });
- 
 
   const verifyUser = await User.findOneAndUpdate(
     { email },
@@ -42,17 +40,13 @@ export async function POST(req: Request) {
         from: "support@btcusdperp.com",
         to: [email],
         subject: "Reset Password - btcusdperp.com",
-        react: ResetPassword(
-          { resetUrl:resetUrl}
-          ),
+        react: ResetPassword({ resetUrl: resetUrl }),
       });
-  
+
       return Response.json(data);
     } catch (error) {
       return Response.json({ error });
-    };
-
-  
+    }
   } else {
     return NextResponse.json({ message: "user no exist" }, { status: 201 });
   }

@@ -36,7 +36,6 @@ export default function Blog() {
       }
     };
     let ignore = false;
-
     if (!ignore) fetchData();
     return () => {
       ignore = true;

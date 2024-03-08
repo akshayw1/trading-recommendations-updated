@@ -16,7 +16,6 @@ export default function HotStoriesSection() {
         });
         if (res.ok) {
           const resData = await res.json();
-          console.log(resData);
           setRecentTagsList(resData.tags);
         } else {
           // Handle error

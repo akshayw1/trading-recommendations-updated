@@ -1,16 +1,25 @@
 "use client";
 import HotStoriesSection from "@/components/blog/hotStoriesSection/hotStoriesSection";
 import styles from "./styles.module.css";
-import RecentPostsSection from "@/components/blog/recentPostsSection/recentPostsSection";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import TextToSpeech from "@/components/blog/blogPost/textToSpeech/textToSpeech";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  TelegramShareButton,
+  RedditShareButton,
+  WhatsappShareButton,
+  LinkedinShareButton,
+} from "react-share";
+import { usePathname } from "next/navigation";
+
 export default function BlogPost({ id }) {
   const [postData, setPostData] = useState(null);
   const router = useRouter();
   const didMountRef = useRef(false);
-
+  const pathname = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}${usePathname()}`;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,7 +47,15 @@ export default function BlogPost({ id }) {
       ignore = true;
     };
   }, [id, router]);
-
+  const fetchAddShare = async () => {
+    try {
+      const fetchUrl = `/api/blog/${id}/share`;
+      const res = await fetch(fetchUrl, {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+      });
+    } catch (error) {}
+  };
   if (postData)
     return (
       <div className={styles.bgWhite}>
@@ -71,12 +88,10 @@ export default function BlogPost({ id }) {
                   <span>{postData.totalViews}</span>
                   Total Views
                 </div>
-                {/*
                 <div className={styles.postTopText}>
-                  <span>1</span>
+                  <span>{postData.totalShare}</span>
                   Total Share
                 </div>
-      */}
               </div>
               <div className={styles.postTopImgRight}>
                 <div className={styles.postTopText}>Listen to Article</div>
@@ -96,42 +111,73 @@ export default function BlogPost({ id }) {
             </div>
             <div className={styles.mainTextBox}>
               <div className={styles.socialLinkBox}>
-                <Image
-                  alt="whatsapp"
-                  width={32}
-                  height={32}
-                  src={"/images/blog/Whatsapp.png"}
-                />
-                <Image
-                  alt="whatsapp"
-                  width={32}
-                  height={32}
-                  src={"/images/blog/Facebook.png"}
-                />
-                <Image
-                  alt="whatsapp"
-                  width={32}
-                  height={32}
-                  src={"/images/blog/Twitter.png"}
-                />
-                <Image
-                  alt="whatsapp"
-                  width={32}
-                  height={32}
-                  src={"/images/blog/Linkedin.png"}
-                />
-                <Image
-                  alt="whatsapp"
-                  width={32}
-                  height={32}
-                  src={"/images/blog/Reddit.png"}
-                />
-                <Image
-                  alt="whatsapp"
-                  width={32}
-                  height={32}
-                  src={"/images/blog/Telegram.png"}
-                />
+                <WhatsappShareButton
+                  onShareWindowClose={fetchAddShare}
+                  url={pathname}
+                >
+                  <Image
+                    alt="whatsapp"
+                    width={32}
+                    height={32}
+                    src={"/images/blog/Whatsapp.png"}
+                  />
+                </WhatsappShareButton>
+
+                <FacebookShareButton
+                  onShareWindowClose={fetchAddShare}
+                  url={pathname}
+                >
+                  <Image
+                    alt="facebook"
+                    width={32}
+                    height={32}
+                    src={"/images/blog/Facebook.png"}
+                  />
+                </FacebookShareButton>
+                <TwitterShareButton
+                  onShareWindowClose={fetchAddShare}
+                  url={pathname}
+                >
+                  <Image
+                    alt="twitter"
+                    width={32}
+                    height={32}
+                    src={"/images/blog/Twitter.png"}
+                  />
+                </TwitterShareButton>
+                <LinkedinShareButton
+                  onShareWindowClose={fetchAddShare}
+                  url={pathname}
+                >
+                  <Image
+                    alt="linkendin"
+                    width={32}
+                    height={32}
+                    src={"/images/blog/Linkedin.png"}
+                  />
+                </LinkedinShareButton>
+                <RedditShareButton
+                  onShareWindowClose={fetchAddShare}
+                  url={pathname}
+                >
+                  <Image
+                    alt="reddit"
+                    width={32}
+                    height={32}
+                    src={"/images/blog/Reddit.png"}
+                  />
+                </RedditShareButton>
+                <TelegramShareButton
+                  onShareWindowClose={fetchAddShare}
+                  url={pathname}
+                >
+                  <Image
+                    alt="telegram"
+                    width={32}
+                    height={32}
+                    src={"/images/blog/Telegram.png"}
+                  />
+                </TelegramShareButton>
               </div>
               <div dangerouslySetInnerHTML={{ __html: postData.text }} />
             </div>
