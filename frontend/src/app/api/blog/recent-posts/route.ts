@@ -6,7 +6,8 @@ export async function GET(req: Request) {
   await connectMongoDB();
 
   try {
-    const postsFound = await Post.find({}).sort({ datePost: -1 }).limit(5);
+    const postsFound = await Post.find({}).sort({ createdAt: -1 }).limit(5);
+
     if (postsFound.length > 0) {
       return NextResponse.json(
         { message: "Latest 5 posts found", posts: postsFound },

@@ -6,7 +6,7 @@ export async function GET(req: Request) {
   await connectMongoDB();
 
   try {
-    const postsFound = await Post.find({}).sort({ datePost: -1 }).limit(20);
+    const postsFound = await Post.find({}).sort({ createdAt: -1 }).limit(20);
     if (postsFound.length > 0) {
       const tagsArray = postsFound.map((post) => post.tag);
       return NextResponse.json(
