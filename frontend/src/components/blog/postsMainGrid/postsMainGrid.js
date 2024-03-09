@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles.module.css";
 export default function PostsMainGrid({ tag = "" }) {
-  const didMountRef = useRef(false);
   const [mainPostsList, setMainPostsList] = useState([]);
   const [mainPostsPage, setMainPostsPage] = useState(1);
   const [mainTotalPostsPage, setMainTotalPostsPage] = useState(0);
@@ -13,14 +12,13 @@ export default function PostsMainGrid({ tag = "" }) {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return date.toLocaleDateString("en-US", options);
   }
+  const fetchedRef = useRef(false);
+
   useEffect(() => {
-    let ignore = false;
-
-    if (!ignore) fetchMainPostsList();
-
-    return () => {
-      ignore = true;
-    };
+    if (!fetchedRef.current) {
+      fetchMainPostsList();
+      fetchedRef.current = true;
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -36,10 +34,6 @@ export default function PostsMainGrid({ tag = "" }) {
         const resData = await res.json();
         setMainTotalPostsPage(resData.totalPages);
         setMainPostsList((prev) => [...prev, ...resData.posts]);
-        console.log({
-          totalPages: resData.totalPages,
-          page: mainPostsPage + 1,
-        });
       } else {
         // Handle error
       }

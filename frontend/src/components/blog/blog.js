@@ -35,13 +35,7 @@ export default function Blog() {
         // Handle error
       }
     };
-    let ignore = false;
-    if (!ignore) fetchData();
-    return () => {
-      ignore = true;
-    };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchData();
   }, []);
   return (
     <div className={styles.bgWhite}>
