@@ -133,3 +133,14 @@
   margin-right: 1rem;
   width: max-content;
 }
+
+.editorWrapper {
+  color: initial;
+}
+.editor {
+  background-color: white;
+  cursor: text;
+  user-select: text;
+  border: 1px solid white;
+  min-height: 300px;
+}

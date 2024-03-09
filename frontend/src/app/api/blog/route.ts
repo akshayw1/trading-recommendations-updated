@@ -6,6 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "@/app/firebase";
 
 export async function POST(req: Request) {
+  console.log("sad");
   const data = await req.formData();
   const file: File | null = data.get("image") as unknown as File;
   const title: string = data.get("title") as unknown as string;
@@ -13,10 +14,10 @@ export async function POST(req: Request) {
   const author: string = data.get("author") as unknown as string;
   const tag: string = data.get("tag") as unknown as string;
   const tags: string[] = data.getAll("tags") as string[];
-  if (!file) {
-    return NextResponse.json({ success: false, error: "file no supported" });
+  if (!file || !title || !author || !text || !tag) {
+    return NextResponse.json({ success: false, error: "data missing" });
   }
-
+  console.log(text);
   const token = jwt.sign({ name: file.name }, `${process.env.NEXTAUTH_SECRET}`);
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);

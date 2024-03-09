@@ -14,11 +14,16 @@ import {
   LinkedinShareButton,
 } from "react-share";
 import { usePathname } from "next/navigation";
+import { useOnboardingContext } from "@/context/MyContext";
+import { convertToHTML } from "draft-convert";
+import { convertFromRaw } from "draft-js";
 
 export default function BlogPost({ id }) {
+  const [richText, setRichText] = useState("");
   const [postData, setPostData] = useState(null);
   const router = useRouter();
   const didMountRef = useRef(false);
+  const { session, status } = useOnboardingContext();
 
   const pathname = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}${usePathname()}`;
   useEffect(() => {
@@ -29,18 +34,23 @@ export default function BlogPost({ id }) {
           method: "GET",
           headers: { "Content-type": "application/json" },
         });
+        console.log(res.ok);
         if (res.ok) {
           const resData = await res.json();
           setPostData(resData.post);
+          const richText = convertToHTML(
+            convertFromRaw(JSON.parse(resData.post.text))
+          );
+          setRichText(richText);
         } else {
           router.push(`/blog`);
         }
       } catch (error) {
+        console.log(error);
         router.push(`/blog`);
       }
     };
     if (!didMountRef.current) {
-      console.log("mounted");
       fetchData();
       didMountRef.current = true;
     }
@@ -104,7 +114,7 @@ export default function BlogPost({ id }) {
               </div>
               <div className={styles.postTopImgRight}>
                 <div className={styles.postTopText}>Listen to Article</div>
-                <TextToSpeech text={postData.text} />
+                <TextToSpeech text={richText} />
               </div>
             </div>
             <div className={styles.postHeroImg}>
@@ -118,37 +128,41 @@ export default function BlogPost({ id }) {
                 />
               ) : null}
             </div>
-            <div className="relative w-full">
-              <div
-                onClick={deletePost}
-                className="m-auto mr-0 mt-4 cursor-pointer p-[.5rem] rounded-[8px] flex justify-center items-center right-[15px] bottom-[15px] w-[max-content] h-[3rem] bg-red-500"
-              >
-                Delete Post
-                <svg
-                  width="2rem"
-                  height="2rem"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+            {session && session.user.admin ? (
+              <div className="relative w-full">
+                <div
+                  onClick={deletePost}
+                  className="m-auto mr-0 mt-4 cursor-pointer p-[.5rem] rounded-[8px] flex justify-center items-center right-[15px] bottom-[15px] w-[max-content] h-[3rem] bg-red-500"
                 >
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0" />
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
-                      stroke="#ffffff"
-                      strokeWidth="2"
+                  Delete Post
+                  <svg
+                    width="2rem"
+                    height="2rem"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+                    <g
+                      id="SVGRepo_tracerCarrier"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                  </g>
-                </svg>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
+                        stroke="#ffffff"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </g>
+                  </svg>
+                </div>
               </div>
-            </div>
+            ) : (
+              ""
+            )}
             <div className={styles.mainTextBox}>
               <div className={styles.socialLinkBox}>
                 <WhatsappShareButton
@@ -219,7 +233,8 @@ export default function BlogPost({ id }) {
                   />
                 </TelegramShareButton>
               </div>
-              <div dangerouslySetInnerHTML={{ __html: postData.text }} />
+
+              <div dangerouslySetInnerHTML={{ __html: richText }} />
             </div>
           </section>
           <aside className={styles.aside}>

@@ -1,17 +1,23 @@
 "use client";
 import { useState } from "react";
 import styles from "./styles.module.css";
-import { Editor } from "primereact/editor";
 import NextImage from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import LoadingToast from "@/components/usersTable/loading";
+import { EditorState, convertToRaw } from "draft-js";
+import { convertToHTML } from "draft-convert";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import dynamic from "next/dynamic";
+const Editor = dynamic(
+  () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
+  { ssr: false }
+);
 
 export default function BlogCreatorPost() {
   const router = useRouter();
 
-  const [text, setText] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [inputTag, setInputTag] = useState("");
@@ -81,17 +87,8 @@ export default function BlogCreatorPost() {
 
     setEventImg(null);
   };
-  const renderHeader = () => {
-    return (
-      <span className="ql-formats">
-        <button className="ql-bold" aria-label="Bold"></button>
-        <button className="ql-italic" aria-label="Italic"></button>
-        <button className="ql-underline" aria-label="Underline"></button>
-      </span>
-    );
-  };
+  const [text, setText] = useState(() => EditorState.createEmpty());
 
-  const header = renderHeader();
   const submitEvent = async () => {
     const errorsNow = {};
 
@@ -101,9 +98,7 @@ export default function BlogCreatorPost() {
     if (author === "") {
       errorsNow.author = [...(errorsNow.author || []), "Author can't be empty"];
     }
-    if (text === "") {
-      errorsNow.text = [...(errorsNow.text || []), "Text Blog can't be empty"];
-    }
+
     if (eventImg === null) {
       errorsNow.eventImg = [
         ...(errorsNow.eventImg || []),
@@ -113,21 +108,28 @@ export default function BlogCreatorPost() {
     if (inputTag === "") {
       errorsNow.tags = [...(errorsNow.tags || []), "Tag can't be empty"];
     }
-
+    // Assuming textEditor holds the editor state
+    let html = convertToHTML(text.getCurrentContent());
+    // Basic check for empty content (checks for at least one block)
+    if (html === "") {
+      errorsNow.text = [...(errorsNow.text || []), "Text Blog can't be empty"];
+    }
+    const draft = JSON.stringify(convertToRaw(text.getCurrentContent()));
+    console.log(draft);
     if (Object.values(errorsNow).length === 0) {
       let toastId;
-
       try {
         toastId = toast(<LoadingToast text="Uploading..." />, {
           autoClose: false,
         });
+        setUploadingPost(true);
+
         const data = new FormData();
         data.set("image", eventImg);
         data.set("title", title);
-        data.set("text", text);
         data.set("author", author);
         data.set("tag", inputTag);
-        setUploadingPost(true);
+        data.set("text", draft);
 
         const res = await fetch("/api/blog", {
           method: "POST",
@@ -168,6 +170,7 @@ export default function BlogCreatorPost() {
     }
     setErrors(errorsNow);
   };
+
   return (
     <main className={styles.main}>
       <div
@@ -274,13 +277,15 @@ export default function BlogCreatorPost() {
         </div>
       </div>
       <Editor
-        headerTemplate={header}
-        value={text}
-        onTextChange={(e) => setText(e.htmlValue)}
-        style={{
-          minHeight: "420px",
+        editorState={text}
+        toolbarClassName="toolbarClassName"
+        wrapperClassName={styles.editorWrapper}
+        editorClassName={styles.editor}
+        onEditorStateChange={(e) => {
+          setText(e);
         }}
       />
+      <div></div>
       <div
         onClick={() => {
           if (!uploadingPost) {

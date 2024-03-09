@@ -7,6 +7,9 @@ import { useOnboardingContext } from "@/context/MyContext";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import PostsMainGrid from "@/components/blog/postsMainGrid/postsMainGrid";
+import { convertToHTML } from "draft-convert";
+import { convertFromRaw } from "draft-js";
+
 export default function Blog() {
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -37,6 +40,12 @@ export default function Blog() {
     };
     fetchData();
   }, []);
+  let richText;
+  recentPostsList.length > 0
+    ? (richText = convertToHTML(
+        convertFromRaw(JSON.parse(recentPostsList[0].text))
+      ))
+    : "";
   return (
     <div className={styles.bgWhite}>
       <main className={styles.main}>
@@ -60,7 +69,7 @@ export default function Blog() {
                     <p
                       className={styles.heroPostText}
                       dangerouslySetInnerHTML={{
-                        __html: recentPostsList[0].text,
+                        __html: richText,
                       }}
                     ></p>
                     <div className={styles.entryHeroInfo}>
