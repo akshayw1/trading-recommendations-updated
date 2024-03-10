@@ -8,7 +8,7 @@ const TextToSpeech = ({ text }) => {
   const [rate, setRate] = useState(1);
   const [volume, setVolume] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);
-
+  const [synth, setSynth] = useState(null);
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
@@ -18,64 +18,50 @@ const TextToSpeech = ({ text }) => {
   };
 
   useEffect(() => {
-    const synth = window.speechSynthesis;
-    const u = new SpeechSynthesisUtterance(text);
-    setUtterance(u);
+    if (synth) {
+      const u = new SpeechSynthesisUtterance(text);
 
-    // Add an event listener to the speechSynthesis object to listen for the voiceschanged event
-    synth.addEventListener("voiceschanged", () => {
+      u.voice = voice;
+      u.pitch = pitch;
+      u.rate = rate;
+      u.volume = volume;
+      u.onend = handleEnd;
+
+      setUtterance(u);
+
       const voices = synth.getVoices();
-      setVoice(voices[0]);
-    });
+      setVoice(voices[2]);
 
-    return () => {
-      synth.cancel();
-      synth.removeEventListener("voiceschanged", () => {
+      return () => {
         setVoice(null);
-      });
+      };
+    }
+  }, [text, synth, voice, pitch, rate, volume]);
+
+  useEffect(() => {
+    if (!synth) setSynth(window.speechSynthesis);
+    if (synth) {
+      synth.cancel();
+    }
+    return () => {
+      if (synth) {
+        synth.cancel();
+      }
     };
-  }, [text]);
+  }, [synth]);
 
   const handlePlay = () => {
-    const synth = window.speechSynthesis;
     setCurrentTime(0);
-    utterance.voice = voice;
-    utterance.pitch = pitch;
-    utterance.rate = rate;
-    utterance.volume = volume;
-    utterance.onend = handleEnd;
+    console.log(utterance.voice);
     synth.speak(utterance);
 
     setIsPaused(false);
   };
 
   const handleStop = () => {
-    const synth = window.speechSynthesis;
     setIsPaused(true);
     synth.cancel();
   };
-
-  useEffect(() => {
-    const handleVoicesChanged = () => {
-      const voices = window.speechSynthesis.getVoices();
-      setVoice(voices[2]);
-    };
-
-    window.speechSynthesis.addEventListener(
-      "voiceschanged",
-      handleVoicesChanged
-    );
-
-    handleVoicesChanged();
-
-    return () => {
-      handleStop();
-      window.speechSynthesis.removeEventListener(
-        "voiceschanged",
-        handleVoicesChanged
-      );
-    };
-  }, []);
 
   const handleEnd = () => {
     setIsPaused(true);
@@ -99,7 +85,7 @@ const TextToSpeech = ({ text }) => {
           handlePlay();
         }
       }}
-      className={`${styles.audioBox} ${!voice ? styles.disable : ""}`}
+      className={`${styles.audioBox} ${synth && voice ? "" : styles.disable}`}
     >
       {!isPaused ? (
         <svg
