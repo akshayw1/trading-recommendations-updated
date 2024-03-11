@@ -52,7 +52,6 @@ const TextToSpeech = ({ text }) => {
 
   const handlePlay = () => {
     setCurrentTime(0);
-    console.log(utterance.voice);
     synth.speak(utterance);
 
     setIsPaused(false);

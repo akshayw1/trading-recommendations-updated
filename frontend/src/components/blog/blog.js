@@ -41,11 +41,16 @@ export default function Blog() {
     fetchData();
   }, []);
   let richText;
-  recentPostsList.length > 0
-    ? (richText = convertToHTML(
-        convertFromRaw(JSON.parse(recentPostsList[0].text))
-      ))
-    : "";
+  if (recentPostsList.length > 0) {
+    richText = recentPostsList[0].text;
+
+    const div = document.createElement("div");
+    div.innerHTML = richText;
+
+    div.querySelectorAll("*").forEach((el) => el.removeAttribute("style"));
+
+    richText = div.innerHTML;
+  }
   return (
     <div className={styles.bgWhite}>
       <main className={styles.main}>

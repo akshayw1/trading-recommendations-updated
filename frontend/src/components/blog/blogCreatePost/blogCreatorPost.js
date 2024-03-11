@@ -1,13 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import NextImage from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import LoadingToast from "@/components/usersTable/loading";
-import { EditorState, convertToRaw } from "draft-js";
-import { convertToHTML } from "draft-convert";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
+
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import dynamic from "next/dynamic";
 const Editor = dynamic(
@@ -15,13 +17,12 @@ const Editor = dynamic(
   { ssr: false }
 );
 
-export default function BlogCreatorPost() {
+export default function BlogCreatorPost({ postData = "new" }) {
   const router = useRouter();
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [inputTag, setInputTag] = useState("");
-  const [tagsArray, setTagsArray] = useState([]);
   const [eventImg, setEventImg] = useState(null);
   const [errors, setErrors] = useState({});
   const [uploadingPost, setUploadingPost] = useState(false);
@@ -89,6 +90,30 @@ export default function BlogCreatorPost() {
   };
   const [text, setText] = useState(() => EditorState.createEmpty());
 
+  useEffect(() => {
+    if (postData !== "new" && postData !== "initial") {
+      setTitle(postData.title);
+      setAuthor(postData.author);
+      setInputTag(postData.tag);
+      const fetchImageUrl = async () => {
+        const blob = await fetch(postData.imageUrl).then((response) =>
+          response.blob()
+        );
+
+        const file = new File([blob], "image.jpg", {
+          type: blob.type,
+        });
+        setEventImg(file);
+      };
+
+      let editorState = EditorState.createWithContent(
+        ContentState.createFromBlockArray(htmlToDraft(postData.text))
+      );
+      fetchImageUrl();
+      setText(editorState);
+    }
+  }, [postData]);
+
   const submitEvent = async () => {
     const errorsNow = {};
 
@@ -108,51 +133,80 @@ export default function BlogCreatorPost() {
     if (inputTag === "") {
       errorsNow.tags = [...(errorsNow.tags || []), "Tag can't be empty"];
     }
-    // Assuming textEditor holds the editor state
-    let html = convertToHTML(text.getCurrentContent());
-    // Basic check for empty content (checks for at least one block)
-    if (html === "") {
-      errorsNow.text = [...(errorsNow.text || []), "Text Blog can't be empty"];
+    const draft = draftToHtml(convertToRaw(text.getCurrentContent()));
+    if (draft.length < 10) {
+      errorsNow.text = [
+        ...(errorsNow.text || []),
+        "Text Blog minimum length 10 characters",
+      ];
     }
-    const draft = JSON.stringify(convertToRaw(text.getCurrentContent()));
-    console.log(draft);
     if (Object.values(errorsNow).length === 0) {
       let toastId;
       try {
-        toastId = toast(<LoadingToast text="Uploading..." />, {
-          autoClose: false,
-        });
         setUploadingPost(true);
 
         const data = new FormData();
-        data.set("image", eventImg);
+        data.set("image", eventImg, eventImg.type);
         data.set("title", title);
         data.set("author", author);
         data.set("tag", inputTag);
         data.set("text", draft);
-
-        const res = await fetch("/api/blog", {
-          method: "POST",
-          body: data,
-        });
-        if (res.ok) {
-          toast.update(toastId, {
-            render: "Post created successfully",
-            type: "success",
-            autoClose: 5000,
+        if (postData === "new") {
+          toastId = toast(<LoadingToast text="Uploading..." />, {
+            autoClose: false,
           });
-          const resData = await res.json();
-          router.push(`/blog/post/${resData.postID}`);
+          const res = await fetch("/api/blog", {
+            method: "POST",
+            body: data,
+          });
+          if (res.ok) {
+            toast.update(toastId, {
+              render: "Post created successfully",
+              type: "success",
+              autoClose: 5000,
+            });
+            const resData = await res.json();
+            router.push(`/blog/post/${resData.postID}`);
+          } else {
+            toast.update(toastId, {
+              render: "Something go wrong, try again",
+              type: toast.TYPE.ERROR,
+              autoClose: 5000,
+            });
+            errorsNow.form = [
+              ...(errorsNow.form || []),
+              "Something go wrong, try again",
+            ];
+          }
         } else {
-          toast.update(toastId, {
-            render: "Something go wrong, try again",
-            type: toast.TYPE.ERROR,
-            autoClose: 5000,
+          toastId = toast(<LoadingToast text="Submitting..." />, {
+            autoClose: false,
           });
-          errorsNow.form = [
-            ...(errorsNow.form || []),
-            "Something go wrong, try again",
-          ];
+          data.set("postId", postData._id);
+
+          const res = await fetch("/api/blog", {
+            method: "PATCH",
+            body: data,
+          });
+          if (res.ok) {
+            toast.update(toastId, {
+              render: "Edit submited successfully",
+              type: "success",
+              autoClose: 5000,
+            });
+            const resData = await res.json();
+            router.push(`/blog/post/${resData.postId}`);
+          } else {
+            toast.update(toastId, {
+              render: "Something go wrong, try again",
+              type: toast.TYPE.ERROR,
+              autoClose: 5000,
+            });
+            errorsNow.form = [
+              ...(errorsNow.form || []),
+              "Something go wrong, try again",
+            ];
+          }
         }
       } catch (error) {
         toast.update(toastId, {
@@ -170,7 +224,7 @@ export default function BlogCreatorPost() {
     }
     setErrors(errorsNow);
   };
-
+  if (postData === "initial") return <main className={styles.main} />;
   return (
     <main className={styles.main}>
       <div
@@ -285,7 +339,7 @@ export default function BlogCreatorPost() {
           setText(e);
         }}
       />
-      <div></div>
+
       <div
         onClick={() => {
           if (!uploadingPost) {
@@ -296,7 +350,7 @@ export default function BlogCreatorPost() {
           uploadingPost ? styles.disable : ""
         }`}
       >
-        Create New Post
+        {postData === "new" ? "Create New Post" : "Submit Edit"}{" "}
       </div>
     </main>
   );

@@ -24,7 +24,6 @@ export default function Aside() {
     let toastId = toast(<LoadingToast text="Adding new OI..." />, {
       autoClose: false,
     });
-    console.log(listOI);
     if (
       oiName.toLowerCase() === "bitcoin" ||
       oiName.toLowerCase() === "ethereum" ||

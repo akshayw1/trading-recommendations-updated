@@ -15,8 +15,8 @@ import {
 } from "react-share";
 import { usePathname } from "next/navigation";
 import { useOnboardingContext } from "@/context/MyContext";
-import { convertToHTML } from "draft-convert";
-import { convertFromRaw } from "draft-js";
+
+import Link from "next/link";
 
 export default function BlogPost({ id }) {
   const [richText, setRichText] = useState("");
@@ -34,14 +34,10 @@ export default function BlogPost({ id }) {
           method: "GET",
           headers: { "Content-type": "application/json" },
         });
-        console.log(res.ok);
         if (res.ok) {
           const resData = await res.json();
           setPostData(resData.post);
-          const richText = convertToHTML(
-            convertFromRaw(JSON.parse(resData.post.text))
-          );
-          setRichText(richText);
+          setRichText(resData.post.text);
         } else {
           router.push(`/blog`);
         }
@@ -55,6 +51,7 @@ export default function BlogPost({ id }) {
       didMountRef.current = true;
     }
   }, [id, router]);
+
   const fetchAddShare = async () => {
     try {
       const fetchUrl = `/api/blog/${id}/share`;
@@ -129,35 +126,68 @@ export default function BlogPost({ id }) {
               ) : null}
             </div>
             {session && session.user.admin ? (
-              <div className="relative w-full">
-                <div
-                  onClick={deletePost}
-                  className="m-auto mr-0 mt-4 cursor-pointer p-[.5rem] rounded-[8px] flex justify-center items-center right-[15px] bottom-[15px] w-[max-content] h-[3rem] bg-red-500"
-                >
-                  Delete Post
-                  <svg
-                    width="2rem"
-                    height="2rem"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+              <div className="flex flex-row gap-4">
+                <Link href={`/blog/post/${id}/edit`}>
+                  <div className="relative w-full">
+                    <div className="gap-2 m-auto mr-0 mt-4 cursor-pointer p-[.5rem] rounded-[8px] flex justify-center items-center right-[15px] bottom-[15px] w-[max-content] h-[3rem] bg-yellow-500">
+                      Edit Post
+                      <svg
+                        width="1.75em"
+                        height="1.75em"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+                        <g
+                          id="SVGRepo_tracerCarrier"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M20.8477 1.87868C19.6761 0.707109 17.7766 0.707105 16.605 1.87868L2.44744 16.0363C2.02864 16.4551 1.74317 16.9885 1.62702 17.5692L1.03995 20.5046C0.760062 21.904 1.9939 23.1379 3.39334 22.858L6.32868 22.2709C6.90945 22.1548 7.44285 21.8693 7.86165 21.4505L22.0192 7.29289C23.1908 6.12132 23.1908 4.22183 22.0192 3.05025L20.8477 1.87868ZM18.0192 3.29289C18.4098 2.90237 19.0429 2.90237 19.4335 3.29289L20.605 4.46447C20.9956 4.85499 20.9956 5.48815 20.605 5.87868L17.9334 8.55027L15.3477 5.96448L18.0192 3.29289ZM13.9334 7.3787L3.86165 17.4505C3.72205 17.5901 3.6269 17.7679 3.58818 17.9615L3.00111 20.8968L5.93645 20.3097C6.13004 20.271 6.30784 20.1759 6.44744 20.0363L16.5192 9.96448L13.9334 7.3787Z"
+                            fill="#ffffff"
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
+                <div className="relative w-full">
+                  <div
+                    onClick={deletePost}
+                    className="m-auto mr-0 mt-4 cursor-pointer p-[.5rem] rounded-[8px] flex justify-center items-center right-[15px] bottom-[15px] w-[max-content] h-[3rem] bg-red-500"
                   >
-                    <g id="SVGRepo_bgCarrier" strokeWidth="0" />
-                    <g
-                      id="SVGRepo_tracerCarrier"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <g id="SVGRepo_iconCarrier">
-                      <path
-                        d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
-                        stroke="#ffffff"
-                        strokeWidth="2"
+                    Delete Post
+                    <svg
+                      width="2rem"
+                      height="2rem"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+                      <g
+                        id="SVGRepo_tracerCarrier"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                    </g>
-                  </svg>
+                      <g id="SVGRepo_iconCarrier">
+                        <path
+                          d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
+                          stroke="#ffffff"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -233,7 +263,6 @@ export default function BlogPost({ id }) {
                   />
                 </TelegramShareButton>
               </div>
-
               <div dangerouslySetInnerHTML={{ __html: richText }} />
             </div>
           </section>
