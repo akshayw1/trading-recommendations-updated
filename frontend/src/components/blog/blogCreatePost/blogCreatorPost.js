@@ -9,7 +9,10 @@ import LoadingToast from "@/components/usersTable/loading";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
 
 import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
+let htmlToDraft = null;
+if (typeof window === "object") {
+  htmlToDraft = require("html-to-draftjs").default;
+}
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import dynamic from "next/dynamic";
 const Editor = dynamic(
