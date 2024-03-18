@@ -1,8 +1,11 @@
+"use client";
 // Importing helper modules
 import { useCallback, useMemo, useRef, useState } from "react";
 
 // Importing core components
-import QuillEditor from "react-quill";
+import dynamic from "next/dynamic";
+const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
+
 import styles from "../styles.module.css";
 // Importing styles
 import "react-quill/dist/quill.snow.css";
@@ -32,7 +35,7 @@ const EditorNew = ({ value, setValue }) => {
 
       reader.readAsDataURL(file);
     };
-  }, []);
+  }, [quill]);
 
   const modules = useMemo(
     () => ({
@@ -50,6 +53,7 @@ const EditorNew = ({ value, setValue }) => {
           ["link", "image"],
           ["clean"],
         ],
+
         handlers: {
           image: imageHandler,
         },
@@ -58,6 +62,7 @@ const EditorNew = ({ value, setValue }) => {
         matchVisual: true,
       },
     }),
+
     [imageHandler]
   );
 

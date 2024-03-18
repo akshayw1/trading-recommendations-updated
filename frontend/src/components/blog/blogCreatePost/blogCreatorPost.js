@@ -92,7 +92,7 @@ export default function BlogCreatorPost({ postData = "new" }) {
 
     setEventImg(null);
   };
-  const [text, setText] = useState(() => EditorState.createEmpty());
+  const [text, setText] = useState("");
 
   useEffect(() => {
     if (postData !== "new" && postData !== "initial") {
@@ -334,7 +334,7 @@ export default function BlogCreatorPost({ postData = "new" }) {
           <label>Tag</label>
         </div>
       </div>
-      {/*  <Editor
+      {/*<Editor
         editorState={text}
         toolbarClassName="toolbarClassName"
         wrapperClassName={styles.editorWrapper}
