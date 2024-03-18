@@ -7,7 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import LoadingToast from "@/components/usersTable/loading";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
-
+import parse from "html-react-parser";
+import EditorNew from "@/components/blog/blogCreatePost/quillEditor/quillEditor";
 import draftToHtml from "draftjs-to-html";
 let htmlToDraft = null;
 if (typeof window === "object") {
@@ -113,7 +114,7 @@ export default function BlogCreatorPost({ postData = "new" }) {
         ContentState.createFromBlockArray(htmlToDraft(postData.text))
       );
       fetchImageUrl();
-      setText(editorState);
+      setText(postData.text);
     }
   }, [postData]);
 
@@ -136,7 +137,7 @@ export default function BlogCreatorPost({ postData = "new" }) {
     if (inputTag === "") {
       errorsNow.tags = [...(errorsNow.tags || []), "Tag can't be empty"];
     }
-    const draft = draftToHtml(convertToRaw(text.getCurrentContent()));
+    const draft = text;
     if (draft.length < 10) {
       errorsNow.text = [
         ...(errorsNow.text || []),
@@ -333,7 +334,7 @@ export default function BlogCreatorPost({ postData = "new" }) {
           <label>Tag</label>
         </div>
       </div>
-      <Editor
+      {/*  <Editor
         editorState={text}
         toolbarClassName="toolbarClassName"
         wrapperClassName={styles.editorWrapper}
@@ -341,8 +342,8 @@ export default function BlogCreatorPost({ postData = "new" }) {
         onEditorStateChange={(e) => {
           setText(e);
         }}
-      />
-
+      />*/}
+      <EditorNew value={text} setValue={setText} />
       <div
         onClick={() => {
           if (!uploadingPost) {
@@ -355,6 +356,11 @@ export default function BlogCreatorPost({ postData = "new" }) {
       >
         {postData === "new" ? "Create New Post" : "Submit Edit"}{" "}
       </div>
+      {/*<div
+        dangerouslySetInnerHTML={{
+          __html: draftToHtml(convertToRaw(text.getCurrentContent())),
+        }}
+      ></div>*/}
     </main>
   );
 }
