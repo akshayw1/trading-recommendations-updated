@@ -20,19 +20,21 @@ const EditorNew = ({ value, setValue }) => {
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
     input.click();
-
+  
     input.onchange = () => {
       const file = input.files[0];
       const reader = new FileReader();
-
+  
       reader.onload = () => {
         const imageUrl = reader.result;
-        const quillEditor = quill.current.getEditor();
-
-        const range = quillEditor.getSelection(true);
-        quillEditor.insertEmbed(range.index, "image", imageUrl);
+        const quillEditor = quill.current?.getEditor(); // Use optional chaining here
+  
+        const range = quillEditor?.getSelection(true);
+        if (range && imageUrl) {
+          quillEditor.insertEmbed(range.index, "image", imageUrl);
+        }
       };
-
+  
       reader.readAsDataURL(file);
     };
   }, [quill]);

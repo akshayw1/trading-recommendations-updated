@@ -15,6 +15,7 @@ import {
 } from "react-share";
 import { usePathname } from "next/navigation";
 import { useOnboardingContext } from "@/context/MyContext";
+import HtmlParser from "../blogPost/htmlText"
 
 import Link from "next/link";
 
@@ -263,7 +264,9 @@ export default function BlogPost({ id }) {
                   />
                 </TelegramShareButton>
               </div>
-              <div dangerouslySetInnerHTML={{ __html: richText }} />
+              {/* <div dangerouslySetInnerHTML={{ __html: richText }} /> */}
+                <HtmlParser htmlContent = {richText}/>
+                {console.log(richText)}
             </div>
           </section>
           <aside className={styles.aside}>
